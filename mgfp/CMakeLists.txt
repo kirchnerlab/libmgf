@@ -7,6 +7,31 @@ cmake_minimum_required(VERSION 2.6)
 INCLUDE(${CMAKE_CURRENT_SOURCE_DIR}/cmake/macros/require_out_of_src_build.cmake)
 
 #############################################################################
+# versioning
+#############################################################################
+set(VERSION_MAJOR 1)
+set(VERSION_MINOR 2)
+
+# get SVN revision
+EXECUTE_PROCESS(
+    COMMAND "svnversion"
+    WORKING_DIRECTORY ${MGFP_SOURCE_DIR}
+    RESULT_VARIABLE svnversion_failed
+    OUTPUT_VARIABLE SVNVERSION
+    ERROR_QUIET
+    OUTPUT_STRIP_TRAILING_WHITESPACE
+)
+IF(svnversion_failed)
+    SET(SVNVERSIONSTR "-")
+ELSE(svnversion_failed)
+    SET(SVNVERSIONSTR "r${SVNVERSION}")
+ENDIF(svnversion_failed)
+
+# construct version string
+STRING(REGEX REPLACE ":" "_" VERSION_PATCH ${SVNVERSIONSTR})
+SET(VERSION "${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_PATCH}")
+
+#############################################################################
 # build
 #############################################################################
 
@@ -27,7 +52,7 @@ ENDIF(MSVC)
 
 # add subdirs
 ADD_SUBDIRECTORY(src)
-ADD_SUBDIRECTORY(applications EXCLUDE_FROM_ALL)
+ADD_SUBDIRECTORY(applications)
 
 # doxygen support
 CONFIGURE_FILE(${MGFP_SOURCE_DIR}/Doxyfile.cmake
@@ -54,4 +79,20 @@ INSTALL(FILES ${MGFP_BINARY_DIR}/include/mgfp/config.h
 INSTALL(DIRECTORY ${MGFP_BINARY_DIR}/doc
         DESTINATION share/mgfp
         PATTERN "Doxyfile" EXCLUDE)
+
+#############################################################################
+# packaging
+#############################################################################
+
+set(CPACK_PACKAGE_NAME "mgfp")
+
+# CPack version strings
+SET(CPACK_PACKAGE_VERSION_MAJOR ${VERSION_MAJOR})
+SET(CPACK_PACKAGE_VERSION_MINOR ${VERSION_MINOR})
+SET(CPACK_PACKAGE_VERSION_PATCH ${VERSION_PATCH})
+
+SET(CPACK_RESOURCE_FILE_README "${MGFP_SOURCE_DIR}/README.txt")
+SET(CPACK_RESOURCE_FILE_LICENSE "${MGFP_SOURCE_DIR}/LICENSE.txt")
+
+INCLUDE(CPack)
 

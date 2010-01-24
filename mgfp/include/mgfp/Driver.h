@@ -8,8 +8,6 @@
 
 #include <mgfp/Context.h>
 
-/** The example namespace is used to encapsulate the three parser classes
- * example::Parser, example::Scanner and example::Driver */
 namespace mgf
 {
 

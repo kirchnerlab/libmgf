@@ -13,6 +13,8 @@
 #undef max
 #endif
 
+#define VERSION @VERSION@
+
 #if defined(WIN32)
     #if defined(MGFP_EXPORTS)
         #define MGFP_EXPORT __declspec( dllexport )
