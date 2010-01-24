@@ -32,7 +32,8 @@ int main(int argc, char *argv[])
     bool verbose = false;
     desc.add_options()
         ("help,h", "produce help message")
-        ("verbose,v", po::value(&verbose)->zero_tokens(), "verbose output (good to pinpoint parsing errors)")
+        ("verbose,v", po::value(&verbose)->zero_tokens(), 
+         "verbose output (good to pinpoint parsing errors)")
     ;
     po::variables_map vm;
     po::store(po::parse_command_line(argc, argv, desc), vm);
@@ -47,9 +48,11 @@ int main(int argc, char *argv[])
     // parse input into memory
     bool result = driver.parse_stream(std::cin);
     if (!result) {
-        std::cerr << "Error parsing data stream." << std::endl;
+        std::cerr << std::endl 
+          << "Error parsing data stream (use -v for details)." << std::endl;
         return -1;
     }
+    std::cerr << "Ok." << std::endl;
     return 0;
 }
 
