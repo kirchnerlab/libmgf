@@ -39,7 +39,7 @@ SET(VERSION "${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_PATCH}")
 MACRO_REQUIRE_OUT_OF_SRC_BUILD("MGFp requires out-of-source builds.")
 
 CONFIGURE_FILE(
-    ${CMAKE_CURRENT_SOURCE_DIR}/config.h.cmake 
+    ${CMAKE_CURRENT_SOURCE_DIR}/include/mgfp/config.h.cmake 
     ${MGFP_BINARY_DIR}/include/mgfp/config.h
 )
 
@@ -55,7 +55,7 @@ ADD_SUBDIRECTORY(src)
 ADD_SUBDIRECTORY(applications)
 
 # doxygen support
-CONFIGURE_FILE(${MGFP_SOURCE_DIR}/Doxyfile.cmake
+CONFIGURE_FILE(${MGFP_SOURCE_DIR}/doc/Doxyfile.cmake
     ${MGFP_BINARY_DIR}/doc/Doxyfile
     @ONLY IMMEDIATE
 )
