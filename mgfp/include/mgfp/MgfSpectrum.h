@@ -13,6 +13,11 @@
 
 namespace mgf {
 
+/** An MgfSpectrum holds a fragment ion series and the corresponding (local)
+ * search parameters. The parameter set, their values and syntax are taken from
+ * the MatrixScience format help file at
+ * http://www.matrixscience.com/help/data_file_help.html#GEN
+ */
 class MgfSpectrum : public Collection<MassAbundancePair>
 {
   public:
@@ -58,6 +63,10 @@ class MgfSpectrum : public Collection<MassAbundancePair>
     std::string tolu_;
 };
 
+/** An stream operator to output the fragment ion spectrum in MGF. This includes
+ * all entries between <tt>BEGIN IONS</tt> and <tt>END IONS</tt> as well as all
+ * local parameter key/value-pairs.
+ */
 std::ostream& operator<<(std::ostream& os, const MgfSpectrum& mgf);
 
 } // namespace mgf

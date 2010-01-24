@@ -14,7 +14,9 @@
 namespace mgf
 {
 
-/** MGF file representation.
+/** A Mascot Generic Format file type. An MgfFile is essentially a container for
+ * a set of global settings (i.e. an HgfHeader) and a set of fragment ion
+ * spectra, each of which is represented using an MgfSpectrum.
  */
 class MgfFile : public Collection<MgfSpectrum>
 {
@@ -45,9 +47,13 @@ class MgfFile : public Collection<MgfSpectrum>
 
   private:
     friend std::ostream& operator<<(std::ostream& os, const MgfFile& mgf);
+    /** The global MGF parameters
+     */
     MgfHeader header_;
 };
 
+/** A stream operator to output the contents of an MgfFile object as valid MGF.
+ */
 std::ostream& operator<<(std::ostream& os, const MgfFile& mgf);
 
 }

@@ -1,0 +1,86 @@
+    0 $accept: start "end of file"
+
+    1 ion: "double" "double" "end of line"
+    2    | "integer" "double" "end of line"
+    3    | "double" "integer" "end of line"
+    4    | "integer" "integer" "end of line"
+
+    5 ions: ions ion
+    6     | ion
+
+    7 charge: "integer" '+'
+    8       | "integer" '-'
+
+    9 charges: '(' charges ')'
+   10        | charges ',' charge
+   11        | charges "and keyword" charge
+   12        | charge
+
+   13 csintegerlist: csintegerlist ',' "integer"
+   14              | "integer"
+
+   15 blocks: []
+   16       | blocks block
+
+   17 block: "begin_ions keyword" "end of line" localparams ions "end_ions keyword" "end of line"
+
+   18 globalparams: []
+   19             | globalparams globalparam
+
+   20 globalparam: "enzyme keyword" '=' "string" "end of line"
+   21            | "search title keyword" '=' "string" "end of line"
+   22            | "database keyword" '=' "string" "end of line"
+   23            | "MS/MS datafile format keyword" '=' "string" "end of line"
+   24            | "MS/MS ion series keyword" '=' "string" "end of line"
+   25            | "variable modifications keyword" '=' "string" "end of line"
+   26            | "units for ITOL keyword" '=' "string" "end of line"
+   27            | "mass type (mono or avg) keyword" '=' "string" "end of line"
+   28            | "fixed modifications keyword" '=' "string" "end of line"
+   29            | "quantitation method keyword" '=' "string" "end of line"
+   30            | "maximum hits keyword" '=' "string" "end of line"
+   31            | "type of report keyword" '=' "string" "end of line"
+   32            | "type of search keyword" '=' "string" "end of line"
+   33            | "taxonomy keyword" '=' "string" "end of line"
+   34            | "tolerance units keyword" '=' "string" "end of line"
+   35            | "user keyword" '=' "string" "end of line"
+   36            | "user email keyword" '=' "string" "end of line"
+   37            | "username keyword" '=' "string" "end of line"
+   38            | "perform decoy search keyword" '=' "integer" "end of line"
+   39            | "error tolerance keyword" '=' "integer" "end of line"
+   40            | "partials keyword" '=' "integer" "end of line"
+   41            | "fragment ion tolerance keyword" '=' "double" "end of line"
+   42            | "fragment ion tolerance keyword" '=' "integer" "end of line"
+   43            | "misassigned 13C keyword" '=' "double" "end of line"
+   44            | "precursor m/z keyword" '=' "double" "end of line"
+   45            | "protein mass (kDa) keyword" '=' "double" "end of line"
+   46            | "peptide mass tolerance keyword" '=' "double" "end of line"
+   47            | "peptide mass tolerance keyword" '=' "integer" "end of line"
+   48            | "charge set keyword" '=' charges "end of line"
+   49            | "NA translation keyword" '=' csintegerlist "end of line"
+   50            | "comment" "end of line"
+
+   51 localparams: []
+   52            | localparams localparam
+
+   53 localparam: "title keyword" '=' "string" "end of line"
+   54           | "amino acid composition keyword" '=' "string" "end of line"
+   55           | "MS/MS ion series keyword" '=' "string" "end of line"
+   56           | "variable modifications keyword" '=' "string" "end of line"
+   57           | "retention time or range keyword" '=' "double" "end of line"
+   58           | "scan number of range keyword" '=' "string" "end of line"
+   59           | "tolerance units keyword" '=' "string" "end of line"
+   60           | "amino acid sequence keyword" '=' "string" "end of line"
+   61           | "sequence tag keyword" '=' "string" "end of line"
+   62           | "error tolerant sequence keyword" '=' "string" "end of line"
+   63           | "peptide mass tolerance keyword" '=' "double" "end of line"
+   64           | "peptide mass tolerance keyword" '=' "integer" "end of line"
+   65           | "charge set keyword" '=' charges "end of line"
+   66           | "precursor mass keyword" '=' "double" "end of line"
+   67           | "precursor mass keyword" '=' "double" "double" "end of line"
+   68           | "precursor mass keyword" '=' "integer" "end of line"
+   69           | "precursor mass keyword" '=' "integer" "integer" "end of line"
+   70           | "comment" "end of line"
+
+   71 contents: globalparams blocks "end of file"
+
+   72 start: contents

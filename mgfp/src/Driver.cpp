@@ -2,6 +2,7 @@
 #include <sstream>
 
 #include <mgfp/Driver.h>
+#include "Parser.h"
 #include "Scanner.h"
 
 namespace mgf

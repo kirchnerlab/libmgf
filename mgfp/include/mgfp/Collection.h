@@ -5,17 +5,23 @@
 
 #include <vector>
 
-/**
- * @brief Wrapper around std::vector
+/** A std::vector<T> composite.
+ * The STL std::vector<T> does not have a virtual destructor, hence it is not
+ * possible for vector-like classes to derive in order to inherit the
+ * std::vector<T> interface.
  *
- * std::vector does not have a virtual destructor, so it is not possible
- * to derive from it. As a lot of classes need to implement a vector-like
- * interface, the Collection class can be used to derive from.
+ * Collection<T> has a std::vector<T> member variable \a c_ and implements a
+ * complete forwarding interface for this member. It can be used as a safe
+ * base class if the vector interface is common in a framework.
+ *
+ * See the std::vector<T> documentation for all details.
+ *
+ * @author Marc Kirchner <marc.kirchner@childrens.harvard.edu>
  */
 template < class T, class A = std::allocator<T> >
 class Collection
 {
-public:
+  public:
     // typedefs
     typedef T value_type;
     typedef A allocator_type;
@@ -155,7 +161,7 @@ public:
         return c_.get_allocator();
     }
 
-protected:
+  protected:
     std::vector<T, A> c_;
 };
 
