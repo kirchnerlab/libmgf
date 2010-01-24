@@ -2,7 +2,9 @@
 #ifndef __CONTEXT_H__
 #define __CONTEXT_H__
 
-#include <mgfp/mgfp.h>
+#include <mgfp/MgfFile.h>
+#include <mgfp/MgfHeader.h>
+#include <mgfp/MgfSpectrum.h>
 
 namespace mgf
 {

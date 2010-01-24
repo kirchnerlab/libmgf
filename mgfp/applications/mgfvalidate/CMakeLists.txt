@@ -1,0 +1,19 @@
+# make sure we find the headers
+INCLUDE_DIRECTORIES(
+    ${MGFP_SOURCE_DIR}/include
+    ${MGFP_BINARY_DIR}/include
+    ${CMAKE_CURRENT_SOURCE_DIR}
+)
+# this requres BOOST
+FIND_PACKAGE(Boost COMPONENTS program_options REQUIRED)
+MESSAGE(STATUS "Found Boost libs in ${Boost_INCLUDE_DIRS}") 
+INCLUDE_DIRECTORIES(${Boost_INCLUDE_DIRS})
+LINK_DIRECTORIES(${Boost_LIBRARY_DIRS})
+
+SET(SRCS_MGFVALIDATE mgfvalidate.cpp)
+ADD_EXECUTABLE(mgfvalidate ${SRCS_MGFVALIDATE})
+TARGET_LINK_LIBRARIES(mgfvalidate mgfp ${Boost_PROGRAM_OPTIONS_LIBRARY})
+INSTALL(TARGETS 
+mgfvalidate
+RUNTIME DESTINATION bin)
+

@@ -23,4 +23,5 @@ ENDIF(MSVC)
 
 # add subdirs
 ADD_SUBDIRECTORY(src)
+ADD_SUBDIRECTORY(applications EXCLUDE_FROM_ALL)
 
