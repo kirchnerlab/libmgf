@@ -8,21 +8,23 @@
 #ifdef min
 #undef min
 #endif
+
 #ifdef max
 #undef max
 #endif
 
-#cmakedefine HAVE_UNIX_ISNAN
-#cmakedefine HAVE_UNIX_ISINF
-
-#ifdef _WIN32
-	#define MGFP_EXPORT __declspec( dllexport )
-	/* Disable a template related MSVC warning.
-	   See: http://www.unknownroad.com/rtfm/VisualStudio/warningC4251.html */
-	#pragma warning( disable: 4251 )
+#if defined(WIN32)
+    #if defined(MGFP_EXPORTS)
+        #define MGFP_EXPORT __declspec( dllexport )
+    #else 
+        #define MGFP_EXPORT __declspec( dllimport )
+    #endif
+    /* Disable a template related MSVC warning.
+       See: http://www.unknownroad.com/rtfm/VisualStudio/warningC4251.html */
+    #pragma warning( disable: 4251 )
 #else
 	#define MGFP_EXPORT
 #endif
 
-#endif
+#endif // __CONFIG_H__
 
