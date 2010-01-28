@@ -5,6 +5,10 @@
 
 #include <vector>
 
+#ifdef REGRESSION_TEST_BUILD
+    struct CollectionTestSuite;
+#endif
+
 /** A std::vector<T> composite.
  * The STL std::vector<T> does not have a virtual destructor, hence it is not
  * possible for vector-like classes to derive in order to inherit the
@@ -162,6 +166,9 @@ class Collection
     }
 
   protected:
+#ifdef REGRESSION_TEST_BUILD
+    friend struct ::CollectionTestSuite;
+#endif
     std::vector<T, A> c_;
 };
 
