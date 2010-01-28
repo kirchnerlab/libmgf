@@ -11,6 +11,8 @@
 namespace mgf
 {
 
+class Scanner;
+
 /** The Driver class brings together all components. It creates an instance of
  * the Parser and Scanner classes and connects them. Then the input stream is
  * fed into the scanner object and the parser gets it's token
@@ -19,9 +21,9 @@ namespace mgf
  * structure into which the parsed data is saved. */
 class MGFP_EXPORT Driver
 {
-public:
+  public:
     /// construct a new parser driver context
-    Driver(class Context& context);
+    Driver(Context& context);
 
     /// enable debug output in the flex scanner
     bool trace_scanning;
@@ -69,11 +71,11 @@ public:
 
     /** Pointer to the current lexer instance, this is used to connect the
      * parser to the scanner. It is used in the yylex macro. */
-    class Scanner* lexer;
+    Scanner* lexer;
 
     /** Reference to the calculator context filled during parsing of the
      * expressions. */
-    class Context& context;
+    Context& context;
 };
 
 } // namespace mgf
