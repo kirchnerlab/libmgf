@@ -16,7 +16,7 @@
 #define VERSION @VERSION@
 
 #if defined(WIN32)
-    #if defined(MGFP_EXPORTS)
+    #if defined(mgfp_EXPORTS)
         #define MGFP_EXPORT __declspec( dllexport )
     #else 
         #define MGFP_EXPORT __declspec( dllimport )
