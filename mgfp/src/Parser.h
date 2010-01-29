@@ -51,6 +51,7 @@ namespace mgf
 #line 6 "Parser.ypp"
 
 
+#include <mgfp/Driver.h>
 #include "Nodes.h"
 
 #include <cstdio>
@@ -63,7 +64,7 @@ using namespace mgf::detail;
 
 
 /* Line 303 of lalr1.cc.  */
-#line 67 "Parser.h"
+#line 68 "Parser.h"
 
 #include "location.h"
 
@@ -114,7 +115,7 @@ namespace mgf
     /// Symbol semantic values.
 #ifndef YYSTYPE
     union semantic_type
-#line 61 "Parser.ypp"
+#line 62 "Parser.ypp"
 {
     int integerVal;
     double doubleVal;
@@ -125,7 +126,7 @@ namespace mgf
     IntegerListNode* integerlistnode;
 }
 /* Line 303 of lalr1.cc.  */
-#line 129 "Parser.h"
+#line 130 "Parser.h"
 	;
 #else
     typedef YYSTYPE semantic_type;
@@ -189,7 +190,7 @@ namespace mgf
     typedef token::yytokentype token_type;
 
     /// Build a parser object.
-    Parser (class Driver& driver_yyarg);
+    Parser (Driver& driver_yyarg);
     virtual ~Parser ();
 
     /// Parse.
@@ -348,7 +349,7 @@ namespace mgf
 
 
     /* User arguments.  */
-    class Driver& driver;
+    Driver& driver;
   };
 }
 

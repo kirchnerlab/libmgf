@@ -5,6 +5,7 @@
  */
 %{
 
+#include <mgfp/Driver.h>
 #include "Nodes.h"
 
 #include <cstdio>
@@ -53,7 +54,7 @@ using namespace mgf::detail;
 /* The driver is passed by reference to the parser and to the scanner. This
  * provides a simple but effective pure interface, not relying on global
  * variables. */
-%parse-param { class Driver& driver }
+%parse-param { Driver& driver }
 
 /* verbose error messages */
 %error-verbose

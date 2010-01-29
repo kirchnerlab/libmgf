@@ -38,7 +38,7 @@
 #include "Parser.h"
 
 /* User implementation prologue.  */
-#line 126 "Parser.ypp"
+#line 127 "Parser.ypp"
 
 #include <mgfp/Driver.h>
 #include "Scanner.h"
@@ -154,7 +154,7 @@ namespace mgf
 #endif
 
   /// Build a parser object.
-  Parser::Parser (class Driver& driver_yyarg)
+  Parser::Parser (Driver& driver_yyarg)
     : yydebug_ (false),
       yycdebug_ (&std::cerr),
       driver (driver_yyarg)
@@ -209,32 +209,32 @@ namespace mgf
     switch (yytype)
       {
         case 8: /* "\"string\"" */
-#line 123 "Parser.ypp"
+#line 124 "Parser.ypp"
 	{ delete (yyvaluep->stringVal); };
 #line 215 "Parser.cpp"
 	break;
       case 54: /* "ion" */
-#line 124 "Parser.ypp"
+#line 125 "Parser.ypp"
 	{ delete (yyvaluep->doublepairnode); };
 #line 220 "Parser.cpp"
 	break;
       case 55: /* "ions" */
-#line 124 "Parser.ypp"
+#line 125 "Parser.ypp"
 	{ delete (yyvaluep->doublepairlistnode); };
 #line 225 "Parser.cpp"
 	break;
       case 56: /* "charge" */
-#line 124 "Parser.ypp"
+#line 125 "Parser.ypp"
 	{ delete (yyvaluep->integernode); };
 #line 230 "Parser.cpp"
 	break;
       case 57: /* "charges" */
-#line 124 "Parser.ypp"
+#line 125 "Parser.ypp"
 	{ delete (yyvaluep->integerlistnode); };
 #line 235 "Parser.cpp"
 	break;
       case 58: /* "csintegerlist" */
-#line 124 "Parser.ypp"
+#line 125 "Parser.ypp"
 	{ delete (yyvaluep->integerlistnode); };
 #line 240 "Parser.cpp"
 	break;
@@ -312,7 +312,7 @@ namespace mgf
 
 
     /* User initialization code.  */
-    #line 48 "Parser.ypp"
+    #line 49 "Parser.ypp"
 {
     // initialize the initial location object
     yylloc.begin.filename = yylloc.end.filename = &driver.streamname;
@@ -434,77 +434,77 @@ namespace mgf
     switch (yyn)
       {
 	  case 2:
-#line 139 "Parser.ypp"
+#line 140 "Parser.ypp"
     { (yyval.doublepairnode) = new DoublePairNode((yysemantic_stack_[(3) - (1)].doubleVal), (yysemantic_stack_[(3) - (2)].doubleVal)); ;}
     break;
 
   case 3:
-#line 140 "Parser.ypp"
+#line 141 "Parser.ypp"
     { (yyval.doublepairnode) = new DoublePairNode((yysemantic_stack_[(3) - (1)].integerVal), (yysemantic_stack_[(3) - (2)].doubleVal)); ;}
     break;
 
   case 4:
-#line 141 "Parser.ypp"
+#line 142 "Parser.ypp"
     { (yyval.doublepairnode) = new DoublePairNode((yysemantic_stack_[(3) - (1)].doubleVal), (yysemantic_stack_[(3) - (2)].integerVal)); ;}
     break;
 
   case 5:
-#line 142 "Parser.ypp"
+#line 143 "Parser.ypp"
     { (yyval.doublepairnode) = new DoublePairNode((yysemantic_stack_[(3) - (1)].integerVal), (yysemantic_stack_[(3) - (2)].integerVal)); ;}
     break;
 
   case 6:
-#line 144 "Parser.ypp"
+#line 145 "Parser.ypp"
     { (yyval.doublepairlistnode) = new DoublePairListNode((yysemantic_stack_[(2) - (1)].doublepairlistnode), (yysemantic_stack_[(2) - (2)].doublepairnode)); ;}
     break;
 
   case 7:
-#line 145 "Parser.ypp"
+#line 146 "Parser.ypp"
     { (yyval.doublepairlistnode) = new DoublePairListNode((yysemantic_stack_[(1) - (1)].doublepairnode)); ;}
     break;
 
   case 8:
-#line 147 "Parser.ypp"
+#line 148 "Parser.ypp"
     { (yyval.integernode) = new IntegerNode((yysemantic_stack_[(2) - (1)].integerVal)); ;}
     break;
 
   case 9:
-#line 148 "Parser.ypp"
+#line 149 "Parser.ypp"
     { (yyval.integernode) = new IntegerNode(-(yysemantic_stack_[(2) - (1)].integerVal)); ;}
     break;
 
   case 10:
-#line 150 "Parser.ypp"
+#line 151 "Parser.ypp"
     { (yyval.integerlistnode) = (yysemantic_stack_[(3) - (2)].integerlistnode); ;}
     break;
 
   case 11:
-#line 151 "Parser.ypp"
-    { (yyval.integerlistnode) = new IntegerListNode((yysemantic_stack_[(3) - (1)].integerlistnode), (yysemantic_stack_[(3) - (3)].integernode)); ;}
-    break;
-
-  case 12:
 #line 152 "Parser.ypp"
     { (yyval.integerlistnode) = new IntegerListNode((yysemantic_stack_[(3) - (1)].integerlistnode), (yysemantic_stack_[(3) - (3)].integernode)); ;}
     break;
 
-  case 13:
+  case 12:
 #line 153 "Parser.ypp"
+    { (yyval.integerlistnode) = new IntegerListNode((yysemantic_stack_[(3) - (1)].integerlistnode), (yysemantic_stack_[(3) - (3)].integernode)); ;}
+    break;
+
+  case 13:
+#line 154 "Parser.ypp"
     { (yyval.integerlistnode) = new IntegerListNode((yysemantic_stack_[(1) - (1)].integernode)); ;}
     break;
 
   case 14:
-#line 155 "Parser.ypp"
+#line 156 "Parser.ypp"
     { (yyval.integerlistnode) = new IntegerListNode((yysemantic_stack_[(3) - (1)].integerlistnode), (yysemantic_stack_[(3) - (3)].integerVal)); ;}
     break;
 
   case 15:
-#line 156 "Parser.ypp"
+#line 157 "Parser.ypp"
     { (yyval.integerlistnode) = new IntegerListNode((yysemantic_stack_[(1) - (1)].integerVal)); ;}
     break;
 
   case 17:
-#line 160 "Parser.ypp"
+#line 161 "Parser.ypp"
     {
             driver.context.mgfFile.push_back(driver.context.currentSpectrum);
             driver.context.currentSpectrum.clear();
@@ -512,7 +512,7 @@ namespace mgf
     break;
 
   case 18:
-#line 166 "Parser.ypp"
+#line 167 "Parser.ypp"
     {
             driver.context.currentSpectrum.assign(((yysemantic_stack_[(6) - (4)].doublepairlistnode)->pairlist_)->begin(), ((yysemantic_stack_[(6) - (4)].doublepairlistnode)->pairlist_)->end());
             delete (yysemantic_stack_[(6) - (4)].doublepairlistnode); 
@@ -520,242 +520,242 @@ namespace mgf
     break;
 
   case 21:
-#line 174 "Parser.ypp"
+#line 175 "Parser.ypp"
     { driver.context.header.setCLE(*(yysemantic_stack_[(4) - (3)].stringVal)); delete (yysemantic_stack_[(4) - (3)].stringVal); ;}
     break;
 
   case 22:
-#line 175 "Parser.ypp"
+#line 176 "Parser.ypp"
     { driver.context.header.setCOM(*(yysemantic_stack_[(4) - (3)].stringVal)); delete (yysemantic_stack_[(4) - (3)].stringVal); ;}
     break;
 
   case 23:
-#line 176 "Parser.ypp"
+#line 177 "Parser.ypp"
     { driver.context.header.setDB(*(yysemantic_stack_[(4) - (3)].stringVal)); delete (yysemantic_stack_[(4) - (3)].stringVal); ;}
     break;
 
   case 24:
-#line 177 "Parser.ypp"
+#line 178 "Parser.ypp"
     { driver.context.header.setFORMAT(*(yysemantic_stack_[(4) - (3)].stringVal)); delete (yysemantic_stack_[(4) - (3)].stringVal); ;}
     break;
 
   case 25:
-#line 178 "Parser.ypp"
+#line 179 "Parser.ypp"
     { driver.context.header.setINSTRUMENT(*(yysemantic_stack_[(4) - (3)].stringVal)); delete (yysemantic_stack_[(4) - (3)].stringVal); ;}
     break;
 
   case 26:
-#line 179 "Parser.ypp"
+#line 180 "Parser.ypp"
     { driver.context.header.setIT_MODS(*(yysemantic_stack_[(4) - (3)].stringVal)); delete (yysemantic_stack_[(4) - (3)].stringVal); ;}
     break;
 
   case 27:
-#line 180 "Parser.ypp"
+#line 181 "Parser.ypp"
     { driver.context.header.setITOLU(*(yysemantic_stack_[(4) - (3)].stringVal)); delete (yysemantic_stack_[(4) - (3)].stringVal); ;}
     break;
 
   case 28:
-#line 181 "Parser.ypp"
+#line 182 "Parser.ypp"
     { driver.context.header.setMASS(*(yysemantic_stack_[(4) - (3)].stringVal)); delete (yysemantic_stack_[(4) - (3)].stringVal); ;}
     break;
 
   case 29:
-#line 182 "Parser.ypp"
+#line 183 "Parser.ypp"
     { driver.context.header.setMODS(*(yysemantic_stack_[(4) - (3)].stringVal)); delete (yysemantic_stack_[(4) - (3)].stringVal); ;}
     break;
 
   case 30:
-#line 183 "Parser.ypp"
+#line 184 "Parser.ypp"
     { driver.context.header.setQUANTITATION(*(yysemantic_stack_[(4) - (3)].stringVal)); delete (yysemantic_stack_[(4) - (3)].stringVal); ;}
     break;
 
   case 31:
-#line 184 "Parser.ypp"
+#line 185 "Parser.ypp"
     { driver.context.header.setREPORT(*(yysemantic_stack_[(4) - (3)].stringVal)); delete (yysemantic_stack_[(4) - (3)].stringVal); ;}
     break;
 
   case 32:
-#line 185 "Parser.ypp"
+#line 186 "Parser.ypp"
     { driver.context.header.setREPTYPE(*(yysemantic_stack_[(4) - (3)].stringVal)); delete (yysemantic_stack_[(4) - (3)].stringVal); ;}
     break;
 
   case 33:
-#line 186 "Parser.ypp"
+#line 187 "Parser.ypp"
     { driver.context.header.setSEARCH(*(yysemantic_stack_[(4) - (3)].stringVal)); delete (yysemantic_stack_[(4) - (3)].stringVal); ;}
     break;
 
   case 34:
-#line 187 "Parser.ypp"
+#line 188 "Parser.ypp"
     { driver.context.header.setTAXONOMY(*(yysemantic_stack_[(4) - (3)].stringVal)); delete (yysemantic_stack_[(4) - (3)].stringVal); ;}
     break;
 
   case 35:
-#line 188 "Parser.ypp"
+#line 189 "Parser.ypp"
     { driver.context.header.setTOLU(*(yysemantic_stack_[(4) - (3)].stringVal)); delete (yysemantic_stack_[(4) - (3)].stringVal); ;}
     break;
 
   case 36:
-#line 189 "Parser.ypp"
+#line 190 "Parser.ypp"
     { /*driver.context.header.setUSER(*$3);*/ delete (yysemantic_stack_[(4) - (3)].stringVal); ;}
     break;
 
   case 37:
-#line 190 "Parser.ypp"
+#line 191 "Parser.ypp"
     { driver.context.header.setUSEREMAIL(*(yysemantic_stack_[(4) - (3)].stringVal)); delete (yysemantic_stack_[(4) - (3)].stringVal); ;}
     break;
 
   case 38:
-#line 191 "Parser.ypp"
+#line 192 "Parser.ypp"
     { driver.context.header.setUSERNAME(*(yysemantic_stack_[(4) - (3)].stringVal)); delete (yysemantic_stack_[(4) - (3)].stringVal); ;}
     break;
 
   case 39:
-#line 192 "Parser.ypp"
+#line 193 "Parser.ypp"
     { driver.context.header.setDECOY(((yysemantic_stack_[(4) - (3)].integerVal))!=0); ;}
     break;
 
   case 40:
-#line 193 "Parser.ypp"
+#line 194 "Parser.ypp"
     { driver.context.header.setERRORTOLERANT(((yysemantic_stack_[(4) - (3)].integerVal))!=0); ;}
     break;
 
   case 41:
-#line 194 "Parser.ypp"
+#line 195 "Parser.ypp"
     { driver.context.header.setPFA((yysemantic_stack_[(4) - (3)].integerVal)); ;}
     break;
 
   case 42:
-#line 195 "Parser.ypp"
+#line 196 "Parser.ypp"
     { driver.context.header.setITOL((yysemantic_stack_[(4) - (3)].doubleVal)); ;}
     break;
 
   case 43:
-#line 196 "Parser.ypp"
+#line 197 "Parser.ypp"
     { driver.context.header.setITOL((yysemantic_stack_[(4) - (3)].integerVal)); ;}
     break;
 
   case 44:
-#line 197 "Parser.ypp"
+#line 198 "Parser.ypp"
     { driver.context.header.setPEP_ISOTOPE_ERROR((yysemantic_stack_[(4) - (3)].doubleVal)); ;}
     break;
 
   case 45:
-#line 198 "Parser.ypp"
+#line 199 "Parser.ypp"
     { driver.context.header.setPRECURSOR((yysemantic_stack_[(4) - (3)].doubleVal)); ;}
     break;
 
   case 46:
-#line 199 "Parser.ypp"
+#line 200 "Parser.ypp"
     { driver.context.header.setSEG((yysemantic_stack_[(4) - (3)].doubleVal)); ;}
     break;
 
   case 47:
-#line 200 "Parser.ypp"
+#line 201 "Parser.ypp"
     { driver.context.header.setTOL((yysemantic_stack_[(4) - (3)].doubleVal)); ;}
     break;
 
   case 48:
-#line 201 "Parser.ypp"
+#line 202 "Parser.ypp"
     { driver.context.header.setTOL((yysemantic_stack_[(4) - (3)].integerVal)); ;}
     break;
 
   case 49:
-#line 202 "Parser.ypp"
+#line 203 "Parser.ypp"
     { driver.context.header.setCHARGE(*((yysemantic_stack_[(4) - (3)].integerlistnode)->integers_)); delete (yysemantic_stack_[(4) - (3)].integerlistnode); ;}
     break;
 
   case 50:
-#line 203 "Parser.ypp"
+#line 204 "Parser.ypp"
     { driver.context.header.setFRAMES(*((yysemantic_stack_[(4) - (3)].integerlistnode)->integers_)); delete (yysemantic_stack_[(4) - (3)].integerlistnode); ;}
     break;
 
   case 54:
-#line 209 "Parser.ypp"
+#line 210 "Parser.ypp"
     { driver.context.currentSpectrum.setTITLE(*(yysemantic_stack_[(4) - (3)].stringVal)); delete (yysemantic_stack_[(4) - (3)].stringVal); ;}
     break;
 
   case 55:
-#line 210 "Parser.ypp"
+#line 211 "Parser.ypp"
     { driver.context.currentSpectrum.setCOMP(*(yysemantic_stack_[(4) - (3)].stringVal)); delete (yysemantic_stack_[(4) - (3)].stringVal); ;}
     break;
 
   case 56:
-#line 211 "Parser.ypp"
+#line 212 "Parser.ypp"
     { driver.context.currentSpectrum.setINSTRUMENT(*(yysemantic_stack_[(4) - (3)].stringVal)); delete (yysemantic_stack_[(4) - (3)].stringVal); ;}
     break;
 
   case 57:
-#line 212 "Parser.ypp"
+#line 213 "Parser.ypp"
     { driver.context.currentSpectrum.setIT_MODS(*(yysemantic_stack_[(4) - (3)].stringVal)); delete (yysemantic_stack_[(4) - (3)].stringVal); ;}
     break;
 
   case 58:
-#line 213 "Parser.ypp"
+#line 214 "Parser.ypp"
     { driver.context.currentSpectrum.setRTINSECONDS((yysemantic_stack_[(4) - (3)].doubleVal)); ;}
     break;
 
   case 59:
-#line 214 "Parser.ypp"
+#line 215 "Parser.ypp"
     { driver.context.currentSpectrum.setSCANS(*(yysemantic_stack_[(4) - (3)].stringVal)); delete (yysemantic_stack_[(4) - (3)].stringVal); ;}
     break;
 
   case 60:
-#line 215 "Parser.ypp"
+#line 216 "Parser.ypp"
     { driver.context.currentSpectrum.setTOLU(*(yysemantic_stack_[(4) - (3)].stringVal)); delete (yysemantic_stack_[(4) - (3)].stringVal); ;}
     break;
 
   case 61:
-#line 216 "Parser.ypp"
+#line 217 "Parser.ypp"
     { driver.context.currentSpectrum.setSEQ(*(yysemantic_stack_[(4) - (3)].stringVal)); delete (yysemantic_stack_[(4) - (3)].stringVal); ;}
     break;
 
   case 62:
-#line 217 "Parser.ypp"
+#line 218 "Parser.ypp"
     { driver.context.currentSpectrum.setTAG(*(yysemantic_stack_[(4) - (3)].stringVal)); delete (yysemantic_stack_[(4) - (3)].stringVal); ;}
     break;
 
   case 63:
-#line 218 "Parser.ypp"
+#line 219 "Parser.ypp"
     { driver.context.currentSpectrum.setETAG(*(yysemantic_stack_[(4) - (3)].stringVal)); delete (yysemantic_stack_[(4) - (3)].stringVal); ;}
     break;
 
   case 64:
-#line 219 "Parser.ypp"
+#line 220 "Parser.ypp"
     { driver.context.currentSpectrum.setTOL((yysemantic_stack_[(4) - (3)].doubleVal)); ;}
     break;
 
   case 65:
-#line 220 "Parser.ypp"
+#line 221 "Parser.ypp"
     { driver.context.currentSpectrum.setTOL((yysemantic_stack_[(4) - (3)].integerVal)); ;}
     break;
 
   case 66:
-#line 221 "Parser.ypp"
+#line 222 "Parser.ypp"
     { driver.context.currentSpectrum.setCHARGE(*((yysemantic_stack_[(4) - (3)].integerlistnode)->integers_)); delete (yysemantic_stack_[(4) - (3)].integerlistnode); ;}
     break;
 
   case 67:
-#line 222 "Parser.ypp"
+#line 223 "Parser.ypp"
     { driver.context.currentSpectrum.setPEPMASS(std::make_pair((yysemantic_stack_[(4) - (3)].doubleVal), 0.0)); ;}
     break;
 
   case 68:
-#line 223 "Parser.ypp"
+#line 224 "Parser.ypp"
     { driver.context.currentSpectrum.setPEPMASS(std::make_pair((yysemantic_stack_[(5) - (3)].doubleVal), (yysemantic_stack_[(5) - (4)].doubleVal))); ;}
     break;
 
   case 69:
-#line 224 "Parser.ypp"
+#line 225 "Parser.ypp"
     { driver.context.currentSpectrum.setPEPMASS(std::make_pair((yysemantic_stack_[(4) - (3)].integerVal), 0.0)); ;}
     break;
 
   case 70:
-#line 225 "Parser.ypp"
+#line 226 "Parser.ypp"
     { driver.context.currentSpectrum.setPEPMASS(std::make_pair((yysemantic_stack_[(5) - (3)].integerVal), (yysemantic_stack_[(5) - (4)].integerVal))); ;}
     break;
 
   case 72:
-#line 230 "Parser.ypp"
+#line 231 "Parser.ypp"
     {
              driver.context.mgfFile.setHeader(driver.context.header);
              driver.context.header.clear();
@@ -1272,14 +1272,14 @@ namespace mgf
   const unsigned char
   Parser::yyrline_[] =
   {
-         0,   139,   139,   140,   141,   142,   144,   145,   147,   148,
-     150,   151,   152,   153,   155,   156,   158,   159,   165,   171,
-     172,   174,   175,   176,   177,   178,   179,   180,   181,   182,
-     183,   184,   185,   186,   187,   188,   189,   190,   191,   192,
-     193,   194,   195,   196,   197,   198,   199,   200,   201,   202,
-     203,   204,   206,   207,   209,   210,   211,   212,   213,   214,
-     215,   216,   217,   218,   219,   220,   221,   222,   223,   224,
-     225,   226,   229,   235
+         0,   140,   140,   141,   142,   143,   145,   146,   148,   149,
+     151,   152,   153,   154,   156,   157,   159,   160,   166,   172,
+     173,   175,   176,   177,   178,   179,   180,   181,   182,   183,
+     184,   185,   186,   187,   188,   189,   190,   191,   192,   193,
+     194,   195,   196,   197,   198,   199,   200,   201,   202,   203,
+     204,   205,   207,   208,   210,   211,   212,   213,   214,   215,
+     216,   217,   218,   219,   220,   221,   222,   223,   224,   225,
+     226,   227,   230,   236
   };
 
   // Print the state stack on the debug stream.
@@ -1371,7 +1371,7 @@ namespace mgf
 
 } // namespace mgf
 
-#line 237 "Parser.ypp"
+#line 238 "Parser.ypp"
  /*** Additional Code ***/
 
 void mgf::Parser::error(const Parser::location_type& l, const std::string& m)
