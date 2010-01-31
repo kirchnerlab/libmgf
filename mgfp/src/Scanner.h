@@ -32,7 +32,7 @@ namespace mgf
  * macros to ExampleFlexLexer. However we change the context of the generated
  * yylex() function to be contained within the Scanner class. This is required
  * because the yylex() defined in ExampleFlexLexer has no parameters. */
-class Scanner : public MgfFlexLexer
+class MGFP_EXPORT Scanner : public MgfFlexLexer
 {
 public:
     /** Create a new scanner object. The streams arg_yyin and arg_yyout default

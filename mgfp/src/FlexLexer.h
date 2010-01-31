@@ -49,6 +49,7 @@
 #define __FLEX_LEXER_H
 
 #include <iostream>
+#include <mgfp/config.h>
 #  ifndef FLEX_STD
 #    define FLEX_STD std::
 #  endif
@@ -59,7 +60,7 @@ extern "C++"
     struct yy_buffer_state;
     typedef int yy_state_type;
 
-    class FlexLexer
+    class MGFP_EXPORT FlexLexer
     {
     public:
         virtual ~FlexLexer() { }
@@ -121,7 +122,7 @@ extern "C++"
 extern "C++"
 {
 
-    class yyFlexLexer : public FlexLexer
+    class MGFP_EXPORT yyFlexLexer : public FlexLexer
     {
     public:
         // arg_yyin and arg_yyout default to the cin and cout, but we
