@@ -1,0 +1,9 @@
+#ifndef __MGFPUNITTEST_H__
+#define __MGFPUNITTEST_H__
+
+#include "unittest.hxx" // from VIGRA
+#include <string>
+
+static const std::string testDataDir = "@MGFP_SOURCE_DIR@/test/data";
+
+#endif
