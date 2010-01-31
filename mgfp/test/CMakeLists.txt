@@ -38,19 +38,28 @@ MACRO(ADD_MGFP_TEST name exe src)
     #ENDIF(WITH_GCOV)
 ENDMACRO(ADD_MGFP_TEST name exe src)
 
+# adapt test data dir
+CONFIGURE_FILE(
+    ${CMAKE_CURRENT_SOURCE_DIR}/include/mgfpunittest.h.in
+    ${MGFP_BINARY_DIR}/test/include/mgfpunittest.h
+)
+
 # include directorie
 INCLUDE_DIRECTORIES(
     ${MGFP_SOURCE_DIR}/test/include
     ${MGFP_SOURCE_DIR}/include
     ${MGFP_BINARY_DIR}/include
+    ${MGFP_BINARY_DIR}/test/include
     ${CMAKE_CURRENT_SOURCE_DIR}
 )
 
 #### Sources
+SET(SRCS_PARSERFORMAT ParserFormat-test.cpp)
 SET_SOURCE_FILES_PROPERTIES(Collection-test.cpp PROPERTIES COMPILE_FLAGS "-DREGRESSION_TEST_BUILD")
 SET(SRCS_COLLECTION Collection-test.cpp)
 
 #### Tests
+ADD_MGFP_TEST("ParserFormat" test_parserformat ${SRCS_PARSERFORMAT})
 ADD_MGFP_TEST("Collection" test_collection ${SRCS_COLLECTION})
 
 #ADD_TEST("CorrectLicenseHeaders" ${MGFP_SOURCE_DIR}/checklicense.sh)

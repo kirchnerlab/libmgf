@@ -13,7 +13,7 @@ namespace mgf
  * passed along to the Driver class and filled during parsing via bison
  * actions. 
  */
-struct Context
+struct MGFP_EXPORT Context
 {
     MgfFile mgfFile;
     MgfSpectrum currentSpectrum;

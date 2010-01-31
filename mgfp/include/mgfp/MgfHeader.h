@@ -19,7 +19,7 @@ namespace mgf {
  * MatrixScience format information page at
  * http://www.matrixscience.com/help/data_file_help.html#GEN..
  */
-class MgfHeader
+class MGFP_EXPORT MgfHeader
 {
   public:
     

@@ -1,7 +1,7 @@
 --[ LICENSE ]---------------------------------------------------
 
 With the exception of all files explicitly mentioned further
-below, the following licensing holds:
+below, mgfp is distributed under the following licensing terms:
 
     Copyright (c) 2010 Marc Kirchner
     All rights reserved.
@@ -131,7 +131,6 @@ below, the following licensing holds:
 
           0. You just DO WHAT THE FUCK YOU WANT TO. 
 
-    Now being part of mgfp, all of these files have been moved to the mgfp
-    licensing scheme. Plese refere to the LICENSE file in the mgfp top level
-    directory for details.
+    Being part of mgfp, all of these files are thus licensed using the mgfp
+    licensing scheme detailed at the beginning of this document. 
 

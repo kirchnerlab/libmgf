@@ -18,7 +18,7 @@ namespace mgf
  * a set of global settings (i.e. an HgfHeader) and a set of fragment ion
  * spectra, each of which is represented using an MgfSpectrum.
  */
-class MgfFile : public Collection<MgfSpectrum>
+class MGFP_EXPORT MgfFile : public Collection<MgfSpectrum>
 {
   public:
     /** Default constructor.

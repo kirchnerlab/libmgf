@@ -11,14 +11,14 @@
 namespace mgf
 {
 
-class Scanner;
+class MGFP_EXPORT Scanner;
 
-/** The Driver class brings together all components. It creates an instance of
- * the Parser and Scanner classes and connects them. Then the input stream is
- * fed into the scanner object and the parser gets it's token
- * sequence. Furthermore the driver object is available in the grammar rules as
- * a parameter. Therefore the driver class contains a reference to the
- * structure into which the parsed data is saved. */
+/** The primary user interface class. The Driver class brings together all
+ * components. It creates an instance of the Parser and Scanner classes and
+ * connects them. Then the input stream is fed into the scanner object and the
+ * parser gets it's token sequence. Furthermore the driver object is available
+ * in the grammar rules as a parameter. Therefore the driver class contains a
+ * reference to the structure into which the parsed data is saved. */
 class MGFP_EXPORT Driver
 {
   public:

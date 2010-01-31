@@ -4,6 +4,7 @@
 #define __COLLECTION_H__
 
 #include <vector>
+#include <mgfp/config.h>
 
 #ifdef REGRESSION_TEST_BUILD
     struct CollectionTestSuite;
@@ -23,7 +24,7 @@
  * @author Marc Kirchner <marc.kirchner@childrens.harvard.edu>
  */
 template < class T, class A = std::allocator<T> >
-class Collection
+class MGFP_EXPORT Collection
 {
   public:
     // typedefs
