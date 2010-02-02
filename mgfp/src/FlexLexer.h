@@ -140,7 +140,7 @@ extern "C++"
         void yypush_buffer_state(struct yy_buffer_state* new_buffer);
         void yypop_buffer_state();
 
-        virtual int yylex();
+        virtual int yylex() { return 0; }
         virtual void switch_streams(FLEX_STD istream* new_in,
                 FLEX_STD ostream* new_out);
 

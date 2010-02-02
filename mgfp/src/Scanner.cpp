@@ -2408,7 +2408,7 @@ void Scanner::set_debug(bool b)
 
 /* This implementation of ExampleFlexLexer::yylex() is required to fill the
  * vtable of the class ExampleFlexLexer. We define the scanner's main yylex
- * function via YY_DECL to reside in the Scanner class instead. */
+ * function via YY_DECL to reside in the Scanner class instead.
 #ifdef yylex
 #undef yylex
 #endif
@@ -2417,6 +2417,8 @@ int MgfFlexLexer::yylex()
 {
     return 0;
 }
+
+*/
 
 /* When the scanner receives an end-of-file indication from YY_INPUT, it then
  * checks the yywrap() function. If yywrap() returns false (zero), then it is
