@@ -24,10 +24,10 @@ struct ParserFormatTestSuite : vigra::test_suite {
     }
 
     void testNumberFormats() {
-        std::string file(testDataDir + "/numberFormats.mgf");
+        std::string file(testDataDir + "/numberformats.mgf");
         std::ifstream ifs(file.c_str());
         if (!ifs) {
-            failTest("Could not open test data files.");
+            failTest("Could not open test data file.");
         }
         // prepare the parser
         mgf::Context context;
