@@ -1,2 +1,3 @@
 ADD_SUBDIRECTORY(mgfvalidate)
+ADD_SUBDIRECTORY(tmtx)
 

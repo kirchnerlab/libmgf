@@ -17,7 +17,7 @@ typedef std::pair<double, double> MassAbundancePair;
 
 /** Functor for m/z-based comparison of \c MassAbundancePairs.
  */
-struct LessThanMass :  std::binary_function<bool, MassAbundancePair, 
+struct LessThanMz :  std::binary_function<bool, MassAbundancePair, 
   MassAbundancePair> {
     bool operator()(const MassAbundancePair& lhs, 
       const MassAbundancePair& rhs) {
