@@ -40,8 +40,8 @@ int main(int argc, char *argv[])
     po::notify(vm);    
     
     // prepare the parser
-    mgf::Context context;
-    mgf::Driver driver(context);
+    mgf::MgfFile mgfFile;
+    mgf::Driver driver(mgfFile);
     driver.trace_parsing = verbose;
     driver.trace_scanning = verbose;
 

@@ -8,10 +8,10 @@
 namespace mgf
 {
 
-Driver::Driver(Context& _context)
+Driver::Driver(MgfFile& mgfFile)
         : trace_scanning(false),
         trace_parsing(false),
-        context(_context)
+        context(mgfFile)
 {}
 
 bool Driver::parse_stream(std::istream& in, const std::string& sname) {

@@ -7,6 +7,7 @@
 #include <vector>
 
 #include <mgfp/Context.h>
+#include <mgfp/MgfSpectrum.h>
 
 namespace mgf
 {
@@ -23,7 +24,7 @@ class MGFP_EXPORT Driver
 {
   public:
     /// construct a new parser driver context
-    Driver(Context& context);
+    Driver(MgfFile& mgfFile);
 
     /// enable debug output in the flex scanner
     bool trace_scanning;
@@ -75,7 +76,7 @@ class MGFP_EXPORT Driver
 
     /** Reference to the calculator context filled during parsing of the
      * expressions. */
-    Context& context;
+    Context context;
 };
 
 } // namespace mgf

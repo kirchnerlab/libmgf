@@ -89,8 +89,8 @@ int main(int argc, char *argv[])
         return 1;
     }
     // prepare the parser
-    mgf::Context context;
-    mgf::Driver driver(context);
+    mgf::MgfFile m;
+    mgf::Driver driver(m);
     driver.trace_parsing = verbose;
     driver.trace_scanning = verbose;
     // parse input 
@@ -100,8 +100,6 @@ int main(int argc, char *argv[])
           << "Error parsing data stream (use -v for details)." << std::endl;
         return -1;
     }
-    // get a handle to the data
-    mgf::MgfFile& m = context.mgfFile;
     typedef mgf::MgfFile::iterator MFI;
     // iterate over all spectra
     for (MFI i = m.begin(); i != m.end(); ++i) {

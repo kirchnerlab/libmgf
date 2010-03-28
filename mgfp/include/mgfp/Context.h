@@ -15,7 +15,8 @@ namespace mgf
  */
 struct MGFP_EXPORT Context
 {
-    MgfFile mgfFile;
+    Context(MgfFile& file) : mgfFile(file) {}
+    MgfFile& mgfFile;
     MgfSpectrum currentSpectrum;
     MgfHeader header;
 };
