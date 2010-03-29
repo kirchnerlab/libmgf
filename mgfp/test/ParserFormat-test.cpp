@@ -21,6 +21,7 @@ using namespace vigra;
 struct ParserFormatTestSuite : vigra::test_suite {
     ParserFormatTestSuite() : vigra::test_suite("ParserFormat") {
         add(testCase(&ParserFormatTestSuite::testNumberFormats));
+        add(testCase(&ParserFormatTestSuite::testTitleFormats));
     }
 
     void testNumberFormats() {
@@ -30,8 +31,8 @@ struct ParserFormatTestSuite : vigra::test_suite {
             failTest("Could not open test data file.");
         }
         // prepare the parser
-        mgf::Context context;
-        mgf::Driver driver(context);
+        mgf::MgfFile mgfFile;
+        mgf::Driver driver(mgfFile);
         // don't need verbose output for the tests
         driver.trace_parsing = false;
         driver.trace_scanning = false;
@@ -43,8 +44,8 @@ struct ParserFormatTestSuite : vigra::test_suite {
                      "the verbose switch to determine the cause of the error.");
         }
         // check the data
-        shouldEqual(context.mgfFile.size(), static_cast<size_t>(1));
-        mgf::MgfSpectrum& s = context.mgfFile[0];
+        shouldEqual(mgfFile.size(), static_cast<size_t>(1));
+        mgf::MgfSpectrum& s = mgfFile[0];
         shouldEqual(s.size(), 9);
         double spectrum[9][2] = {
             {232.1765,190.9556},
@@ -65,6 +66,33 @@ struct ParserFormatTestSuite : vigra::test_suite {
         shouldEqual(s.getPEPMASS().first, 508.7576);
         shouldEqual(s.getPEPMASS().second, 0.0);
         shouldEqual(s.getTITLE(), "MGFp format test");
+    }
+    
+    void testTitleFormats() {
+        std::string file(testDataDir + "/titleformats.mgf");
+        std::ifstream ifs(file.c_str());
+        if (!ifs) {
+            failTest("Could not open test data file.");
+        }
+        // prepare the parser
+        mgf::MgfFile mgfFile;
+        mgf::Driver driver(mgfFile);
+        // don't need verbose output for the tests
+        driver.trace_parsing = false;
+        driver.trace_scanning = false;
+
+        // parse input into memory
+        bool result = driver.parse_stream(ifs);
+        if (!result) {
+            failTest("Parsing failed. Use the mgfvalidate application with "
+                     "the verbose switch to determine the cause of the error.");
+        }
+        // check the data
+        shouldEqual(mgfFile.size(), static_cast<size_t>(4));
+        shouldEqual(mgfFile[0].getTITLE(), "Normal Title");
+        shouldEqual(mgfFile[1].getTITLE(), "5.1arting with a fractional number");
+        shouldEqual(mgfFile[2].getTITLE(), "=repeating the = sign");
+        shouldEqual(mgfFile[3].getTITLE(), "     5paces! And other stuff: +_)(*&^%$#@!~`{}[]:\";'<>,./?=");
     }
 };
 

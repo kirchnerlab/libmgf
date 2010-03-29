@@ -52,6 +52,10 @@ int main(int argc, char *argv[])
           << "Error parsing data stream (use -v for details)." << std::endl;
         return -1;
     }
+    // print out the titles as we go.
+    for (mgf::MgfFile::iterator i = mgfFile.begin(); i != mgfFile.end(); ++i) {
+        std::cerr << '"' << i->getTITLE() << '"' << std::endl;
+    }
     std::cerr << "Ok." << std::endl;
     return 0;
 }

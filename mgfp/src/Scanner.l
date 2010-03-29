@@ -8,6 +8,7 @@
 
 #include <string>
 #include <sstream>
+#include <iostream>
 
 /* import the parser's token type into a local typedef */
 typedef mgf::Parser::token token;
@@ -37,7 +38,7 @@ typedef mgf::Parser::token_type token_type;
 
 /* enable scanner to generate debug output. disable this for release
  * versions. */
-%option debug
+/* %option debug */
 
 /* no support for include files is planned */
 %option yywrap nounput 
@@ -166,11 +167,6 @@ typedef mgf::Parser::token_type token_type;
     return token::PEPMASS;
 }
 
-"TITLE" {
-    yylloc->step();
-    return token::TITLE;
-}
-
 "ERRORTOLERANT" {
     yylloc->step();
     return token::ERRORTOLERANT;
@@ -264,6 +260,16 @@ typedef mgf::Parser::token_type token_type;
 #[^\n]* {
     yylloc->step();
     return token::COMMENT;
+}
+
+"TITLE="[^\n]* {
+    std::string title(yytext);
+    size_t pos = title.find("=");
+    yylval->stringVal = new std::string();
+    if (pos != std::string::npos && pos < (title.size()-1)) {
+        *(yylval->stringVal) = title.substr(pos+1);
+    }
+    return token::TITLE;
 }
 
 [A-Za-z][ :;,()A-Za-z0-9_.-]* {

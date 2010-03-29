@@ -92,12 +92,6 @@ Coding examples are in the \c applications/ subdirectory
 \section sec_appendix Appendix
 
 \subsection sec_issues Known Issues
-\li Parsing the TITLE tag. If the TITLE tag starts with a valid integer or double
-    parsing will fail. There is no simple grammar-based remedy for this as there
-    are no official requirements for the string that follows the tag (e.g.
-    enclosure in quotes or similar). The solution is to modify the scanner to
-    read full TITLE lines and to process the line prior to returning it to the
-    parser. This will be implemented asap.
 \li Multiple USERxx entries; the current implementation ignores USER entries.
 \li General PMF support: most MGFp testing has been done on MS/MS ion search
     data. Hence, it is possible that valid PMF constructs are not

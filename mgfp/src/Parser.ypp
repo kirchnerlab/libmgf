@@ -88,7 +88,7 @@ using namespace mgf::detail;
 %token SCANS "scan number of range keyword"
 %token SEQ "amino acid sequence keyword"
 %token TAG "sequence tag keyword"
-%token TITLE "title keyword"
+%token <stringVal> TITLE "title keyword and full title string"
 %token TOL "peptide mass tolerance keyword"
 %token TOLU "tolerance units keyword"
 %token CLE "enzyme keyword"
@@ -207,7 +207,7 @@ globalparam : CLE '=' STRING EOL { driver.context.header.setCLE(*$3); delete $3;
 localparams : /* empty */ 
             | localparams localparam
 
-localparam : TITLE '=' STRING EOL { driver.context.currentSpectrum.setTITLE(*$3); delete $3; }
+localparam : TITLE EOL { driver.context.currentSpectrum.setTITLE(*$1); delete $1; }
            | COMP '=' STRING EOL { driver.context.currentSpectrum.setCOMP(*$3); delete $3; }
            | INSTRUMENT '=' STRING EOL { driver.context.currentSpectrum.setINSTRUMENT(*$3); delete $3; }
            | IT_MODS '=' STRING EOL { driver.context.currentSpectrum.setIT_MODS(*$3); delete $3; }

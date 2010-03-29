@@ -1,0 +1,33 @@
+# 
+# test file for title formats
+# the library should return all titles exactly the way they are,
+# including whitespace, if present
+#
+BEGIN IONS
+TITLE=Normal Title
+CHARGE=4+
+PEPMASS=508.7576
+232.1765 190.9556
+END IONS
+
+BEGIN IONS
+TITLE=5.1arting with a fractional number
+CHARGE=4+
+PEPMASS=508.7576
+232.1765 190.9556
+END IONS
+
+BEGIN IONS
+TITLE==repeating the = sign
+CHARGE=4+
+PEPMASS=508.7576
+232.1765 190.9556
+END IONS
+
+BEGIN IONS
+TITLE=     5paces! And other stuff: +_)(*&^%$#@!~`{}[]:";'<>,./?=
+CHARGE=4+
+PEPMASS=508.7576
+232.1765 190.9556
+END IONS
+
