@@ -19,12 +19,12 @@
    13 csintegerlist: csintegerlist ',' "integer"
    14              | "integer"
 
-   15 blocks: []
+   15 blocks: /* empty */
    16       | blocks block
 
    17 block: "begin_ions keyword" "end of line" localparams ions "end_ions keyword" "end of line"
 
-   18 globalparams: []
+   18 globalparams: /* empty */
    19             | globalparams globalparam
 
    20 globalparam: "enzyme keyword" '=' "string" "end of line"
@@ -59,10 +59,10 @@
    49            | "NA translation keyword" '=' csintegerlist "end of line"
    50            | "comment" "end of line"
 
-   51 localparams: []
+   51 localparams: /* empty */
    52            | localparams localparam
 
-   53 localparam: "title keyword" '=' "string" "end of line"
+   53 localparam: "title keyword and full title string" "end of line"
    54           | "amino acid composition keyword" '=' "string" "end of line"
    55           | "MS/MS ion series keyword" '=' "string" "end of line"
    56           | "variable modifications keyword" '=' "string" "end of line"
@@ -84,3 +84,4 @@
    71 contents: globalparams blocks "end of file"
 
    72 start: contents
+
