@@ -61,6 +61,7 @@ CONFIGURE_FILE(${MGFP_SOURCE_DIR}/doc/Doxyfile.cmake
 )
 FIND_PACKAGE(Doxygen)
 ADD_CUSTOM_TARGET(doc COMMAND ${DOXYGEN} ${MGFP_BINARY_DIR}/doc/Doxyfile)
+# FIXME: add target for pdf generation
 
 #############################################################################
 # regression tests
@@ -76,23 +77,26 @@ ADD_SUBDIRECTORY(test)
 # headers
 INSTALL(DIRECTORY ${MGFP_SOURCE_DIR}/include/mgfp
         DESTINATION include
-	COMPONENT headers
+        COMPONENT headers
         REGEX "/.svn$" EXCLUDE)
 
 # config.h
 INSTALL(FILES ${MGFP_BINARY_DIR}/include/mgfp/config.h
         DESTINATION include/mgfp
-	COMPONENT headers)
+        COMPONENT headers)
 
 # documentation
 INSTALL(DIRECTORY ${MGFP_BINARY_DIR}/doc
         DESTINATION share/mgfp
-	COMPONENT documentation
+        COMPONENT documentation
         PATTERN "Doxyfile" EXCLUDE)
 
 #############################################################################
 # packaging
 #############################################################################
+
+# FIXME: make sure that the documentation is compiled and pdfs are 
+#        generated prior to packaging!
 
 set(CPACK_PACKAGE_NAME "mgfp")
 set(CPACK_PACKAGE_VENDOR "steenlab.org")
