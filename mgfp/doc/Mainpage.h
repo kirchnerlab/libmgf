@@ -4,7 +4,7 @@
 
 \mainpage mgfp: Mascot Generic Format (MGF) Parser
 
-\author Marc Kirchner <marc.kirchner@childrens.harvard.edu>
+\author Marc Kirchner <firstname.lastname@childrens.harvard.edu>
 
 \section sec_intro Introduction
 \c mgfp is a flex/bison-based C++ MGF parser library.<br>

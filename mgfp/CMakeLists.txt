@@ -60,7 +60,14 @@ CONFIGURE_FILE(${MGFP_SOURCE_DIR}/doc/Doxyfile.cmake
     @ONLY IMMEDIATE
 )
 FIND_PACKAGE(Doxygen)
+
+# target for doxygen
 ADD_CUSTOM_TARGET(doc COMMAND ${DOXYGEN} ${MGFP_BINARY_DIR}/doc/Doxyfile)
+
+# convenience targets for synchronisation: htdocs and docs
+ADD_CUSTOM_TARGET(synchtdocs COMMAND rsync -Cavz ${MGFP_SOURCE_DIR}/htdocs mkirchner,mgfp@web.sourceforge.net:/home/groups/m/mg/mgfp/)
+ADD_CUSTOM_TARGET(syncdocs COMMAND rsync -Cavz ${MGFP_BINARY_DIR}/doc/html mkirchner,mgfp@web.sourceforge.net:/home/groups/m/mg/mgfp/htdocs/doc)
+
 # FIXME: add target for pdf generation
 
 #############################################################################
