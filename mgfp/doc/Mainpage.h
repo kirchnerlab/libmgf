@@ -1,30 +1,36 @@
 /*!
 
-\image html mgfp_small.png 
-
 \mainpage mgfp: Mascot Generic Format (MGF) Parser
-
-\author Marc Kirchner <firstname.lastname@childrens.harvard.edu>
 
 \section sec_intro Introduction
 \c mgfp is a flex/bison-based C++ MGF parser library.<br>
 
-The library is provided 
-under the terms of a BSD license and can thus be used in academic and 
+The <a href="http://steenlab.org">Steen \& Steen Lab</a> provides
+the library under the terms of a BSD license for use in academic and 
 non-academic environments.
+
+\section sec_citation Citation
+
+If you make use of \c mgfp in your own projects, please cite the
+following article:<br>
+
+Kirchner M, Steen JAJ, Hamprecht FA, Steen H (2010).
+MGFp: An open Mascot Generic Format parser library implementation.
+<i>Journal of Proteome Research, in press.</i>
+[<a href="http://www.ncbi.nlm.nih.gov/pubmed/20334363">PubMed</a>]
 
 \section sec_install Installation
 
-\subsection sec_install_bin Obtaining a Binary Package
+\subsection sec_install_bin Obtaining the Software
 Binary packages for Microsoft Windows, Linux (64 bit, built on Ubuntu 10.4) and
 MacOS X (Snow Leopard) are available for download from 
 
-\li the Steen Lab software page at http://software.steenlab.org/mgfp .
+\li the MGFp project page at sourceforge: http://mgfp.sf.net .
 
-Additionally, we are in the process of migrating MGFp to sourceforge.
-This will allow SVN access for anyone who wants to contribute.
+Additional information is available on 
 
-\li (Future) MGFp project page at sourceforge: http://mgfp.sf.net .
+\li the Steen Lab page at http://steenlab.org/
+\li the Steen Lab software page at http://software.steenlab.org/
 
 \subsection sec_install_src Building from Source
 Building \c mgfp from source is straightforward. However, it requires a working
