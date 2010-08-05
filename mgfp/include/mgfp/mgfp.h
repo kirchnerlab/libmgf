@@ -1,5 +1,5 @@
-#ifndef __MGFPARSER_H__
-#define __MGFPARSER_H__
+#ifndef __MGFP_INCLUDE_MGFP_H__
+#define __MGFP_INCLUDE_MGFP_H__
 
 #include <mgfp/Context.h>
 #include <mgfp/Driver.h>

@@ -1,6 +1,6 @@
 // $Id$
-#ifndef __CONTEXT_H__
-#define __CONTEXT_H__
+#ifndef __MGFP_INCLUDE_CONTEXT_H__
+#define __MGFP_INCLUDE_CONTEXT_H__
 
 #include <mgfp/MgfFile.h>
 #include <mgfp/MgfHeader.h>
@@ -23,4 +23,4 @@ struct MGFP_EXPORT Context
 
 }
 
-#endif // __CONTEXT_H__
+#endif // __MGFP_INCLUDE_CONTEXT_H__

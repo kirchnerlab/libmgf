@@ -1,5 +1,5 @@
-#ifndef __MGFHEADER_H__
-#define __MGFHEADER_H__
+#ifndef __MGFP_INCLUDE_MGFHEADER_H__
+#define __MGFP_INCLUDE_MGFHEADER_H__
 
 #include <mgfp/config.h>
 

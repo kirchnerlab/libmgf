@@ -1,7 +1,7 @@
 /* $Id$ */
 
-#ifndef __DRIVER_H__
-#define __DRIVER_H__
+#ifndef __MGFP_INCLUDE_DRIVER_H__
+#define __MGFP_INCLUDE_DRIVER_H__
 
 #include <string>
 #include <vector>
@@ -81,4 +81,4 @@ class MGFP_EXPORT Driver
 
 } // namespace mgf
 
-#endif // __DRIVER_H__
+#endif // __MGFP_INCLUDE_DRIVER_H__

@@ -1,14 +1,17 @@
 /*$Id$*/
 
-#ifndef __COLLECTION_H__
-#define __COLLECTION_H__
+#ifndef __MGFP_INCLUDE_COLLECTION_H__
+#define __MGFP_INCLUDE_COLLECTION_H__
 
 #include <vector>
 #include <mgfp/config.h>
 
+
 #ifdef REGRESSION_TEST_BUILD
-    struct CollectionTestSuite;
+struct CollectionTestSuite;
 #endif
+
+namespace mgf {
 
 /** A std::vector<T> composite.
  * The STL std::vector<T> does not have a virtual destructor, hence it is not
@@ -186,5 +189,7 @@ template <class T, class A> void swap(Collection<T, A>& lhs, Collection<T, A>& r
 {
     lhs.c_.swap(rhs.c_);
 }
+
+} // namespace mgf
 
 #endif

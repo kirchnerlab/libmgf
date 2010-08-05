@@ -1,5 +1,5 @@
-#ifndef __MASSABUNDANCEPAIR_H__
-#define __MASSABUNDANCEPAIR_H__
+#ifndef __MGFP_INCLUDE_MASSABUNDANCEPAIR_H__
+#define __MGFP_INCLUDE_MASSABUNDANCEPAIR_H__
 
 #include <mgfp/config.h>
 

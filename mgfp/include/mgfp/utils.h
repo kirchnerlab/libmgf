@@ -1,5 +1,5 @@
-#ifndef __UTILS_H__
-#define __UTILS_H__
+#ifndef __MGFP_INCLUDE_UTILS_H__
+#define __MGFP_INCLUDE_UTILS_H__
 
 #include <mgfp/config.h>
 

@@ -1,7 +1,7 @@
 /* $Id$ */
 
-#ifndef __MGFFILE_H__
-#define __MGFFILE_H__
+#ifndef __MGFP_INCLUDE_MGFFILE_H__
+#define __MGFP_INCLUDE_MGFFILE_H__
 
 #include <mgfp/config.h>
 

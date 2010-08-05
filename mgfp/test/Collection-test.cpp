@@ -29,6 +29,7 @@
 
 #include "unittest.hxx"
 
+using namespace mgf;
 
 struct CollectionTestSuite : vigra::test_suite {
     CollectionTestSuite() : vigra::test_suite("Collection") {

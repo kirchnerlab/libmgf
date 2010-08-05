@@ -1,5 +1,5 @@
-#ifndef __MGFSPECTRUM_H__
-#define __MGFSPECTRUM_H__
+#ifndef __MGFP_INCLUDE_MGFSPECTRUM_H__
+#define __MGFP_INCLUDE_MGFSPECTRUM_H__
 
 #include <mgfp/config.h>
 

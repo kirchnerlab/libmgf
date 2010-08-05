@@ -1,5 +1,5 @@
-#ifndef __CONFIG_H__
-#define __CONFIG_H__
+#ifndef __MGFP_INCLUDE_CONFIG_H__
+#define __MGFP_INCLUDE_CONFIG_H__
 
 //#ifdef _MSC_VER
 //	#include "winsock2.h"
@@ -26,5 +26,5 @@
 	#define MGFP_EXPORT
 #endif
 
-#endif // __CONFIG_H__
+#endif // __MGFP_INCLUDE_CONFIG_H__
 
