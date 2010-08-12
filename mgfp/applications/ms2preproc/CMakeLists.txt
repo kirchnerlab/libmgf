@@ -7,7 +7,7 @@ INCLUDE_DIRECTORIES(
     ${CMAKE_CURRENT_SOURCE_DIR}
 )
 #############################################################################
-# this requres BOOST
+# require boost
 #############################################################################
 IF(MSVC) 
     SET(Boost_USE_STATIC_LIBS ON)
@@ -17,10 +17,10 @@ FIND_PACKAGE(Boost COMPONENTS program_options)
 IF(Boost_PROGRAM_OPTIONS_FOUND)
     INCLUDE_DIRECTORIES(${Boost_INCLUDE_DIRS})
     LINK_DIRECTORIES(${Boost_LIBRARY_DIRS})
-    SET(SRCS_MGFVALIDATE mgfvalidate.cpp)
-    ADD_EXECUTABLE(mgfvalidate ${SRCS_MGFVALIDATE})
-    TARGET_LINK_LIBRARIES(mgfvalidate mgfp ${Boost_PROGRAM_OPTIONS_LIBRARY})
-    INSTALL(TARGETS mgfvalidate RUNTIME DESTINATION bin)
+    SET(SRCS_MS2PREPROC ms2preproc.cpp)
+    ADD_EXECUTABLE(ms2preproc ${SRCS_MS2PREPROC})
+    TARGET_LINK_LIBRARIES(ms2preproc mgfp ${Boost_PROGRAM_OPTIONS_LIBRARY})
+    INSTALL(TARGETS ms2preproc RUNTIME DESTINATION bin)
 ELSE(Boost_PROGRAM_OPTIONS_FOUND)
     MESSAGE(STATUS "Could not find BOOST program_options. Skipping ${CMAKE_CURRENT_SOURCE_DIR}.") 
 ENDIF(Boost_PROGRAM_OPTIONS_FOUND)

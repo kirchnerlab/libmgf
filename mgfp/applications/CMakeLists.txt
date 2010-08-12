@@ -1,3 +1,4 @@
 ADD_SUBDIRECTORY(mgfvalidate)
+ADD_SUBDIRECTORY(ms2preproc)
 ADD_SUBDIRECTORY(tmtx)
 
