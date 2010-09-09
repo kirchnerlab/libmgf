@@ -1,6 +1,7 @@
 #include <mgfp/MgfSpectrum.h>
 
 #include <cstdlib> // for std::abs(int)
+#include <sstream>
 
 namespace mgf {
 
@@ -69,6 +70,12 @@ std::string MgfSpectrum::getSCANS(void) const {
 }
 void MgfSpectrum::setSCANS(const std::string& scans) {
     scans_ = scans;    //FIXME
+}
+
+void MgfSpectrum::setSCANS(const int scans) {
+    std::ostringstream oss;
+    oss << scans;
+    scans_ = oss.str();    //FIXME
 }
 
 std::string MgfSpectrum::getSEQ(void) const {

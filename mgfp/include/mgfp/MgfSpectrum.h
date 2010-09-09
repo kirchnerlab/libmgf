@@ -145,6 +145,12 @@ class MGFP_EXPORT MgfSpectrum : public Collection<MassAbundancePair>
      */
     void setSCANS(const std::string& scans);
 
+    /** Set 
+     *  @see 
+     *  @param[in] 
+     */
+    void setSCANS(const int scans);
+
     /** Get the amino acid sequence. Please consult the detailed description in
      * the Mascot documentation (see link).
      *  @see http://www.matrixscience.com/help/sq_help.html#SEQ
