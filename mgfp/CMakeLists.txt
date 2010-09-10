@@ -9,8 +9,8 @@ INCLUDE(${CMAKE_CURRENT_SOURCE_DIR}/cmake/macros/require_out_of_src_build.cmake)
 #############################################################################
 # versioning
 #############################################################################
-set(VERSION_MAJOR 1)
-set(VERSION_MINOR 3)
+set(VERSION_MAJOR 2)
+set(VERSION_MINOR 0)
 
 # get SVN revision
 EXECUTE_PROCESS(
