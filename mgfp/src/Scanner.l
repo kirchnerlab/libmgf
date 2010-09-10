@@ -63,7 +63,7 @@ typedef mgf::Parser::token_type token_type;
  /*
   * lexer rules 
   */
-[0-9]+"."[0-9]*[eE][+-][0-9]+ {
+[0-9]+("."[0-9]+)?[eE][+-][0-9]+ {
     std::istringstream iss;
     iss.str(std::string(yytext));
     iss >> yylval->doubleVal;

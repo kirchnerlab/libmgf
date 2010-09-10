@@ -6,6 +6,7 @@
 
 #include <cstdio>
 #include <string>
+#include <utility>
 #include <vector>
 
 using namespace mgf;
@@ -158,6 +159,7 @@ block : BEGIN_IONS EOL localparams ions END_IONS EOL
             driver.context.currentSpectrum.assign(($4->pairlist_)->begin(), ($4->pairlist_)->end());
             delete $4; 
         }
+      | BEGIN_IONS EOL localparams END_IONS EOL 
 
 globalparams : /*empty*/ 
              | globalparams globalparam 
@@ -187,7 +189,9 @@ globalparam : CLE '=' STRING EOL { driver.context.header.setCLE(*$3); delete $3;
             | ITOL '=' INTEGER EOL { driver.context.header.setITOL($3); }
             | PEP_ISOTOPE_ERROR '=' DOUBLE EOL { driver.context.header.setPEP_ISOTOPE_ERROR($3); }
             | PRECURSOR '=' DOUBLE EOL { driver.context.header.setPRECURSOR($3); }
+            | PRECURSOR '=' INTEGER EOL { driver.context.header.setPRECURSOR($3); }
             | SEG '=' DOUBLE EOL { driver.context.header.setSEG($3); }
+            | SEG '=' INTEGER EOL { driver.context.header.setSEG($3); }
             | TOL '=' DOUBLE EOL { driver.context.header.setTOL($3); }
             | TOL '=' INTEGER EOL { driver.context.header.setTOL($3); }
             | CHARGE '=' charges EOL { driver.context.header.setCHARGE(*($3->integers_)); delete $3; }
@@ -202,8 +206,13 @@ localparam : TITLE EOL { driver.context.currentSpectrum.setTITLE(*$1); delete $1
            | INSTRUMENT '=' STRING EOL { driver.context.currentSpectrum.setINSTRUMENT(*$3); delete $3; }
            | IT_MODS '=' STRING EOL { driver.context.currentSpectrum.setIT_MODS(*$3); delete $3; }
            | RTINSECONDS '=' DOUBLE EOL { driver.context.currentSpectrum.setRTINSECONDS($3); }
-           | SCANS '=' STRING EOL { driver.context.currentSpectrum.setSCANS(*$3); delete $3; }
-           | SCANS '=' INTEGER EOL { driver.context.currentSpectrum.setSCANS($3); }
+           | RTINSECONDS '=' INTEGER EOL { driver.context.currentSpectrum.setRTINSECONDS($3); }
+           | RTINSECONDS '=' DOUBLE '-' DOUBLE EOL { driver.context.currentSpectrum.setRTINSECONDS(std::make_pair($3, $5)); }
+           | RTINSECONDS '=' DOUBLE '-' INTEGER EOL { driver.context.currentSpectrum.setRTINSECONDS(std::make_pair($3, $5)); }
+           | RTINSECONDS '=' INTEGER '-' DOUBLE EOL { driver.context.currentSpectrum.setRTINSECONDS(std::make_pair($3, $5)); }
+           | RTINSECONDS '=' INTEGER '-' INTEGER EOL { driver.context.currentSpectrum.setRTINSECONDS(std::make_pair($3, $5)); }
+           | SCANS '=' INTEGER EOL { driver.context.currentSpectrum.setSCANS(std::make_pair($3, -1)); }
+           | SCANS '=' INTEGER '-' INTEGER EOL { driver.context.currentSpectrum.setSCANS(std::make_pair($3, $5)); }
            | TOLU '=' STRING EOL { driver.context.currentSpectrum.setTOLU(*$3); delete $3; }
            | SEQ '=' STRING EOL { driver.context.currentSpectrum.setSEQ(*$3); delete $3; }/* FIXME: multiple */
            | TAG '=' STRING EOL { driver.context.currentSpectrum.setTAG(*$3); delete $3; }/* FIXME: multiple */
@@ -213,7 +222,9 @@ localparam : TITLE EOL { driver.context.currentSpectrum.setTITLE(*$1); delete $1
            | CHARGE '=' charges EOL { driver.context.currentSpectrum.setCHARGE(*($3->integers_)); delete $3; }
            | PEPMASS '=' DOUBLE EOL { driver.context.currentSpectrum.setPEPMASS(std::make_pair($3, 0.0)); }
            | PEPMASS '=' DOUBLE DOUBLE EOL { driver.context.currentSpectrum.setPEPMASS(std::make_pair($3, $4)); }
+           | PEPMASS '=' DOUBLE INTEGER EOL { driver.context.currentSpectrum.setPEPMASS(std::make_pair($3, $4)); }
            | PEPMASS '=' INTEGER EOL { driver.context.currentSpectrum.setPEPMASS(std::make_pair($3, 0.0)); }
+           | PEPMASS '=' INTEGER DOUBLE EOL { driver.context.currentSpectrum.setPEPMASS(std::make_pair($3, $4)); }
            | PEPMASS '=' INTEGER INTEGER EOL { driver.context.currentSpectrum.setPEPMASS(std::make_pair($3, $4)); }
            | COMMENT EOL
 

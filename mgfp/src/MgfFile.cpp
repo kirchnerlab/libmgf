@@ -22,7 +22,7 @@ void MgfFile::clear() {
 std::ostream& operator<<(std::ostream& os, const MgfFile& mgf) {
     os << mgf.header_;
     for (MgfFile::const_iterator i = mgf.begin(); i != mgf.end(); ++i) {
-        os << std::endl << *i;
+        os << '\n' << *i;
     }
     return os;
 }

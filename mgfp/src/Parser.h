@@ -47,6 +47,7 @@
 
 #include <cstdio>
 #include <string>
+#include <utility>
 #include <vector>
 
 using namespace mgf;
@@ -55,7 +56,7 @@ using namespace mgf::detail;
 
 
 /* Line 35 of lalr1.cc  */
-#line 59 "Parser.h"
+#line 60 "Parser.h"
 
 
 #include <string>
@@ -69,7 +70,7 @@ using namespace mgf::detail;
 namespace mgf {
 
 /* Line 35 of lalr1.cc  */
-#line 73 "Parser.h"
+#line 74 "Parser.h"
   class position;
   class location;
 
@@ -79,7 +80,7 @@ namespace mgf {
 } // mgf
 
 /* Line 35 of lalr1.cc  */
-#line 83 "Parser.h"
+#line 84 "Parser.h"
 
 #include "location.h"
 
@@ -127,7 +128,7 @@ do {							\
 namespace mgf {
 
 /* Line 35 of lalr1.cc  */
-#line 131 "Parser.h"
+#line 132 "Parser.h"
 
   /// A Bison parser.
   class Parser
@@ -139,7 +140,7 @@ namespace mgf {
     {
 
 /* Line 35 of lalr1.cc  */
-#line 52 "Parser.ypp"
+#line 53 "Parser.ypp"
 
     int integerVal;
     double doubleVal;
@@ -152,7 +153,7 @@ namespace mgf {
 
 
 /* Line 35 of lalr1.cc  */
-#line 156 "Parser.h"
+#line 157 "Parser.h"
     };
 #else
     typedef YYSTYPE semantic_type;
@@ -385,7 +386,7 @@ namespace mgf {
 } // mgf
 
 /* Line 35 of lalr1.cc  */
-#line 389 "Parser.h"
+#line 390 "Parser.h"
 
 
 

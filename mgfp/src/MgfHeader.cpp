@@ -203,15 +203,15 @@ void MgfHeader::clear() {
 std::ostream& operator<<(std::ostream& os, const MgfHeader& mgf) {
     typedef std::map<std::string, std::string>::const_iterator MSSCI;
     for (MSSCI i = mgf.strings.begin(); i != mgf.strings.end() ; ++i) {
-        os << i->first << '=' << i->second << std::endl;
+        os << i->first << '=' << i->second << '\n';
     }
     typedef std::map<std::string, int>::const_iterator MSICI;
     for (MSICI i = mgf.ints.begin(); i != mgf.ints.end() ; ++i) {
-        os << i->first << '=' << i->second << std::endl;
+        os << i->first << '=' << i->second << '\n';
     }
     typedef std::map<std::string, double>::const_iterator MSDCI;
     for (MSDCI i = mgf.doubles.begin(); i != mgf.doubles.end() ; ++i) {
-        os << i->first << '=' << i->second << std::endl;
+        os << i->first << '=' << i->second << '\n';
     }
     typedef std::vector<int>::const_iterator VICI;
     if (!mgf.charges_.empty()) {
@@ -227,7 +227,7 @@ std::ostream& operator<<(std::ostream& os, const MgfHeader& mgf) {
                 os << '-';
             }
         }
-        os << std::endl;
+        os << '\n';
     }
     if (!mgf.frames_.empty()) {
         os << "FRAMES=";
@@ -237,7 +237,7 @@ std::ostream& operator<<(std::ostream& os, const MgfHeader& mgf) {
             }
             os << *i;
         }
-        os << std::endl;
+        os << '\n';
     }
     return os;
 }

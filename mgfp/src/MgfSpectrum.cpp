@@ -1,12 +1,16 @@
 #include <mgfp/MgfSpectrum.h>
 
 #include <cstdlib> // for std::abs(int)
+#include <iostream>
 #include <sstream>
+#include <utility>
 
 namespace mgf {
 
 MgfSpectrum::MgfSpectrum() : Collection<MassAbundancePair>() {
     this->clear();
+    scans_ = std::make_pair(-1, -1);
+    rtinseconds_ = std::make_pair(-1.0, -1.0);
 }
 
 std::vector<int> MgfSpectrum::getCHARGE(void) const {
@@ -58,24 +62,24 @@ void MgfSpectrum::setPEPMASS(const std::pair<double, double> pepmass) {
     pepmass_ = pepmass;
 }
 
-double MgfSpectrum::getRTINSECONDS(void) const {
+std::pair<double, double> MgfSpectrum::getRTINSECONDS(void) const {
     return rtinseconds_;
 }
-void MgfSpectrum::setRTINSECONDS(const double rtinseconds) {
+void MgfSpectrum::setRTINSECONDS(const std::pair<double,double>& rtinseconds) {
     rtinseconds_ = rtinseconds;
 }
-
-std::string MgfSpectrum::getSCANS(void) const {
-    return scans_;    // FIXME
-}
-void MgfSpectrum::setSCANS(const std::string& scans) {
-    scans_ = scans;    //FIXME
+void MgfSpectrum::setRTINSECONDS(const double rtinseconds) {
+    setRTINSECONDS(std::make_pair(rtinseconds, -1.0));
 }
 
-void MgfSpectrum::setSCANS(const int scans) {
-    std::ostringstream oss;
-    oss << scans;
-    scans_ = oss.str();    //FIXME
+std::pair<int, int> MgfSpectrum::getSCANS(void) const {
+    return scans_;  
+}
+void MgfSpectrum::setSCANS(const std::pair<int, int>& scans) {
+    scans_ = scans;
+}
+void MgfSpectrum::setSCANS(const int scan) {
+    setSCANS(std::make_pair(scan, -1));
 }
 
 std::string MgfSpectrum::getSEQ(void) const {
@@ -115,19 +119,20 @@ void MgfSpectrum::setTOLU(const std::string& tolu) {
 
 void MgfSpectrum::clear() {
     charges_.clear();
-    comp_ = etag_ = instrument_ = it_mods_ = scans_ = "";
+    scans_ = std::make_pair(-1, -1);
+    comp_ = etag_ = instrument_ = it_mods_;
     seq_ = tag_ = title_ = tolu_ = "";
     pepmass_ = std::make_pair(0.0, 0.0);
-    rtinseconds_ = 0;
+    rtinseconds_ = std::make_pair(-1.0, -1.0);
     tol_ = 0.0;
     Collection<MassAbundancePair>::clear();
 }
 
 std::ostream& operator<<(std::ostream& os, const MgfSpectrum& mgf) {
     // start with title, then A-Z
-    os << "BEGIN IONS" << std::endl;
+    os << "BEGIN IONS" << '\n';
     if (!mgf.title_.empty())
-        os << "TITLE=" << mgf.title_ << std::endl;
+        os << "TITLE=" << mgf.title_ << '\n';
     if (!mgf.charges_.empty()) {
         os << "CHARGE=";
         typedef std::vector<int>::const_iterator VICI;
@@ -142,39 +147,49 @@ std::ostream& operator<<(std::ostream& os, const MgfSpectrum& mgf) {
                 os << '-';
             }
         }
-        os << std::endl;
+        os << '\n';
     }
     if (!mgf.comp_.empty())
-        os << "COMP=" << mgf.comp_ << std::endl;
+        os << "COMP=" << mgf.comp_ << '\n';
     if (!mgf.etag_.empty())
-        os << "ETAG=" << mgf.etag_ << std::endl;
+        os << "ETAG=" << mgf.etag_ << '\n';
     if (!mgf.instrument_.empty())
-        os << "INSTRUMENT=" << mgf.instrument_ << std::endl;
+        os << "INSTRUMENT=" << mgf.instrument_ << '\n';
     if (!mgf.it_mods_.empty())
-        os << "IT_MODS=" << mgf.it_mods_ << std::endl;
+        os << "IT_MODS=" << mgf.it_mods_ << '\n';
     if (mgf.pepmass_.first > 0.0) {
         os << "PEPMASS=" << mgf.pepmass_.first;
         if (mgf.pepmass_.second > 0.0) {
             os << " " << mgf.pepmass_.second;
         }
-        os << std::endl;
+        os << '\n';
     }
-    if (mgf.rtinseconds_ > 0)
-        os << "RTINSECONDS=" << mgf.rtinseconds_ << std::endl;
-    if (!mgf.scans_.empty())
-        os << "SCANS=" << mgf.scans_ << std::endl;
+    if (mgf.rtinseconds_.first != -1.0) {
+        os << "RTINSECONDS=" << mgf.rtinseconds_.first;
+        if (mgf.rtinseconds_.second != -1.0) {
+            os << "-" << mgf.rtinseconds_.second;
+        }
+        os << '\n';
+    }
+    if (mgf.scans_.first != -1) {
+        os << "SCANS=" << mgf.scans_.first;
+        if (mgf.scans_.second != -1) {
+            os << "-" << mgf.scans_.second;
+        }
+        os << '\n';
+    }
     if (!mgf.seq_.empty())
-        os << "SEQ=" << mgf.seq_ << std::endl;
+        os << "SEQ=" << mgf.seq_ << '\n';
     if (!mgf.tag_.empty())
-        os << "TAG=" << mgf.tag_ << std::endl;
+        os << "TAG=" << mgf.tag_ << '\n';
     if (mgf.tol_ > 0.0)
-        os << "TOL=" << mgf.tol_ << std::endl;
+        os << "TOL=" << mgf.tol_ << '\n';
     if (!mgf.tolu_.empty())
-        os << "TOLU=" << mgf.tolu_ << std::endl;
+        os << "TOLU=" << mgf.tolu_ << '\n';
     for (MgfSpectrum::const_iterator i = mgf.begin(); i != mgf.end(); ++i) {
-        os << i->first << " " << i->second << std::endl;
+        os << i->first << " " << i->second << '\n';
     }
-    os << "END IONS" << std::endl;
+    os << "END IONS" << '\n';
     return os;
 }
 

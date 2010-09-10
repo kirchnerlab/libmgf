@@ -123,31 +123,48 @@ class MGFP_EXPORT MgfSpectrum : public Collection<MassAbundancePair>
      */
     void setPEPMASS(const std::pair<double, double> pepmass);
 
-    /** Get the retention time of the precursor. 
-     *  @return The retention time of the precursor, in seconds.
+    /** Get the retention time range of the precursor scans. 
+     *  @return The retention time range of the precursor scans, in seconds.
+     *          If the precursors stem from a single scan, the .second entry
+     *          of the returned std::pair equals -1.0.
      */
-    double getRTINSECONDS(void) const;
+    std::pair<double,double> getRTINSECONDS(void) const;
 
-    /** Set the retention time of the precursor. 
-     *  @param[in] rtinseconds The retention time of the precursor, in seconds.
+    /** Set the retention time range of the precursor scans.
+     *  @param[in] rtinseconds The retention time of the precursor scan(s), 
+     *               in seconds. For single scans, use -1.0 as .second value
+     *               or the alternate setRTINSECONDS function that takes a
+     *               single double.
+     */
+    void setRTINSECONDS(const std::pair<double,double>& rtinseconds);
+
+    /** Set the retention time range of a single precursor scan.
+     *  @param[in] rtinseconds The retention time of the precursor scan, 
+     *               in seconds. 
      */
     void setRTINSECONDS(const double rtinseconds);
 
-    /** Get 
-     *  @see 
-     *  @return
+    /** Get the scan number or scan number range from which this fragmentation
+     *  spectrum was generated.
+     *  @see http://www.matrixscience.com/help/data_file_help.html
+     *  @return A pair of scan numbers. For fragmentation spectra of single 
+     *          scans, the .second value of the return value equals -1.
      */
-    std::string getSCANS(void) const;
+    std::pair<int, int> getSCANS(void) const;
 
-    /** Set 
-     *  @see 
-     *  @param[in] 
+    /** Set the scan number or scan number range from which this fragmentation
+     *  spectrum was generated.
+     *  @see http://www.matrixscience.com/help/data_file_help.html
+     *  @param[in] A pair [start, end] of scan numbers. For single scans
+     *             use [scanNumber, -1].
      */
-    void setSCANS(const std::string& scans);
+    void setSCANS(const std::pair<int, int>& scans);
 
-    /** Set 
-     *  @see 
-     *  @param[in] 
+    /** Set the scan number from which this fragmentation
+     *  spectrum was generated. This is just a convenience function wrapper
+     *  for single scans.
+     *  @see http://www.matrixscience.com/help/data_file_help.html
+     *  @param[in] A scan number.
      */
     void setSCANS(const int scans);
 
@@ -228,8 +245,9 @@ class MGFP_EXPORT MgfSpectrum : public Collection<MassAbundancePair>
     std::vector<int> charges_;
     std::string comp_, etag_, instrument_, it_mods_;
     std::pair<double, double> pepmass_;
-    double rtinseconds_;
-    std::string scans_, seq_, tag_, title_; // FIXME: scans_ should be a vector of ranges
+    std::pair<double, double> rtinseconds_;
+    std::pair<int, int> scans_;
+    std::string seq_, tag_, title_;
     double tol_;
     std::string tolu_;
 };

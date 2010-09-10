@@ -47,7 +47,7 @@
 /* User implementation prologue.  */
 
 /* Line 317 of lalr1.cc  */
-#line 117 "Parser.ypp"
+#line 118 "Parser.ypp"
 
 #include <mgfp/Driver.h>
 #include "Scanner.h"
@@ -232,7 +232,7 @@ namespace mgf {
         case 8: /* "\"string\"" */
 
 /* Line 480 of lalr1.cc  */
-#line 114 "Parser.ypp"
+#line 115 "Parser.ypp"
 	{ delete (yyvaluep->stringVal); };
 
 /* Line 480 of lalr1.cc  */
@@ -241,7 +241,7 @@ namespace mgf {
       case 54: /* "ion" */
 
 /* Line 480 of lalr1.cc  */
-#line 115 "Parser.ypp"
+#line 116 "Parser.ypp"
 	{ delete (yyvaluep->doublepairnode); };
 
 /* Line 480 of lalr1.cc  */
@@ -250,7 +250,7 @@ namespace mgf {
       case 55: /* "ions" */
 
 /* Line 480 of lalr1.cc  */
-#line 115 "Parser.ypp"
+#line 116 "Parser.ypp"
 	{ delete (yyvaluep->doublepairlistnode); };
 
 /* Line 480 of lalr1.cc  */
@@ -259,7 +259,7 @@ namespace mgf {
       case 56: /* "charge" */
 
 /* Line 480 of lalr1.cc  */
-#line 115 "Parser.ypp"
+#line 116 "Parser.ypp"
 	{ delete (yyvaluep->integernode); };
 
 /* Line 480 of lalr1.cc  */
@@ -268,7 +268,7 @@ namespace mgf {
       case 57: /* "charges" */
 
 /* Line 480 of lalr1.cc  */
-#line 115 "Parser.ypp"
+#line 116 "Parser.ypp"
 	{ delete (yyvaluep->integerlistnode); };
 
 /* Line 480 of lalr1.cc  */
@@ -277,7 +277,7 @@ namespace mgf {
       case 58: /* "csintegerlist" */
 
 /* Line 480 of lalr1.cc  */
-#line 115 "Parser.ypp"
+#line 116 "Parser.ypp"
 	{ delete (yyvaluep->integerlistnode); };
 
 /* Line 480 of lalr1.cc  */
@@ -360,7 +360,7 @@ namespace mgf {
     /* User initialization code.  */
     
 /* Line 553 of lalr1.cc  */
-#line 39 "Parser.ypp"
+#line 40 "Parser.ypp"
 {
     // initialize the initial location object
     yylloc.begin.filename = yylloc.end.filename = &driver.streamname;
@@ -486,105 +486,105 @@ namespace mgf {
 	  case 2:
 
 /* Line 678 of lalr1.cc  */
-#line 130 "Parser.ypp"
+#line 131 "Parser.ypp"
     { (yyval.doublepairnode) = new DoublePairNode((yysemantic_stack_[(3) - (1)].doubleVal), (yysemantic_stack_[(3) - (2)].doubleVal)); }
     break;
 
   case 3:
 
 /* Line 678 of lalr1.cc  */
-#line 131 "Parser.ypp"
+#line 132 "Parser.ypp"
     { (yyval.doublepairnode) = new DoublePairNode((yysemantic_stack_[(3) - (1)].integerVal), (yysemantic_stack_[(3) - (2)].doubleVal)); }
     break;
 
   case 4:
 
 /* Line 678 of lalr1.cc  */
-#line 132 "Parser.ypp"
+#line 133 "Parser.ypp"
     { (yyval.doublepairnode) = new DoublePairNode((yysemantic_stack_[(3) - (1)].doubleVal), (yysemantic_stack_[(3) - (2)].integerVal)); }
     break;
 
   case 5:
 
 /* Line 678 of lalr1.cc  */
-#line 133 "Parser.ypp"
+#line 134 "Parser.ypp"
     { (yyval.doublepairnode) = new DoublePairNode((yysemantic_stack_[(3) - (1)].integerVal), (yysemantic_stack_[(3) - (2)].integerVal)); }
     break;
 
   case 6:
 
 /* Line 678 of lalr1.cc  */
-#line 135 "Parser.ypp"
+#line 136 "Parser.ypp"
     { (yyval.doublepairlistnode) = new DoublePairListNode((yysemantic_stack_[(2) - (1)].doublepairlistnode), (yysemantic_stack_[(2) - (2)].doublepairnode)); }
     break;
 
   case 7:
 
 /* Line 678 of lalr1.cc  */
-#line 136 "Parser.ypp"
+#line 137 "Parser.ypp"
     { (yyval.doublepairlistnode) = new DoublePairListNode((yysemantic_stack_[(1) - (1)].doublepairnode)); }
     break;
 
   case 8:
 
 /* Line 678 of lalr1.cc  */
-#line 138 "Parser.ypp"
+#line 139 "Parser.ypp"
     { (yyval.integernode) = new IntegerNode((yysemantic_stack_[(2) - (1)].integerVal)); }
     break;
 
   case 9:
 
 /* Line 678 of lalr1.cc  */
-#line 139 "Parser.ypp"
+#line 140 "Parser.ypp"
     { (yyval.integernode) = new IntegerNode(-(yysemantic_stack_[(2) - (1)].integerVal)); }
     break;
 
   case 10:
 
 /* Line 678 of lalr1.cc  */
-#line 141 "Parser.ypp"
+#line 142 "Parser.ypp"
     { (yyval.integerlistnode) = (yysemantic_stack_[(3) - (2)].integerlistnode); }
     break;
 
   case 11:
 
 /* Line 678 of lalr1.cc  */
-#line 142 "Parser.ypp"
+#line 143 "Parser.ypp"
     { (yyval.integerlistnode) = new IntegerListNode((yysemantic_stack_[(3) - (1)].integerlistnode), (yysemantic_stack_[(3) - (3)].integernode)); }
     break;
 
   case 12:
 
 /* Line 678 of lalr1.cc  */
-#line 143 "Parser.ypp"
+#line 144 "Parser.ypp"
     { (yyval.integerlistnode) = new IntegerListNode((yysemantic_stack_[(3) - (1)].integerlistnode), (yysemantic_stack_[(3) - (3)].integernode)); }
     break;
 
   case 13:
 
 /* Line 678 of lalr1.cc  */
-#line 144 "Parser.ypp"
+#line 145 "Parser.ypp"
     { (yyval.integerlistnode) = new IntegerListNode((yysemantic_stack_[(1) - (1)].integernode)); }
     break;
 
   case 14:
 
 /* Line 678 of lalr1.cc  */
-#line 146 "Parser.ypp"
+#line 147 "Parser.ypp"
     { (yyval.integerlistnode) = new IntegerListNode((yysemantic_stack_[(3) - (1)].integerlistnode), (yysemantic_stack_[(3) - (3)].integerVal)); }
     break;
 
   case 15:
 
 /* Line 678 of lalr1.cc  */
-#line 147 "Parser.ypp"
+#line 148 "Parser.ypp"
     { (yyval.integerlistnode) = new IntegerListNode((yysemantic_stack_[(1) - (1)].integerVal)); }
     break;
 
   case 17:
 
 /* Line 678 of lalr1.cc  */
-#line 151 "Parser.ypp"
+#line 152 "Parser.ypp"
     {
             driver.context.mgfFile.push_back(driver.context.currentSpectrum);
             driver.context.currentSpectrum.clear();
@@ -594,353 +594,416 @@ namespace mgf {
   case 18:
 
 /* Line 678 of lalr1.cc  */
-#line 157 "Parser.ypp"
+#line 158 "Parser.ypp"
     {
             driver.context.currentSpectrum.assign(((yysemantic_stack_[(6) - (4)].doublepairlistnode)->pairlist_)->begin(), ((yysemantic_stack_[(6) - (4)].doublepairlistnode)->pairlist_)->end());
             delete (yysemantic_stack_[(6) - (4)].doublepairlistnode); 
         }
     break;
 
-  case 21:
-
-/* Line 678 of lalr1.cc  */
-#line 165 "Parser.ypp"
-    { driver.context.header.setCLE(*(yysemantic_stack_[(4) - (3)].stringVal)); delete (yysemantic_stack_[(4) - (3)].stringVal); }
-    break;
-
   case 22:
 
 /* Line 678 of lalr1.cc  */
-#line 166 "Parser.ypp"
-    { driver.context.header.setCOM(*(yysemantic_stack_[(4) - (3)].stringVal)); delete (yysemantic_stack_[(4) - (3)].stringVal); }
+#line 167 "Parser.ypp"
+    { driver.context.header.setCLE(*(yysemantic_stack_[(4) - (3)].stringVal)); delete (yysemantic_stack_[(4) - (3)].stringVal); }
     break;
 
   case 23:
 
 /* Line 678 of lalr1.cc  */
-#line 167 "Parser.ypp"
-    { driver.context.header.setDB(*(yysemantic_stack_[(4) - (3)].stringVal)); delete (yysemantic_stack_[(4) - (3)].stringVal); }
+#line 168 "Parser.ypp"
+    { driver.context.header.setCOM(*(yysemantic_stack_[(4) - (3)].stringVal)); delete (yysemantic_stack_[(4) - (3)].stringVal); }
     break;
 
   case 24:
 
 /* Line 678 of lalr1.cc  */
-#line 168 "Parser.ypp"
-    { driver.context.header.setFORMAT(*(yysemantic_stack_[(4) - (3)].stringVal)); delete (yysemantic_stack_[(4) - (3)].stringVal); }
+#line 169 "Parser.ypp"
+    { driver.context.header.setDB(*(yysemantic_stack_[(4) - (3)].stringVal)); delete (yysemantic_stack_[(4) - (3)].stringVal); }
     break;
 
   case 25:
 
 /* Line 678 of lalr1.cc  */
-#line 169 "Parser.ypp"
-    { driver.context.header.setINSTRUMENT(*(yysemantic_stack_[(4) - (3)].stringVal)); delete (yysemantic_stack_[(4) - (3)].stringVal); }
+#line 170 "Parser.ypp"
+    { driver.context.header.setFORMAT(*(yysemantic_stack_[(4) - (3)].stringVal)); delete (yysemantic_stack_[(4) - (3)].stringVal); }
     break;
 
   case 26:
 
 /* Line 678 of lalr1.cc  */
-#line 170 "Parser.ypp"
-    { driver.context.header.setIT_MODS(*(yysemantic_stack_[(4) - (3)].stringVal)); delete (yysemantic_stack_[(4) - (3)].stringVal); }
+#line 171 "Parser.ypp"
+    { driver.context.header.setINSTRUMENT(*(yysemantic_stack_[(4) - (3)].stringVal)); delete (yysemantic_stack_[(4) - (3)].stringVal); }
     break;
 
   case 27:
 
 /* Line 678 of lalr1.cc  */
-#line 171 "Parser.ypp"
-    { driver.context.header.setITOLU(*(yysemantic_stack_[(4) - (3)].stringVal)); delete (yysemantic_stack_[(4) - (3)].stringVal); }
+#line 172 "Parser.ypp"
+    { driver.context.header.setIT_MODS(*(yysemantic_stack_[(4) - (3)].stringVal)); delete (yysemantic_stack_[(4) - (3)].stringVal); }
     break;
 
   case 28:
 
 /* Line 678 of lalr1.cc  */
-#line 172 "Parser.ypp"
-    { driver.context.header.setMASS(*(yysemantic_stack_[(4) - (3)].stringVal)); delete (yysemantic_stack_[(4) - (3)].stringVal); }
+#line 173 "Parser.ypp"
+    { driver.context.header.setITOLU(*(yysemantic_stack_[(4) - (3)].stringVal)); delete (yysemantic_stack_[(4) - (3)].stringVal); }
     break;
 
   case 29:
 
 /* Line 678 of lalr1.cc  */
-#line 173 "Parser.ypp"
-    { driver.context.header.setMODS(*(yysemantic_stack_[(4) - (3)].stringVal)); delete (yysemantic_stack_[(4) - (3)].stringVal); }
+#line 174 "Parser.ypp"
+    { driver.context.header.setMASS(*(yysemantic_stack_[(4) - (3)].stringVal)); delete (yysemantic_stack_[(4) - (3)].stringVal); }
     break;
 
   case 30:
 
 /* Line 678 of lalr1.cc  */
-#line 174 "Parser.ypp"
-    { driver.context.header.setQUANTITATION(*(yysemantic_stack_[(4) - (3)].stringVal)); delete (yysemantic_stack_[(4) - (3)].stringVal); }
+#line 175 "Parser.ypp"
+    { driver.context.header.setMODS(*(yysemantic_stack_[(4) - (3)].stringVal)); delete (yysemantic_stack_[(4) - (3)].stringVal); }
     break;
 
   case 31:
 
 /* Line 678 of lalr1.cc  */
-#line 175 "Parser.ypp"
-    { driver.context.header.setREPORT(*(yysemantic_stack_[(4) - (3)].stringVal)); delete (yysemantic_stack_[(4) - (3)].stringVal); }
+#line 176 "Parser.ypp"
+    { driver.context.header.setQUANTITATION(*(yysemantic_stack_[(4) - (3)].stringVal)); delete (yysemantic_stack_[(4) - (3)].stringVal); }
     break;
 
   case 32:
 
 /* Line 678 of lalr1.cc  */
-#line 176 "Parser.ypp"
-    { driver.context.header.setREPTYPE(*(yysemantic_stack_[(4) - (3)].stringVal)); delete (yysemantic_stack_[(4) - (3)].stringVal); }
+#line 177 "Parser.ypp"
+    { driver.context.header.setREPORT(*(yysemantic_stack_[(4) - (3)].stringVal)); delete (yysemantic_stack_[(4) - (3)].stringVal); }
     break;
 
   case 33:
 
 /* Line 678 of lalr1.cc  */
-#line 177 "Parser.ypp"
-    { driver.context.header.setSEARCH(*(yysemantic_stack_[(4) - (3)].stringVal)); delete (yysemantic_stack_[(4) - (3)].stringVal); }
+#line 178 "Parser.ypp"
+    { driver.context.header.setREPTYPE(*(yysemantic_stack_[(4) - (3)].stringVal)); delete (yysemantic_stack_[(4) - (3)].stringVal); }
     break;
 
   case 34:
 
 /* Line 678 of lalr1.cc  */
-#line 178 "Parser.ypp"
-    { driver.context.header.setTAXONOMY(*(yysemantic_stack_[(4) - (3)].stringVal)); delete (yysemantic_stack_[(4) - (3)].stringVal); }
+#line 179 "Parser.ypp"
+    { driver.context.header.setSEARCH(*(yysemantic_stack_[(4) - (3)].stringVal)); delete (yysemantic_stack_[(4) - (3)].stringVal); }
     break;
 
   case 35:
 
 /* Line 678 of lalr1.cc  */
-#line 179 "Parser.ypp"
-    { driver.context.header.setTOLU(*(yysemantic_stack_[(4) - (3)].stringVal)); delete (yysemantic_stack_[(4) - (3)].stringVal); }
+#line 180 "Parser.ypp"
+    { driver.context.header.setTAXONOMY(*(yysemantic_stack_[(4) - (3)].stringVal)); delete (yysemantic_stack_[(4) - (3)].stringVal); }
     break;
 
   case 36:
 
 /* Line 678 of lalr1.cc  */
-#line 180 "Parser.ypp"
-    { /*driver.context.header.setUSER(*$3);*/ delete (yysemantic_stack_[(4) - (3)].stringVal); }
+#line 181 "Parser.ypp"
+    { driver.context.header.setTOLU(*(yysemantic_stack_[(4) - (3)].stringVal)); delete (yysemantic_stack_[(4) - (3)].stringVal); }
     break;
 
   case 37:
 
 /* Line 678 of lalr1.cc  */
-#line 181 "Parser.ypp"
-    { driver.context.header.setUSEREMAIL(*(yysemantic_stack_[(4) - (3)].stringVal)); delete (yysemantic_stack_[(4) - (3)].stringVal); }
+#line 182 "Parser.ypp"
+    { /*driver.context.header.setUSER(*$3);*/ delete (yysemantic_stack_[(4) - (3)].stringVal); }
     break;
 
   case 38:
 
 /* Line 678 of lalr1.cc  */
-#line 182 "Parser.ypp"
-    { driver.context.header.setUSERNAME(*(yysemantic_stack_[(4) - (3)].stringVal)); delete (yysemantic_stack_[(4) - (3)].stringVal); }
+#line 183 "Parser.ypp"
+    { driver.context.header.setUSEREMAIL(*(yysemantic_stack_[(4) - (3)].stringVal)); delete (yysemantic_stack_[(4) - (3)].stringVal); }
     break;
 
   case 39:
 
 /* Line 678 of lalr1.cc  */
-#line 183 "Parser.ypp"
-    { driver.context.header.setDECOY(((yysemantic_stack_[(4) - (3)].integerVal))!=0); }
+#line 184 "Parser.ypp"
+    { driver.context.header.setUSERNAME(*(yysemantic_stack_[(4) - (3)].stringVal)); delete (yysemantic_stack_[(4) - (3)].stringVal); }
     break;
 
   case 40:
 
 /* Line 678 of lalr1.cc  */
-#line 184 "Parser.ypp"
-    { driver.context.header.setERRORTOLERANT(((yysemantic_stack_[(4) - (3)].integerVal))!=0); }
+#line 185 "Parser.ypp"
+    { driver.context.header.setDECOY(((yysemantic_stack_[(4) - (3)].integerVal))!=0); }
     break;
 
   case 41:
 
 /* Line 678 of lalr1.cc  */
-#line 185 "Parser.ypp"
-    { driver.context.header.setPFA((yysemantic_stack_[(4) - (3)].integerVal)); }
+#line 186 "Parser.ypp"
+    { driver.context.header.setERRORTOLERANT(((yysemantic_stack_[(4) - (3)].integerVal))!=0); }
     break;
 
   case 42:
 
 /* Line 678 of lalr1.cc  */
-#line 186 "Parser.ypp"
-    { driver.context.header.setITOL((yysemantic_stack_[(4) - (3)].doubleVal)); }
+#line 187 "Parser.ypp"
+    { driver.context.header.setPFA((yysemantic_stack_[(4) - (3)].integerVal)); }
     break;
 
   case 43:
 
 /* Line 678 of lalr1.cc  */
-#line 187 "Parser.ypp"
-    { driver.context.header.setITOL((yysemantic_stack_[(4) - (3)].integerVal)); }
+#line 188 "Parser.ypp"
+    { driver.context.header.setITOL((yysemantic_stack_[(4) - (3)].doubleVal)); }
     break;
 
   case 44:
 
 /* Line 678 of lalr1.cc  */
-#line 188 "Parser.ypp"
-    { driver.context.header.setPEP_ISOTOPE_ERROR((yysemantic_stack_[(4) - (3)].doubleVal)); }
+#line 189 "Parser.ypp"
+    { driver.context.header.setITOL((yysemantic_stack_[(4) - (3)].integerVal)); }
     break;
 
   case 45:
 
 /* Line 678 of lalr1.cc  */
-#line 189 "Parser.ypp"
-    { driver.context.header.setPRECURSOR((yysemantic_stack_[(4) - (3)].doubleVal)); }
+#line 190 "Parser.ypp"
+    { driver.context.header.setPEP_ISOTOPE_ERROR((yysemantic_stack_[(4) - (3)].doubleVal)); }
     break;
 
   case 46:
 
 /* Line 678 of lalr1.cc  */
-#line 190 "Parser.ypp"
-    { driver.context.header.setSEG((yysemantic_stack_[(4) - (3)].doubleVal)); }
+#line 191 "Parser.ypp"
+    { driver.context.header.setPRECURSOR((yysemantic_stack_[(4) - (3)].doubleVal)); }
     break;
 
   case 47:
 
 /* Line 678 of lalr1.cc  */
-#line 191 "Parser.ypp"
-    { driver.context.header.setTOL((yysemantic_stack_[(4) - (3)].doubleVal)); }
+#line 192 "Parser.ypp"
+    { driver.context.header.setPRECURSOR((yysemantic_stack_[(4) - (3)].integerVal)); }
     break;
 
   case 48:
 
 /* Line 678 of lalr1.cc  */
-#line 192 "Parser.ypp"
-    { driver.context.header.setTOL((yysemantic_stack_[(4) - (3)].integerVal)); }
+#line 193 "Parser.ypp"
+    { driver.context.header.setSEG((yysemantic_stack_[(4) - (3)].doubleVal)); }
     break;
 
   case 49:
 
 /* Line 678 of lalr1.cc  */
-#line 193 "Parser.ypp"
-    { driver.context.header.setCHARGE(*((yysemantic_stack_[(4) - (3)].integerlistnode)->integers_)); delete (yysemantic_stack_[(4) - (3)].integerlistnode); }
+#line 194 "Parser.ypp"
+    { driver.context.header.setSEG((yysemantic_stack_[(4) - (3)].integerVal)); }
     break;
 
   case 50:
 
 /* Line 678 of lalr1.cc  */
-#line 194 "Parser.ypp"
+#line 195 "Parser.ypp"
+    { driver.context.header.setTOL((yysemantic_stack_[(4) - (3)].doubleVal)); }
+    break;
+
+  case 51:
+
+/* Line 678 of lalr1.cc  */
+#line 196 "Parser.ypp"
+    { driver.context.header.setTOL((yysemantic_stack_[(4) - (3)].integerVal)); }
+    break;
+
+  case 52:
+
+/* Line 678 of lalr1.cc  */
+#line 197 "Parser.ypp"
+    { driver.context.header.setCHARGE(*((yysemantic_stack_[(4) - (3)].integerlistnode)->integers_)); delete (yysemantic_stack_[(4) - (3)].integerlistnode); }
+    break;
+
+  case 53:
+
+/* Line 678 of lalr1.cc  */
+#line 198 "Parser.ypp"
     { driver.context.header.setFRAMES(*((yysemantic_stack_[(4) - (3)].integerlistnode)->integers_)); delete (yysemantic_stack_[(4) - (3)].integerlistnode); }
-    break;
-
-  case 54:
-
-/* Line 678 of lalr1.cc  */
-#line 200 "Parser.ypp"
-    { driver.context.currentSpectrum.setTITLE(*(yysemantic_stack_[(2) - (1)].stringVal)); delete (yysemantic_stack_[(2) - (1)].stringVal); }
-    break;
-
-  case 55:
-
-/* Line 678 of lalr1.cc  */
-#line 201 "Parser.ypp"
-    { driver.context.currentSpectrum.setCOMP(*(yysemantic_stack_[(4) - (3)].stringVal)); delete (yysemantic_stack_[(4) - (3)].stringVal); }
-    break;
-
-  case 56:
-
-/* Line 678 of lalr1.cc  */
-#line 202 "Parser.ypp"
-    { driver.context.currentSpectrum.setINSTRUMENT(*(yysemantic_stack_[(4) - (3)].stringVal)); delete (yysemantic_stack_[(4) - (3)].stringVal); }
     break;
 
   case 57:
 
 /* Line 678 of lalr1.cc  */
-#line 203 "Parser.ypp"
-    { driver.context.currentSpectrum.setIT_MODS(*(yysemantic_stack_[(4) - (3)].stringVal)); delete (yysemantic_stack_[(4) - (3)].stringVal); }
+#line 204 "Parser.ypp"
+    { driver.context.currentSpectrum.setTITLE(*(yysemantic_stack_[(2) - (1)].stringVal)); delete (yysemantic_stack_[(2) - (1)].stringVal); }
     break;
 
   case 58:
 
 /* Line 678 of lalr1.cc  */
-#line 204 "Parser.ypp"
-    { driver.context.currentSpectrum.setRTINSECONDS((yysemantic_stack_[(4) - (3)].doubleVal)); }
+#line 205 "Parser.ypp"
+    { driver.context.currentSpectrum.setCOMP(*(yysemantic_stack_[(4) - (3)].stringVal)); delete (yysemantic_stack_[(4) - (3)].stringVal); }
     break;
 
   case 59:
 
 /* Line 678 of lalr1.cc  */
-#line 205 "Parser.ypp"
-    { driver.context.currentSpectrum.setSCANS(*(yysemantic_stack_[(4) - (3)].stringVal)); delete (yysemantic_stack_[(4) - (3)].stringVal); }
+#line 206 "Parser.ypp"
+    { driver.context.currentSpectrum.setINSTRUMENT(*(yysemantic_stack_[(4) - (3)].stringVal)); delete (yysemantic_stack_[(4) - (3)].stringVal); }
     break;
 
   case 60:
 
 /* Line 678 of lalr1.cc  */
-#line 206 "Parser.ypp"
-    { driver.context.currentSpectrum.setSCANS((yysemantic_stack_[(4) - (3)].integerVal)); }
+#line 207 "Parser.ypp"
+    { driver.context.currentSpectrum.setIT_MODS(*(yysemantic_stack_[(4) - (3)].stringVal)); delete (yysemantic_stack_[(4) - (3)].stringVal); }
     break;
 
   case 61:
 
 /* Line 678 of lalr1.cc  */
-#line 207 "Parser.ypp"
-    { driver.context.currentSpectrum.setTOLU(*(yysemantic_stack_[(4) - (3)].stringVal)); delete (yysemantic_stack_[(4) - (3)].stringVal); }
+#line 208 "Parser.ypp"
+    { driver.context.currentSpectrum.setRTINSECONDS((yysemantic_stack_[(4) - (3)].doubleVal)); }
     break;
 
   case 62:
 
 /* Line 678 of lalr1.cc  */
-#line 208 "Parser.ypp"
-    { driver.context.currentSpectrum.setSEQ(*(yysemantic_stack_[(4) - (3)].stringVal)); delete (yysemantic_stack_[(4) - (3)].stringVal); }
+#line 209 "Parser.ypp"
+    { driver.context.currentSpectrum.setRTINSECONDS((yysemantic_stack_[(4) - (3)].integerVal)); }
     break;
 
   case 63:
 
 /* Line 678 of lalr1.cc  */
-#line 209 "Parser.ypp"
-    { driver.context.currentSpectrum.setTAG(*(yysemantic_stack_[(4) - (3)].stringVal)); delete (yysemantic_stack_[(4) - (3)].stringVal); }
+#line 210 "Parser.ypp"
+    { driver.context.currentSpectrum.setRTINSECONDS(std::make_pair((yysemantic_stack_[(6) - (3)].doubleVal), (yysemantic_stack_[(6) - (5)].doubleVal))); }
     break;
 
   case 64:
 
 /* Line 678 of lalr1.cc  */
-#line 210 "Parser.ypp"
-    { driver.context.currentSpectrum.setETAG(*(yysemantic_stack_[(4) - (3)].stringVal)); delete (yysemantic_stack_[(4) - (3)].stringVal); }
+#line 211 "Parser.ypp"
+    { driver.context.currentSpectrum.setRTINSECONDS(std::make_pair((yysemantic_stack_[(6) - (3)].doubleVal), (yysemantic_stack_[(6) - (5)].integerVal))); }
     break;
 
   case 65:
 
 /* Line 678 of lalr1.cc  */
-#line 211 "Parser.ypp"
-    { driver.context.currentSpectrum.setTOL((yysemantic_stack_[(4) - (3)].doubleVal)); }
+#line 212 "Parser.ypp"
+    { driver.context.currentSpectrum.setRTINSECONDS(std::make_pair((yysemantic_stack_[(6) - (3)].integerVal), (yysemantic_stack_[(6) - (5)].doubleVal))); }
     break;
 
   case 66:
 
 /* Line 678 of lalr1.cc  */
-#line 212 "Parser.ypp"
-    { driver.context.currentSpectrum.setTOL((yysemantic_stack_[(4) - (3)].integerVal)); }
+#line 213 "Parser.ypp"
+    { driver.context.currentSpectrum.setRTINSECONDS(std::make_pair((yysemantic_stack_[(6) - (3)].integerVal), (yysemantic_stack_[(6) - (5)].integerVal))); }
     break;
 
   case 67:
 
 /* Line 678 of lalr1.cc  */
-#line 213 "Parser.ypp"
-    { driver.context.currentSpectrum.setCHARGE(*((yysemantic_stack_[(4) - (3)].integerlistnode)->integers_)); delete (yysemantic_stack_[(4) - (3)].integerlistnode); }
+#line 214 "Parser.ypp"
+    { driver.context.currentSpectrum.setSCANS(std::make_pair((yysemantic_stack_[(4) - (3)].integerVal), -1)); }
     break;
 
   case 68:
 
 /* Line 678 of lalr1.cc  */
-#line 214 "Parser.ypp"
-    { driver.context.currentSpectrum.setPEPMASS(std::make_pair((yysemantic_stack_[(4) - (3)].doubleVal), 0.0)); }
+#line 215 "Parser.ypp"
+    { driver.context.currentSpectrum.setSCANS(std::make_pair((yysemantic_stack_[(6) - (3)].integerVal), (yysemantic_stack_[(6) - (5)].integerVal))); }
     break;
 
   case 69:
 
 /* Line 678 of lalr1.cc  */
-#line 215 "Parser.ypp"
-    { driver.context.currentSpectrum.setPEPMASS(std::make_pair((yysemantic_stack_[(5) - (3)].doubleVal), (yysemantic_stack_[(5) - (4)].doubleVal))); }
+#line 216 "Parser.ypp"
+    { driver.context.currentSpectrum.setTOLU(*(yysemantic_stack_[(4) - (3)].stringVal)); delete (yysemantic_stack_[(4) - (3)].stringVal); }
     break;
 
   case 70:
 
 /* Line 678 of lalr1.cc  */
-#line 216 "Parser.ypp"
-    { driver.context.currentSpectrum.setPEPMASS(std::make_pair((yysemantic_stack_[(4) - (3)].integerVal), 0.0)); }
+#line 217 "Parser.ypp"
+    { driver.context.currentSpectrum.setSEQ(*(yysemantic_stack_[(4) - (3)].stringVal)); delete (yysemantic_stack_[(4) - (3)].stringVal); }
     break;
 
   case 71:
 
 /* Line 678 of lalr1.cc  */
-#line 217 "Parser.ypp"
-    { driver.context.currentSpectrum.setPEPMASS(std::make_pair((yysemantic_stack_[(5) - (3)].integerVal), (yysemantic_stack_[(5) - (4)].integerVal))); }
+#line 218 "Parser.ypp"
+    { driver.context.currentSpectrum.setTAG(*(yysemantic_stack_[(4) - (3)].stringVal)); delete (yysemantic_stack_[(4) - (3)].stringVal); }
+    break;
+
+  case 72:
+
+/* Line 678 of lalr1.cc  */
+#line 219 "Parser.ypp"
+    { driver.context.currentSpectrum.setETAG(*(yysemantic_stack_[(4) - (3)].stringVal)); delete (yysemantic_stack_[(4) - (3)].stringVal); }
     break;
 
   case 73:
 
 /* Line 678 of lalr1.cc  */
+#line 220 "Parser.ypp"
+    { driver.context.currentSpectrum.setTOL((yysemantic_stack_[(4) - (3)].doubleVal)); }
+    break;
+
+  case 74:
+
+/* Line 678 of lalr1.cc  */
+#line 221 "Parser.ypp"
+    { driver.context.currentSpectrum.setTOL((yysemantic_stack_[(4) - (3)].integerVal)); }
+    break;
+
+  case 75:
+
+/* Line 678 of lalr1.cc  */
 #line 222 "Parser.ypp"
+    { driver.context.currentSpectrum.setCHARGE(*((yysemantic_stack_[(4) - (3)].integerlistnode)->integers_)); delete (yysemantic_stack_[(4) - (3)].integerlistnode); }
+    break;
+
+  case 76:
+
+/* Line 678 of lalr1.cc  */
+#line 223 "Parser.ypp"
+    { driver.context.currentSpectrum.setPEPMASS(std::make_pair((yysemantic_stack_[(4) - (3)].doubleVal), 0.0)); }
+    break;
+
+  case 77:
+
+/* Line 678 of lalr1.cc  */
+#line 224 "Parser.ypp"
+    { driver.context.currentSpectrum.setPEPMASS(std::make_pair((yysemantic_stack_[(5) - (3)].doubleVal), (yysemantic_stack_[(5) - (4)].doubleVal))); }
+    break;
+
+  case 78:
+
+/* Line 678 of lalr1.cc  */
+#line 225 "Parser.ypp"
+    { driver.context.currentSpectrum.setPEPMASS(std::make_pair((yysemantic_stack_[(5) - (3)].doubleVal), (yysemantic_stack_[(5) - (4)].integerVal))); }
+    break;
+
+  case 79:
+
+/* Line 678 of lalr1.cc  */
+#line 226 "Parser.ypp"
+    { driver.context.currentSpectrum.setPEPMASS(std::make_pair((yysemantic_stack_[(4) - (3)].integerVal), 0.0)); }
+    break;
+
+  case 80:
+
+/* Line 678 of lalr1.cc  */
+#line 227 "Parser.ypp"
+    { driver.context.currentSpectrum.setPEPMASS(std::make_pair((yysemantic_stack_[(5) - (3)].integerVal), (yysemantic_stack_[(5) - (4)].doubleVal))); }
+    break;
+
+  case 81:
+
+/* Line 678 of lalr1.cc  */
+#line 228 "Parser.ypp"
+    { driver.context.currentSpectrum.setPEPMASS(std::make_pair((yysemantic_stack_[(5) - (3)].integerVal), (yysemantic_stack_[(5) - (4)].integerVal))); }
+    break;
+
+  case 83:
+
+/* Line 678 of lalr1.cc  */
+#line 233 "Parser.ypp"
     {
              driver.context.mgfFile.setHeader(driver.context.header);
              driver.context.header.clear();
@@ -950,7 +1013,7 @@ namespace mgf {
 
 
 /* Line 678 of lalr1.cc  */
-#line 954 "Parser.cpp"
+#line 1017 "Parser.cpp"
 	default:
           break;
       }
@@ -1155,33 +1218,35 @@ namespace mgf {
 
   /* YYPACT[STATE-NUM] -- Index in YYTABLE of the portion describing
      STATE-NUM.  */
-  const signed char Parser::yypact_ninf_ = -70;
+  const signed char Parser::yypact_ninf_ = -98;
   const short int
   Parser::yypact_[] =
   {
-       -70,    33,   -70,     8,    30,   -10,    -6,    38,    39,    40,
-      41,    42,    43,    44,    45,    46,    48,    49,    50,    51,
-      52,    53,    54,    55,    56,    57,    58,    59,    60,    61,
-      62,    63,    64,    27,   -70,   -70,   -70,     5,   109,   110,
-      32,   111,   112,   113,   114,   115,   116,   117,   118,   119,
-     120,   121,   122,   123,   124,   125,   126,   129,   130,    34,
-     131,   133,   134,   135,   137,   -70,   141,   -70,    -3,     5,
-     -70,    -2,   142,   143,   144,   145,   146,   147,   148,   149,
-     150,   151,   152,   153,   154,   155,   156,   157,   158,   159,
-     160,   161,   162,   163,   164,   165,   166,   167,   168,   169,
-     -70,     2,   -70,   -70,   -70,     1,   -70,   170,   170,   -70,
-     -70,   -70,   -70,   -70,   -70,   -70,   -70,   -70,   -70,   -70,
-     -70,   -70,   -70,   -70,   -70,   -70,   -70,   -70,   -70,   -70,
-     -70,   -70,   -70,   -70,   -70,   -70,   -70,   -70,   171,     3,
-     -70,   -70,   -70,   -70,   172,    74,    76,    85,    88,   127,
-     128,   132,   136,   138,   139,   140,   173,   175,   174,   176,
-     -70,    22,   -70,   -70,   178,   179,   180,   182,     5,   181,
-     185,   186,   187,    78,   189,    24,   190,   191,   -70,    80,
-     192,   183,   -70,   -70,   -70,   -70,   -70,    -1,   184,   194,
-     198,   199,     9,    28,   200,   201,   202,   203,   204,   205,
-     206,   207,   -70,   -70,   -70,   -70,   -70,   -70,   -70,   208,
-     -70,   209,   -70,   -70,   -70,   -70,   -70,   -70,   -70,   -70,
-     -70,   -70
+       -98,    53,   -98,    59,   104,    14,    56,    57,    60,    61,
+      62,    64,    66,    68,    69,    70,    71,    72,    73,    74,
+      75,    76,    77,    78,    79,    80,    81,    82,    83,    84,
+      85,    86,    87,    34,   -98,   -98,   -98,     9,   102,   103,
+      12,   107,   109,   111,   132,   133,   134,   135,   136,   137,
+     138,   139,   140,   141,   142,   143,   144,   147,   148,    31,
+      55,   149,    33,    54,   150,   -98,   154,   -98,   -40,     9,
+     -98,    -2,   155,   156,   157,   158,   159,   160,   161,   162,
+     163,   164,   165,   166,   167,   168,   169,   170,   171,   172,
+     173,   174,   175,   176,   177,   178,   179,   180,   181,   182,
+     183,   184,   -98,     2,   -98,   -98,   -98,     1,   -98,   185,
+     185,   -98,   -98,   -98,   -98,   -98,   -98,   -98,   -98,   -98,
+     -98,   -98,   -98,   -98,   -98,   -98,   -98,   -98,   -98,   -98,
+     -98,   -98,   -98,   -98,   -98,   -98,   -98,   -98,   -98,   -98,
+     -98,   -98,   186,    10,   -98,   -98,   -98,   -98,   187,    58,
+      63,   145,   146,   190,   151,   152,   153,   188,   189,   191,
+     192,   193,   196,   194,   195,   -98,    29,   -98,   -98,   197,
+     198,   199,   203,     9,   200,   -98,   201,   202,   204,    65,
+      67,   205,   206,   207,   -98,    94,   208,   210,   -98,   -98,
+     -98,   -98,   -98,    -1,   214,   215,   216,   217,    39,    41,
+       6,     7,     8,   218,   219,   220,   221,   222,   -98,   -98,
+     -98,   -98,   -98,   -98,   -98,   223,   224,   -98,   225,   226,
+     -98,    96,   -98,    99,   -98,   227,   -98,   -98,   -98,   -98,
+     -98,   -98,   -98,   -98,   -98,   228,   229,   231,   232,   233,
+     -98,   -98,   -98,   -98,   -98
   };
 
   /* YYDEFACT[S] -- default rule to reduce with in state S when YYTABLE
@@ -1190,45 +1255,47 @@ namespace mgf {
   const unsigned char
   Parser::yydefact_[] =
   {
-        19,    16,    74,     0,     0,     0,     0,     0,     0,     0,
+        20,    16,    84,     0,     0,     0,     0,     0,     0,     0,
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
-       0,     0,     0,     0,    20,     1,    51,     0,     0,     0,
+       0,     0,     0,     0,    21,     1,    54,     0,     0,     0,
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
-       0,     0,     0,     0,     0,    73,     0,    17,     0,     0,
+       0,     0,     0,     0,     0,    83,     0,    17,     0,     0,
       13,     0,     0,     0,     0,     0,     0,     0,     0,     0,
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
-      15,     0,    52,     8,     9,     0,    49,     0,     0,    25,
-      26,    48,    47,    35,    21,    22,    23,    24,    27,    28,
-      29,    30,    31,    32,    33,    34,    36,    37,    38,    39,
-      40,    43,    42,    44,    41,    45,    46,    50,     0,     0,
-      10,    12,    11,    14,     0,     0,     0,     0,     0,     0,
+       0,     0,    15,     0,    55,     8,     9,     0,    52,     0,
+       0,    26,    27,    51,    50,    36,    22,    23,    24,    25,
+      28,    29,    30,    31,    32,    33,    34,    35,    37,    38,
+      39,    40,    41,    44,    43,    45,    42,    47,    46,    49,
+      48,    53,     0,     0,    10,    12,    11,    14,     0,     0,
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
-       7,     0,    53,    72,     0,     0,     0,     0,     0,     0,
-       0,     0,     0,     0,     0,     0,     0,     0,    54,     0,
-       0,     0,     6,     5,     3,     4,     2,     0,     0,     0,
-       0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
-       0,     0,    18,    67,    55,    64,    56,    57,    70,     0,
-      68,     0,    58,    60,    59,    62,    63,    66,    65,    61,
-      71,    69
+       0,     0,     0,     0,     0,     7,     0,    56,    82,     0,
+       0,     0,     0,     0,     0,    19,     0,     0,     0,     0,
+       0,     0,     0,     0,    57,     0,     0,     0,     6,     5,
+       3,     4,     2,     0,     0,     0,     0,     0,     0,     0,
+       0,     0,     0,     0,     0,     0,     0,     0,    18,    75,
+      58,    72,    59,    60,    79,     0,     0,    76,     0,     0,
+      62,     0,    61,     0,    67,     0,    70,    71,    74,    73,
+      69,    81,    80,    78,    77,     0,     0,     0,     0,     0,
+      66,    65,    64,    63,    68
   };
 
   /* YYPGOTO[NTERM-NUM].  */
   const signed char
   Parser::yypgoto_[] =
   {
-       -70,    12,   -70,   -19,   -69,   -70,   -70,   -70,   -70,   -70,
-     -70,   -70,   -70,   -70
+       -98,    22,   -98,   -97,   -69,   -98,   -98,   -98,   -98,   -98,
+     -98,   -98,   -98,   -98
   };
 
   /* YYDEFGOTO[NTERM-NUM].  */
   const short int
   Parser::yydefgoto_[] =
   {
-        -1,   160,   161,    70,    71,   101,    33,    67,     1,    34,
-     139,   162,     2,     3
+        -1,   165,   166,    70,    71,   103,    33,    67,     1,    34,
+     143,   167,     2,     3
   };
 
   /* YYTABLE[YYPACT[STATE-NUM]].  What to do in state STATE-NUM.  If
@@ -1238,58 +1305,62 @@ namespace mgf {
   const unsigned char
   Parser::yytable_[] =
   {
-       105,   106,   203,   107,   107,   137,   107,   144,    35,   145,
-     146,    68,   208,   147,   148,   209,   149,   150,   151,   152,
-     153,   154,   155,   156,   157,   158,   159,    65,   145,   146,
-     195,   210,   196,    36,   181,   211,    66,     4,    74,    75,
-      94,    95,    37,     5,   103,   104,    38,     6,     7,   108,
-     108,   140,   108,   138,    69,     8,     9,    10,    11,    12,
+       107,   108,   209,   109,   109,   141,   109,   105,   106,   220,
+     222,   224,   145,   146,   148,    68,   149,   150,    74,    75,
+     151,   152,   153,   154,   155,   156,   157,   158,   159,   160,
+     161,   162,   163,   164,    65,   149,   150,    94,    95,    98,
+      99,   187,   214,    66,   217,   215,   216,   218,   219,   110,
+     110,   144,   110,   142,   221,   223,   225,     4,    69,    35,
+     100,   101,    96,     5,   169,   170,    37,     6,     7,   171,
+     172,   198,   199,   200,   201,     8,     9,    10,    11,    12,
       13,    14,    15,    16,    17,    18,    19,    20,    21,    22,
       23,    24,    25,    26,    27,    28,    29,    30,    31,    32,
-     164,   165,   166,   167,   192,   193,   199,   200,   141,   142,
-      39,    40,    41,    42,    43,    44,    45,    46,    47,   187,
-      48,    49,    50,    51,    52,    53,    54,    55,    56,    57,
-      58,    59,    60,    61,    62,    63,    64,    72,    73,    76,
-      77,    78,    79,    80,    81,    82,    83,    84,    85,    86,
-      87,    88,    89,    90,    91,    92,    93,   168,    96,    97,
-     169,    98,    99,   100,   102,   109,   110,   111,   112,   113,
-     114,   115,   116,   117,   118,   119,   120,   121,   122,   123,
-     124,   125,   126,   127,   128,   129,   130,   131,   132,   133,
-     134,   135,   136,   182,     0,   163,    68,   143,   178,   170,
-     171,   183,   184,   185,   172,   186,   202,   204,   173,   188,
-     174,   175,   176,   189,   190,   191,   194,   205,   197,   198,
-     201,   206,   207,   212,   213,   214,   215,   216,   217,   218,
-     219,   220,   221,     0,     0,     0,     0,     0,     0,     0,
-       0,     0,     0,     0,     0,   177,   179,     0,   180
+     205,   206,   235,   236,   193,   237,   238,    36,    38,    39,
+      72,    73,    40,    41,    42,    76,    43,    77,    44,    78,
+      45,    46,    47,    48,    49,    50,    51,    52,    53,    54,
+      55,    56,    57,    58,    59,    60,    61,    62,    63,    64,
+      79,    80,    81,    82,    83,    84,    85,    86,    87,    88,
+      89,    90,    91,    92,    93,    97,   102,   104,   111,   112,
+     113,   114,   115,   116,   117,   118,   119,   120,   121,   122,
+     123,   124,   125,   126,   127,   128,   129,   130,   131,   132,
+     133,   134,   135,   136,   137,   138,   139,   140,   188,     0,
+     168,    68,   147,   175,     0,     0,     0,   173,   174,   184,
+     189,   190,   191,   176,   177,   178,   192,     0,   194,   195,
+     196,   202,   197,   208,   203,   204,   207,   210,   211,   212,
+     213,   226,   227,   228,   229,   230,   231,   232,   233,   234,
+       0,   240,   241,   239,   242,   243,   244,     0,     0,     0,
+     179,   180,     0,   181,   182,   183,   185,   186
   };
 
   /* YYCHECK.  */
   const short int
   Parser::yycheck_[] =
   {
-        69,     3,     3,     5,     5,     3,     5,     4,     0,     6,
-       7,     6,     3,    10,    11,     6,    13,    14,    15,    16,
-      17,    18,    19,    20,    21,    22,    23,     0,     6,     7,
-       6,     3,     8,     3,    12,     7,     9,     4,     6,     7,
-       6,     7,    52,    10,    47,    48,    52,    14,    15,    51,
-      51,    50,    51,    51,    49,    22,    23,    24,    25,    26,
+        69,     3,     3,     5,     5,     3,     5,    47,    48,     3,
+       3,     3,   109,   110,     4,     6,     6,     7,     6,     7,
+      10,    11,    12,    13,    14,    15,    16,    17,    18,    19,
+      20,    21,    22,    23,     0,     6,     7,     6,     7,     6,
+       7,    12,     3,     9,     3,     6,     7,     6,     7,    51,
+      51,    50,    51,    51,    48,    48,    48,     4,    49,     0,
+       6,     7,     7,    10,     6,     7,    52,    14,    15,     6,
+       7,     6,     7,     6,     7,    22,    23,    24,    25,    26,
       27,    28,    29,    30,    31,    32,    33,    34,    35,    36,
       37,    38,    39,    40,    41,    42,    43,    44,    45,    46,
-       6,     7,     6,     7,     6,     7,     6,     7,   107,   108,
-      52,    52,    52,    52,    52,    52,    52,    52,    52,   168,
+       6,     7,     6,     7,   173,     6,     7,     3,    52,    52,
+       8,     8,    52,    52,    52,     8,    52,     8,    52,     8,
       52,    52,    52,    52,    52,    52,    52,    52,    52,    52,
-      52,    52,    52,    52,    52,    52,    52,     8,     8,     8,
+      52,    52,    52,    52,    52,    52,    52,    52,    52,    52,
        8,     8,     8,     8,     8,     8,     8,     8,     8,     8,
-       8,     8,     8,     8,     8,     6,     6,    52,     7,     6,
-      52,     7,     7,     6,     3,     3,     3,     3,     3,     3,
+       8,     8,     8,     6,     6,     6,     6,     3,     3,     3,
        3,     3,     3,     3,     3,     3,     3,     3,     3,     3,
        3,     3,     3,     3,     3,     3,     3,     3,     3,     3,
-       3,     3,     3,   161,    -1,     3,     6,     6,     3,    52,
-      52,     3,     3,     3,    52,     3,     3,     3,    52,     8,
-      52,    52,    52,     8,     8,     8,     7,     3,     8,     8,
-       8,     3,     3,     3,     3,     3,     3,     3,     3,     3,
-       3,     3,     3,    -1,    -1,    -1,    -1,    -1,    -1,    -1,
-      -1,    -1,    -1,    -1,    -1,    52,    52,    -1,    52
+       3,     3,     3,     3,     3,     3,     3,     3,   166,    -1,
+       3,     6,     6,     3,    -1,    -1,    -1,    52,    52,     3,
+       3,     3,     3,    52,    52,    52,     3,    -1,     8,     8,
+       8,     6,     8,     3,     8,     8,     8,     3,     3,     3,
+       3,     3,     3,     3,     3,     3,     3,     3,     3,     3,
+      -1,     3,     3,     6,     3,     3,     3,    -1,    -1,    -1,
+      52,    52,    -1,    52,    52,    52,    52,    52
   };
 
   /* STOS_[STATE-NUM] -- The (internal number of the) accessing
@@ -1306,20 +1377,22 @@ namespace mgf {
       52,    52,    52,    52,    52,     0,     9,    60,     6,    49,
       56,    57,     8,     8,     6,     7,     8,     8,     8,     8,
        8,     8,     8,     8,     8,     8,     8,     8,     8,     8,
-       8,     8,     6,     6,     6,     7,     7,     6,     7,     7,
-       6,    58,     3,    47,    48,    57,     3,     5,    51,     3,
+       8,     8,     6,     6,     6,     7,     7,     6,     6,     7,
+       6,     7,     6,    58,     3,    47,    48,    57,     3,     5,
+      51,     3,     3,     3,     3,     3,     3,     3,     3,     3,
        3,     3,     3,     3,     3,     3,     3,     3,     3,     3,
        3,     3,     3,     3,     3,     3,     3,     3,     3,     3,
-       3,     3,     3,     3,     3,     3,     3,     3,    51,    63,
-      50,    56,    56,     6,     4,     6,     7,    10,    11,    13,
-      14,    15,    16,    17,    18,    19,    20,    21,    22,    23,
-      54,    55,    64,     3,     6,     7,     6,     7,    52,    52,
-      52,    52,    52,    52,    52,    52,    52,    52,     3,    52,
-      52,    12,    54,     3,     3,     3,     3,    57,     8,     8,
-       8,     8,     6,     7,     7,     6,     8,     8,     8,     6,
-       7,     8,     3,     3,     3,     3,     3,     3,     3,     6,
-       3,     7,     3,     3,     3,     3,     3,     3,     3,     3,
-       3,     3
+       3,     3,    51,    63,    50,    56,    56,     6,     4,     6,
+       7,    10,    11,    12,    13,    14,    15,    16,    17,    18,
+      19,    20,    21,    22,    23,    54,    55,    64,     3,     6,
+       7,     6,     7,    52,    52,     3,    52,    52,    52,    52,
+      52,    52,    52,    52,     3,    52,    52,    12,    54,     3,
+       3,     3,     3,    57,     8,     8,     8,     8,     6,     7,
+       6,     7,     6,     8,     8,     6,     7,     8,     3,     3,
+       3,     3,     3,     3,     3,     6,     7,     3,     6,     7,
+       3,    48,     3,    48,     3,    48,     3,     3,     3,     3,
+       3,     3,     3,     3,     3,     6,     7,     6,     7,     6,
+       3,     3,     3,     3,     3
   };
 
 #if YYDEBUG
@@ -1342,11 +1415,12 @@ namespace mgf {
   Parser::yyr1_[] =
   {
          0,    53,    54,    54,    54,    54,    55,    55,    56,    56,
-      57,    57,    57,    57,    58,    58,    59,    59,    60,    61,
-      61,    62,    62,    62,    62,    62,    62,    62,    62,    62,
+      57,    57,    57,    57,    58,    58,    59,    59,    60,    60,
+      61,    61,    62,    62,    62,    62,    62,    62,    62,    62,
       62,    62,    62,    62,    62,    62,    62,    62,    62,    62,
       62,    62,    62,    62,    62,    62,    62,    62,    62,    62,
-      62,    62,    63,    63,    64,    64,    64,    64,    64,    64,
+      62,    62,    62,    62,    62,    63,    63,    64,    64,    64,
+      64,    64,    64,    64,    64,    64,    64,    64,    64,    64,
       64,    64,    64,    64,    64,    64,    64,    64,    64,    64,
       64,    64,    64,    65,    66
   };
@@ -1356,13 +1430,14 @@ namespace mgf {
   Parser::yyr2_[] =
   {
          0,     2,     3,     3,     3,     3,     2,     1,     2,     2,
-       3,     3,     3,     1,     3,     1,     0,     2,     6,     0,
-       2,     4,     4,     4,     4,     4,     4,     4,     4,     4,
+       3,     3,     3,     1,     3,     1,     0,     2,     6,     5,
+       0,     2,     4,     4,     4,     4,     4,     4,     4,     4,
        4,     4,     4,     4,     4,     4,     4,     4,     4,     4,
        4,     4,     4,     4,     4,     4,     4,     4,     4,     4,
-       4,     2,     0,     2,     2,     4,     4,     4,     4,     4,
-       4,     4,     4,     4,     4,     4,     4,     4,     4,     5,
-       4,     5,     2,     3,     1
+       4,     4,     4,     4,     2,     0,     2,     2,     4,     4,
+       4,     4,     4,     6,     6,     6,     6,     4,     6,     4,
+       4,     4,     4,     4,     4,     4,     4,     5,     5,     4,
+       5,     5,     2,     3,     1
   };
 
 #if YYDEBUG || YYERROR_VERBOSE || YYTOKEN_TABLE
@@ -1409,33 +1484,39 @@ namespace mgf {
       49,    57,    50,    -1,    57,    51,    56,    -1,    57,     5,
       56,    -1,    56,    -1,    58,    51,     6,    -1,     6,    -1,
       -1,    59,    60,    -1,     9,     3,    63,    55,    12,     3,
-      -1,    -1,    61,    62,    -1,    24,    52,     8,     3,    -1,
-      25,    52,     8,     3,    -1,    26,    52,     8,     3,    -1,
-      27,    52,     8,     3,    -1,    14,    52,     8,     3,    -1,
-      15,    52,     8,     3,    -1,    28,    52,     8,     3,    -1,
-      29,    52,     8,     3,    -1,    30,    52,     8,     3,    -1,
-      31,    52,     8,     3,    -1,    32,    52,     8,     3,    -1,
-      33,    52,     8,     3,    -1,    34,    52,     8,     3,    -1,
-      35,    52,     8,     3,    -1,    23,    52,     8,     3,    -1,
-      36,    52,     8,     3,    -1,    37,    52,     8,     3,    -1,
-      38,    52,     8,     3,    -1,    39,    52,     6,     3,    -1,
-      40,    52,     6,     3,    -1,    43,    52,     6,     3,    -1,
-      41,    52,     7,     3,    -1,    41,    52,     6,     3,    -1,
-      42,    52,     7,     3,    -1,    44,    52,     7,     3,    -1,
-      45,    52,     7,     3,    -1,    22,    52,     7,     3,    -1,
-      22,    52,     6,     3,    -1,    10,    52,    57,     3,    -1,
-      46,    52,    58,     3,    -1,     4,     3,    -1,    -1,    63,
-      64,    -1,    21,     3,    -1,    11,    52,     8,     3,    -1,
-      14,    52,     8,     3,    -1,    15,    52,     8,     3,    -1,
-      17,    52,     7,     3,    -1,    18,    52,     8,     3,    -1,
-      18,    52,     6,     3,    -1,    23,    52,     8,     3,    -1,
-      19,    52,     8,     3,    -1,    20,    52,     8,     3,    -1,
-      13,    52,     8,     3,    -1,    22,    52,     7,     3,    -1,
-      22,    52,     6,     3,    -1,    10,    52,    57,     3,    -1,
-      16,    52,     7,     3,    -1,    16,    52,     7,     7,     3,
-      -1,    16,    52,     6,     3,    -1,    16,    52,     6,     6,
-       3,    -1,     4,     3,    -1,    61,    59,     0,    -1,    65,
-      -1
+      -1,     9,     3,    63,    12,     3,    -1,    -1,    61,    62,
+      -1,    24,    52,     8,     3,    -1,    25,    52,     8,     3,
+      -1,    26,    52,     8,     3,    -1,    27,    52,     8,     3,
+      -1,    14,    52,     8,     3,    -1,    15,    52,     8,     3,
+      -1,    28,    52,     8,     3,    -1,    29,    52,     8,     3,
+      -1,    30,    52,     8,     3,    -1,    31,    52,     8,     3,
+      -1,    32,    52,     8,     3,    -1,    33,    52,     8,     3,
+      -1,    34,    52,     8,     3,    -1,    35,    52,     8,     3,
+      -1,    23,    52,     8,     3,    -1,    36,    52,     8,     3,
+      -1,    37,    52,     8,     3,    -1,    38,    52,     8,     3,
+      -1,    39,    52,     6,     3,    -1,    40,    52,     6,     3,
+      -1,    43,    52,     6,     3,    -1,    41,    52,     7,     3,
+      -1,    41,    52,     6,     3,    -1,    42,    52,     7,     3,
+      -1,    44,    52,     7,     3,    -1,    44,    52,     6,     3,
+      -1,    45,    52,     7,     3,    -1,    45,    52,     6,     3,
+      -1,    22,    52,     7,     3,    -1,    22,    52,     6,     3,
+      -1,    10,    52,    57,     3,    -1,    46,    52,    58,     3,
+      -1,     4,     3,    -1,    -1,    63,    64,    -1,    21,     3,
+      -1,    11,    52,     8,     3,    -1,    14,    52,     8,     3,
+      -1,    15,    52,     8,     3,    -1,    17,    52,     7,     3,
+      -1,    17,    52,     6,     3,    -1,    17,    52,     7,    48,
+       7,     3,    -1,    17,    52,     7,    48,     6,     3,    -1,
+      17,    52,     6,    48,     7,     3,    -1,    17,    52,     6,
+      48,     6,     3,    -1,    18,    52,     6,     3,    -1,    18,
+      52,     6,    48,     6,     3,    -1,    23,    52,     8,     3,
+      -1,    19,    52,     8,     3,    -1,    20,    52,     8,     3,
+      -1,    13,    52,     8,     3,    -1,    22,    52,     7,     3,
+      -1,    22,    52,     6,     3,    -1,    10,    52,    57,     3,
+      -1,    16,    52,     7,     3,    -1,    16,    52,     7,     7,
+       3,    -1,    16,    52,     7,     6,     3,    -1,    16,    52,
+       6,     3,    -1,    16,    52,     6,     7,     3,    -1,    16,
+      52,     6,     6,     3,    -1,     4,     3,    -1,    61,    59,
+       0,    -1,    65,    -1
   };
 
   /* YYPRHS[YYN] -- Index of the first RHS symbol of rule number YYN in
@@ -1445,26 +1526,28 @@ namespace mgf {
   {
          0,     0,     3,     7,    11,    15,    19,    22,    24,    27,
       30,    34,    38,    42,    44,    48,    50,    51,    54,    61,
-      62,    65,    70,    75,    80,    85,    90,    95,   100,   105,
-     110,   115,   120,   125,   130,   135,   140,   145,   150,   155,
-     160,   165,   170,   175,   180,   185,   190,   195,   200,   205,
-     210,   215,   218,   219,   222,   225,   230,   235,   240,   245,
-     250,   255,   260,   265,   270,   275,   280,   285,   290,   295,
-     301,   306,   312,   315,   319
+      67,    68,    71,    76,    81,    86,    91,    96,   101,   106,
+     111,   116,   121,   126,   131,   136,   141,   146,   151,   156,
+     161,   166,   171,   176,   181,   186,   191,   196,   201,   206,
+     211,   216,   221,   226,   231,   234,   235,   238,   241,   246,
+     251,   256,   261,   266,   273,   280,   287,   294,   299,   306,
+     311,   316,   321,   326,   331,   336,   341,   346,   352,   358,
+     363,   369,   375,   378,   382
   };
 
   /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
   const unsigned char
   Parser::yyrline_[] =
   {
-         0,   130,   130,   131,   132,   133,   135,   136,   138,   139,
-     141,   142,   143,   144,   146,   147,   149,   150,   156,   162,
-     163,   165,   166,   167,   168,   169,   170,   171,   172,   173,
-     174,   175,   176,   177,   178,   179,   180,   181,   182,   183,
-     184,   185,   186,   187,   188,   189,   190,   191,   192,   193,
-     194,   195,   197,   198,   200,   201,   202,   203,   204,   205,
-     206,   207,   208,   209,   210,   211,   212,   213,   214,   215,
-     216,   217,   218,   221,   227
+         0,   131,   131,   132,   133,   134,   136,   137,   139,   140,
+     142,   143,   144,   145,   147,   148,   150,   151,   157,   162,
+     164,   165,   167,   168,   169,   170,   171,   172,   173,   174,
+     175,   176,   177,   178,   179,   180,   181,   182,   183,   184,
+     185,   186,   187,   188,   189,   190,   191,   192,   193,   194,
+     195,   196,   197,   198,   199,   201,   202,   204,   205,   206,
+     207,   208,   209,   210,   211,   212,   213,   214,   215,   216,
+     217,   218,   219,   220,   221,   222,   223,   224,   225,   226,
+     227,   228,   229,   232,   238
   };
 
   // Print the state stack on the debug stream.
@@ -1543,7 +1626,7 @@ namespace mgf {
   }
 
   const int Parser::yyeof_ = 0;
-  const int Parser::yylast_ = 228;
+  const int Parser::yylast_ = 247;
   const int Parser::yynnts_ = 14;
   const int Parser::yyempty_ = -2;
   const int Parser::yyfinal_ = 35;
@@ -1561,11 +1644,11 @@ namespace mgf {
 } // mgf
 
 /* Line 1054 of lalr1.cc  */
-#line 1565 "Parser.cpp"
+#line 1648 "Parser.cpp"
 
 
 /* Line 1056 of lalr1.cc  */
-#line 229 "Parser.ypp"
+#line 240 "Parser.ypp"
  /*** Additional Code ***/
 
 void mgf::Parser::error(const Parser::location_type& l, const std::string& m)
