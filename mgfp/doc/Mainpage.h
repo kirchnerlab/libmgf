@@ -4,6 +4,10 @@
 
 \section sec_intro Introduction
 \c mgfp is a flex/bison-based C++ MGF parser library.<br>
+It includes the library code as well as the following set of 
+MGF processing tools:
+
+\li mgfvalidate -- validates a given MGF file 
 
 The <a href="http://steenlab.org">Steen \& Steen Lab</a> provides
 the library under the terms of a BSD license for use in academic and 
@@ -16,8 +20,16 @@ following article:<br>
 
 Kirchner M, Steen JAJ, Hamprecht FA, Steen H (2010).
 MGFp: An open Mascot Generic Format parser library implementation.
-<i>Journal of Proteome Research, in press.</i>
-[<a href="http://www.ncbi.nlm.nih.gov/pubmed/20334363">PubMed</a>]
+<i>Journal of Proteome Research, 9(5):2762-2763 (2010)</i>.
+[<a href="http://www.ncbi.nlm.nih.gov/pubmed/20334363">PubMed entry</a>]
+
+If you use ms2preproc in your data analysis pipeline, please cite<br>
+
+Renard BY, Kirchner M, Monigatti F, Invanov AR, Rappsilber J, 
+Winter D, Steen JAJ, Hamprecht FA, Steen H, When Less
+Can Yield More - Computational Preprocessing of MS/MS Spectra for
+Peptide Identification, <i>Proteomics 9(21):4978-4984 (2009)</i>.
+[<a href="http://www.ncbi.nlm.nih.gov/pubmed/19743429">PubMed entry</a>]
 
 \section sec_install Installation
 
