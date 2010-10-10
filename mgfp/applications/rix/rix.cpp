@@ -87,9 +87,11 @@ int main(int argc, char *argv[])
         ("type,t", po::value<std::string>(), "label type: one of TMT, ITRAQ4")
         ("input,i", po::value<std::string>(&inputfile)->default_value("-"),
          "input filename, defaults to stdin")
+        /*
         ("tee,e", po::value<std::string>(), "run in tee mode: extract label "
           "abundances to specified file and simply pipe MGF data from stdin "
           "to stdout.")
+        */
         ("precision,p", po::value<size_t>(&precision)->default_value(6),
          "number of significant digits in output")
     ;
