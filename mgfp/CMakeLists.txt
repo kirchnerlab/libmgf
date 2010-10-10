@@ -10,7 +10,7 @@ INCLUDE(${CMAKE_CURRENT_SOURCE_DIR}/cmake/macros/require_out_of_src_build.cmake)
 # versioning
 #############################################################################
 set(VERSION_MAJOR 2)
-set(VERSION_MINOR 0)
+set(VERSION_MINOR 1)
 
 # get SVN revision
 EXECUTE_PROCESS(
@@ -106,7 +106,7 @@ INSTALL(DIRECTORY ${MGFP_BINARY_DIR}/doc
 #        generated prior to packaging!
 
 set(CPACK_PACKAGE_NAME "mgfp")
-set(CPACK_PACKAGE_VENDOR "steenlab.org")
+set(CPACK_PACKAGE_VENDOR "mgfp.sf.net.org")
 set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "MGF Parser")
 
 
@@ -125,7 +125,7 @@ set(CPACK_COMPONENT_HEADERS_DISPLAY_NAME "C++ Development Headers")
 set(CPACK_COMPONENT_DOCUMENTATION_DISPLAY_NAME "C++ Interface Documentation")
 
 set(CPACK_COMPONENT_APPLICATIONS_DESCRIPTION 
-   "A simple MGF validator.")
+   "A simple MGF validator, TMT/iTRAQ reporter ion extraction and MGF preprocessing tools.")
 set(CPACK_COMPONENT_LIBRARIES_DESCRIPTION
    "Static libraries necessary used to build programs with MGFp.")
 set(CPACK_COMPONENT_HEADERS_DESCRIPTION
