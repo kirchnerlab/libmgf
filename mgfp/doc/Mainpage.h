@@ -8,6 +8,8 @@ It includes the library code as well as the following set of
 MGF processing tools:
 
 \li mgfvalidate -- validates a given MGF file 
+\li rix -- reporter ion extractor for iTRAQ4 and TMT
+\li ms2preproc -- MGF preprocessing tool (see below)
 
 The <a href="http://steenlab.org">Steen \& Steen Lab</a> provides
 the library under the terms of a BSD license for use in academic and 
@@ -18,14 +20,14 @@ non-academic environments.
 If you make use of \c mgfp in your own projects, please cite the
 following article:<br>
 
-Kirchner M, Steen JAJ, Hamprecht FA, Steen H (2010).
+\li Kirchner M, Steen JAJ, Hamprecht FA, Steen H (2010).
 MGFp: An open Mascot Generic Format parser library implementation.
 <i>Journal of Proteome Research, 9(5):2762-2763 (2010)</i>.
 [<a href="http://www.ncbi.nlm.nih.gov/pubmed/20334363">PubMed entry</a>]
 
-If you use ms2preproc in your data analysis pipeline, please cite<br>
+If you use \c ms2preproc in your data analysis pipeline, please cite<br>
 
-Renard BY, Kirchner M, Monigatti F, Invanov AR, Rappsilber J, 
+\li Renard BY, Kirchner M, Monigatti F, Invanov AR, Rappsilber J, 
 Winter D, Steen JAJ, Hamprecht FA, Steen H, When Less
 Can Yield More - Computational Preprocessing of MS/MS Spectra for
 Peptide Identification, <i>Proteomics 9(21):4978-4984 (2009)</i>.
@@ -38,11 +40,6 @@ Binary packages for Microsoft Windows, Linux (64 bit, built on Ubuntu 10.4) and
 MacOS X (Snow Leopard) are available for download from 
 
 \li the MGFp project page at sourceforge: http://mgfp.sf.net .
-
-Additional information is available on 
-
-\li the Steen Lab page at http://steenlab.org/
-\li the Steen Lab software page at http://software.steenlab.org/
 
 \subsection sec_install_src Building from Source
 Building \c mgfp from source is straightforward. However, it requires a working
