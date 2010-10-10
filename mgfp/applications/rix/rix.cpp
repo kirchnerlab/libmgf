@@ -1,6 +1,6 @@
 /*$Id$*/
 /*
- * tmtx.cpp
+ * rix.cpp
  *
  * Copyright (c) 2010 Marc Kirchner <marc.kirchner@childrens.harvard.edu>
  *
@@ -26,7 +26,11 @@
 #include <iomanip>
 #include <iostream>
 #include <iterator>
+#ifdef _MSC_VER
+#include <array>
+#else
 #include <tr1/array>
+#endif
 #include <boost/program_options.hpp>
 #include <mgfp/mgfp.h>
 
@@ -62,11 +66,12 @@ mgf::MgfSpectrum::iterator findClosestMz(mgf::MgfSpectrum::iterator begin,
         }
         return pos1;
     }
+	return end;
 }
    
-enum LabelType { TMT, ITRAQ4, SIZE };
-static const size_t sizes[SIZE] = { 10, 8 };
-static const double masses[SIZE][10] = 
+enum LabelType { TMT, ITRAQ4, LabelTypeSIZE };
+static const size_t sizes[LabelTypeSIZE] = { 10, 8 };
+static const double masses[LabelTypeSIZE][10] = 
   {
     { 124.0, 125.0, 126.0, 127.0, 128.0,
       129.0, 130.0, 131.0, 132.0, 133.0 },

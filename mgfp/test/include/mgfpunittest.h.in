@@ -1,6 +1,7 @@
 #ifndef __MGFPUNITTEST_H__
 #define __MGFPUNITTEST_H__
 
+#include "windows.h" // from VIGRA
 #include "unittest.hxx" // from VIGRA
 #include <string>
 

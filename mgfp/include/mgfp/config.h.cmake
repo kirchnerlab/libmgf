@@ -1,9 +1,9 @@
 #ifndef __MGFP_INCLUDE_CONFIG_H__
 #define __MGFP_INCLUDE_CONFIG_H__
 
-//#ifdef _MSC_VER
-//	#include "winsock2.h"
-//#endif
+#ifdef _MSC_VER
+#define NOMINMAX
+#endif
 
 #ifdef min
 #undef min
