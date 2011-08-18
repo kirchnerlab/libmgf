@@ -1,10 +1,10 @@
 INCLUDE_DIRECTORIES(
-    ${MGFP_SOURCE_DIR}/include
-    ${MGFP_BINARY_DIR}/include
+    ${MGF_SOURCE_DIR}/include
+    ${MGF_BINARY_DIR}/include
     ${CMAKE_CURRENT_SOURCE_DIR}
 )
 
-SET(MGFP_SRCS
+SET(MGF_SRCS
    Driver.cpp
    Parser.cpp
    Scanner.cpp
@@ -13,9 +13,9 @@ SET(MGFP_SRCS
    MgfFile.cpp
 )
 
-ADD_LIBRARY(mgfp ${MGFP_SRCS})
+ADD_LIBRARY(mgf ${MGF_SRCS})
 
-INSTALL(TARGETS mgfp 
+INSTALL(TARGETS mgf 
         RUNTIME DESTINATION bin
         LIBRARY DESTINATION lib
         ARCHIVE DESTINATION lib

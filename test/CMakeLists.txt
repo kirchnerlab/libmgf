@@ -7,7 +7,7 @@ IF(VALGRIND_EXECUTABLE STREQUAL "VALGRIND_EXECUTABLE-NOTFOUND")
     SET(HAVE_VALGRIND FALSE)
 ENDIF(VALGRIND_EXECUTABLE STREQUAL "VALGRIND_EXECUTABLE-NOTFOUND")
 
-MACRO(ADD_MGFP_TEST name exe src)
+MACRO(ADD_MGF_TEST name exe src)
     STRING(REGEX REPLACE "test_([^ ]+).*" "\\1" test "${exe}" )
 
     #build the test
@@ -34,22 +34,22 @@ MACRO(ADD_MGFP_TEST name exe src)
     #Add target for the gcov coverage report for this test
     #IF(WITH_GCOV)
     #    STRING(REGEX REPLACE "test_([^ ]+).*" "gcov_\\1" gcov_target "${exe}" )
-    #    ADD_CUSTOM_TARGET(${gcov_target} COMMAND /bin/bash ${MGFP_BINARY_DIR}/scripts/for_cmake/unit_coverage.sh ${test})
+    #    ADD_CUSTOM_TARGET(${gcov_target} COMMAND /bin/bash ${MGF_BINARY_DIR}/scripts/for_cmake/unit_coverage.sh ${test})
     #ENDIF(WITH_GCOV)
-ENDMACRO(ADD_MGFP_TEST name exe src)
+ENDMACRO(ADD_MGF_TEST name exe src)
 
 # adapt test data dir
 CONFIGURE_FILE(
     ${CMAKE_CURRENT_SOURCE_DIR}/include/mgfpunittest.h.in
-    ${MGFP_BINARY_DIR}/test/include/mgfpunittest.h
+    ${MGF_BINARY_DIR}/test/include/mgfpunittest.h
 )
 
 # include directorie
 INCLUDE_DIRECTORIES(
-    ${MGFP_SOURCE_DIR}/test/include
-    ${MGFP_SOURCE_DIR}/include
-    ${MGFP_BINARY_DIR}/include
-    ${MGFP_BINARY_DIR}/test/include
+    ${MGF_SOURCE_DIR}/test/include
+    ${MGF_SOURCE_DIR}/include
+    ${MGF_BINARY_DIR}/include
+    ${MGF_BINARY_DIR}/test/include
     ${CMAKE_CURRENT_SOURCE_DIR}
 )
 
@@ -59,11 +59,11 @@ SET_SOURCE_FILES_PROPERTIES(Collection-test.cpp PROPERTIES COMPILE_FLAGS "-DREGR
 SET(SRCS_COLLECTION Collection-test.cpp)
 
 #### Tests
-ADD_MGFP_TEST("ParserFormat" test_parserformat ${SRCS_PARSERFORMAT})
-ADD_MGFP_TEST("Collection" test_collection ${SRCS_COLLECTION})
+ADD_MGF_TEST("ParserFormat" test_parserformat ${SRCS_PARSERFORMAT})
+ADD_MGF_TEST("Collection" test_collection ${SRCS_COLLECTION})
 
-#ADD_TEST("CorrectLicenseHeaders" ${MGFP_SOURCE_DIR}/checklicense.sh)
-#ADD_TEST("FilesShouldEndWithANewline" ${MGFP_SOURCE_DIR}/newlines.sh)
+#ADD_TEST("CorrectLicenseHeaders" ${MGF_SOURCE_DIR}/checklicense.sh)
+#ADD_TEST("FilesShouldEndWithANewline" ${MGF_SOURCE_DIR}/newlines.sh)
 
 LIST(LENGTH memtest_names numtests)
 IF(numtests GREATER 0)

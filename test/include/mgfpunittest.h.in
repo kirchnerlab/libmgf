@@ -4,6 +4,6 @@
 #include "unittest.hxx" // from VIGRA
 #include <string>
 
-static const std::string testDataDir = "@MGFP_SOURCE_DIR@/test/data";
+static const std::string testDataDir = "@MGF_SOURCE_DIR@/test/data";
 
 #endif

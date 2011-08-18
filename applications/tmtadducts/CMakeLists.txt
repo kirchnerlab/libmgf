@@ -1,7 +1,7 @@
 # make sure we find the headers
 INCLUDE_DIRECTORIES(
-    ${MGFP_SOURCE_DIR}/include
-    ${MGFP_BINARY_DIR}/include
+    ${MGF_SOURCE_DIR}/include
+    ${MGF_BINARY_DIR}/include
     ${CMAKE_CURRENT_SOURCE_DIR}
 )
 # this requres BOOST
@@ -15,7 +15,7 @@ IF(Boost_PROGRAM_OPTIONS_FOUND)
     LINK_DIRECTORIES(${Boost_LIBRARY_DIRS})
     SET(SRCS_TMTX tmtx.cpp)
     ADD_EXECUTABLE(tmtx ${SRCS_TMTX})
-    TARGET_LINK_LIBRARIES(tmtx mgfp ${Boost_PROGRAM_OPTIONS_LIBRARY})
+    TARGET_LINK_LIBRARIES(tmtx mgf ${Boost_PROGRAM_OPTIONS_LIBRARY})
     INSTALL(TARGETS tmtx RUNTIME DESTINATION bin)
 ELSE(Boost_PROGRAM_OPTIONS_FOUND)
     MESSAGE(STATUS "Could not find BOOST program_options. Skipping ${CMAKE_CURRENT_SOURCE_DIR}.") 

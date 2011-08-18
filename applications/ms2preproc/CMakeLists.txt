@@ -2,8 +2,8 @@
 # make sure we find the headers
 #############################################################################
 INCLUDE_DIRECTORIES(
-    ${MGFP_SOURCE_DIR}/include
-    ${MGFP_BINARY_DIR}/include
+    ${MGF_SOURCE_DIR}/include
+    ${MGF_BINARY_DIR}/include
     ${CMAKE_CURRENT_SOURCE_DIR}
 )
 #############################################################################
@@ -19,7 +19,7 @@ IF(Boost_PROGRAM_OPTIONS_FOUND)
     LINK_DIRECTORIES(${Boost_LIBRARY_DIRS})
     SET(SRCS_MS2PREPROC ms2preproc.cpp)
     ADD_EXECUTABLE(ms2preproc ${SRCS_MS2PREPROC})
-    TARGET_LINK_LIBRARIES(ms2preproc mgfp ${Boost_PROGRAM_OPTIONS_LIBRARY})
+    TARGET_LINK_LIBRARIES(ms2preproc mgf ${Boost_PROGRAM_OPTIONS_LIBRARY})
     INSTALL(TARGETS ms2preproc RUNTIME 
 	DESTINATION bin
 	COMPONENT applications)

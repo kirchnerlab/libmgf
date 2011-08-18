@@ -2,8 +2,8 @@
 # make sure we find the headers
 #############################################################################
 INCLUDE_DIRECTORIES(
-    ${MGFP_SOURCE_DIR}/include
-    ${MGFP_BINARY_DIR}/include
+    ${MGF_SOURCE_DIR}/include
+    ${MGF_BINARY_DIR}/include
     ${CMAKE_CURRENT_SOURCE_DIR}
 )
 #############################################################################
@@ -19,7 +19,7 @@ IF(Boost_PROGRAM_OPTIONS_FOUND)
     LINK_DIRECTORIES(${Boost_LIBRARY_DIRS})
     SET(SRCS_MGFVALIDATE mgfvalidate.cpp)
     ADD_EXECUTABLE(mgfvalidate ${SRCS_MGFVALIDATE})
-    TARGET_LINK_LIBRARIES(mgfvalidate mgfp ${Boost_PROGRAM_OPTIONS_LIBRARY})
+    TARGET_LINK_LIBRARIES(mgfvalidate mgf ${Boost_PROGRAM_OPTIONS_LIBRARY})
     INSTALL(TARGETS mgfvalidate RUNTIME 
         DESTINATION bin
         COMPONENT applications)

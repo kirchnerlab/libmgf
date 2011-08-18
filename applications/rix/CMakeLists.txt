@@ -1,7 +1,7 @@
 # make sure we find the headers
 INCLUDE_DIRECTORIES(
-    ${MGFP_SOURCE_DIR}/include
-    ${MGFP_BINARY_DIR}/include
+    ${MGF_SOURCE_DIR}/include
+    ${MGF_BINARY_DIR}/include
     ${CMAKE_CURRENT_SOURCE_DIR}
 )
 # this requires BOOST
@@ -15,7 +15,7 @@ IF(Boost_PROGRAM_OPTIONS_FOUND)
     LINK_DIRECTORIES(${Boost_LIBRARY_DIRS})
     SET(SRCS_RIX rix.cpp)
     ADD_EXECUTABLE(rix ${SRCS_RIX})
-    TARGET_LINK_LIBRARIES(rix mgfp ${Boost_PROGRAM_OPTIONS_LIBRARY})
+    TARGET_LINK_LIBRARIES(rix mgf ${Boost_PROGRAM_OPTIONS_LIBRARY})
     INSTALL(TARGETS rix RUNTIME 
 	DESTINATION bin
 	COMPONENT applications)
