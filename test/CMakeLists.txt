@@ -13,7 +13,7 @@ MACRO(ADD_MGF_TEST name exe src)
     #build the test
     ADD_EXECUTABLE(${exe} ${src})
     #link the test
-    TARGET_LINK_LIBRARIES(${exe} mgfp)
+    TARGET_LINK_LIBRARIES(${exe} mgf)
     
     #add test to global list of unit test
     ADD_TEST(${name} ${exe})
