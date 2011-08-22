@@ -408,7 +408,7 @@ int main(int argc, char* argv[]) {
                 }
             } else if (vm.count("winsize")) {
                 // Top X in windows of size Z
-                double z = vm["winsize"].as<int>();
+                double z = vm["winsize"].as<double>();
                 Ms2Preproc::TopXInWindowsOfSizeZ topXInWindowsOfSizeZ(static_cast<unsigned int>(x), z);
                 for (Iterator i = s.begin(); i != s.end(); ++i) {
                     mgf::MgfSpectrum::iterator trash = topXInWindowsOfSizeZ(i->begin(), i->end(), i->begin(), LessThanMass(), LessThanAbundance());
