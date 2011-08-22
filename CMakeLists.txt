@@ -22,8 +22,8 @@ SET(VERSION "${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_PATCH}")
 MACRO_REQUIRE_OUT_OF_SRC_BUILD("libmgf requires out-of-source builds.")
 
 CONFIGURE_FILE(
-    ${CMAKE_CURRENT_SOURCE_DIR}/include/mgfp/config.h.cmake 
-    ${MGF_BINARY_DIR}/include/mgfp/config.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/include/mgf/config.h.cmake 
+    ${MGF_BINARY_DIR}/include/mgf/config.h
 )
 
 # compiler-specific flags

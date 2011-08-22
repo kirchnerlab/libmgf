@@ -1,7 +1,7 @@
 #ifndef __MGFP_INCLUDE_MASSABUNDANCEPAIR_H__
 #define __MGFP_INCLUDE_MASSABUNDANCEPAIR_H__
 
-#include <mgfp/config.h>
+#include <mgf/config.h>
 
 #include <utility>
 #include <functional>

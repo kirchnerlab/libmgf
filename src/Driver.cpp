@@ -1,7 +1,7 @@
 #include <fstream>
 #include <sstream>
 
-#include <mgfp/Driver.h>
+#include <mgf/Driver.h>
 #include "Parser.h"
 #include "Scanner.h"
 

@@ -1,7 +1,5 @@
-/* $Id$ */
-
 %code requires { 
-#include <mgfp/Driver.h>
+#include <mgf/Driver.h>
 #include "Nodes.h"
 
 #include <cstdio>
@@ -116,7 +114,7 @@ using namespace mgf::detail;
 %destructor { delete $$; } ion ions charge charges csintegerlist 
 
 %{
-#include <mgfp/Driver.h>
+#include <mgf/Driver.h>
 #include "Scanner.h"
 
 /* this "connects" the bison parser in the driver to the flex scanner class

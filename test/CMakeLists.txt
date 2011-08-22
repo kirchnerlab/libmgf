@@ -13,7 +13,7 @@ MACRO(ADD_MGF_TEST name exe src)
     #build the test
     ADD_EXECUTABLE(${exe} ${src})
     #link the test
-    TARGET_LINK_LIBRARIES(${exe} mgfp)
+    TARGET_LINK_LIBRARIES(${exe} mgf)
     
     #add test to global list of unit test
     ADD_TEST(${name} ${exe})
@@ -40,8 +40,8 @@ ENDMACRO(ADD_MGF_TEST name exe src)
 
 # adapt test data dir
 CONFIGURE_FILE(
-    ${CMAKE_CURRENT_SOURCE_DIR}/include/mgfpunittest.h.in
-    ${MGF_BINARY_DIR}/test/include/mgfpunittest.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/include/libmgfunittest.h.in
+    ${MGF_BINARY_DIR}/test/include/libmgfunittest.h
 )
 
 # include directorie

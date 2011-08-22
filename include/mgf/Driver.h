@@ -6,8 +6,8 @@
 #include <string>
 #include <vector>
 
-#include <mgfp/Context.h>
-#include <mgfp/MgfSpectrum.h>
+#include <mgf/Context.h>
+#include <mgf/MgfSpectrum.h>
 
 namespace mgf
 {

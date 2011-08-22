@@ -42,7 +42,7 @@
 /* Line 35 of lalr1.cc  */
 #line 3 "Parser.ypp"
  
-#include <mgfp/Driver.h>
+#include <mgf/Driver.h>
 #include "Nodes.h"
 
 #include <cstdio>

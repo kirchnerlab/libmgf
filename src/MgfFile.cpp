@@ -1,4 +1,4 @@
-#include <mgfp/MgfFile.h>
+#include <mgf/MgfFile.h>
 
 namespace mgf {
 

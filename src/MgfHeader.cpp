@@ -1,4 +1,4 @@
-#include <mgfp/MgfHeader.h>
+#include <mgf/MgfHeader.h>
 #include <cstdlib> // for std::abs(int)
 
 namespace mgf {

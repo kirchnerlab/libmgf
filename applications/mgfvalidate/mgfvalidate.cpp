@@ -1,8 +1,7 @@
-/*$Id$*/
 /*
  * mgfvalidate.cpp
  *
- * Copyright (c) 2010 Marc Kirchner <marc.kirchner@childrens.harvard.edu>
+ * Copyright (c) 2010 Marc Kirchner
  *
  * This file is part of mgfp.
  * 
@@ -23,7 +22,7 @@
 
 #include <iostream>
 #include <boost/program_options.hpp>
-#include <mgfp/mgfp.h>
+#include <mgf/mgf.h>
 
 int main(int argc, char *argv[])
 {

@@ -4,7 +4,7 @@
 #define __MGFP_INCLUDE_COLLECTION_H__
 
 #include <vector>
-#include <mgfp/config.h>
+#include <mgf/config.h>
 
 
 #ifdef REGRESSION_TEST_BUILD

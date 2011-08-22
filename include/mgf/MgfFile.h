@@ -3,13 +3,13 @@
 #ifndef __MGFP_INCLUDE_MGFFILE_H__
 #define __MGFP_INCLUDE_MGFFILE_H__
 
-#include <mgfp/config.h>
+#include <mgf/config.h>
 
 #include <ostream>
 
-#include <mgfp/Collection.h>
-#include <mgfp/MgfHeader.h>
-#include <mgfp/MgfSpectrum.h>
+#include <mgf/Collection.h>
+#include <mgf/MgfHeader.h>
+#include <mgf/MgfSpectrum.h>
 
 namespace mgf
 {

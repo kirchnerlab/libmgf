@@ -49,7 +49,7 @@
 /* Line 317 of lalr1.cc  */
 #line 118 "Parser.ypp"
 
-#include <mgfp/Driver.h>
+#include <mgf/Driver.h>
 #include "Scanner.h"
 
 /* this "connects" the bison parser in the driver to the flex scanner class

@@ -1,4 +1,3 @@
-/* $Id$ */
 #ifndef __NODES_H__
 #define __NODES_H__
 

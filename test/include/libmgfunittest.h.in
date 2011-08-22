@@ -1,5 +1,5 @@
-#ifndef __MGFPUNITTEST_H__
-#define __MGFPUNITTEST_H__
+#ifndef __MGFUNITTEST_H__
+#define __MGFUNITTEST_H__
 
 #include "unittest.hxx" // from VIGRA
 #include <string>

@@ -1,4 +1,4 @@
-#include <mgfp/MgfSpectrum.h>
+#include <mgf/MgfSpectrum.h>
 
 #include <cstdlib> // for std::abs(int)
 #include <iostream>

@@ -1,4 +1,3 @@
-
 /* A Bison parser, made by GNU Bison 2.4.1.  */
 
 /* Stack handling for Bison parsers in C++

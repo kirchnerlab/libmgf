@@ -1,14 +1,14 @@
 #ifndef __MGFP_INCLUDE_MGFHEADER_H__
 #define __MGFP_INCLUDE_MGFHEADER_H__
 
-#include <mgfp/config.h>
+#include <mgf/config.h>
 
 #include <map>
 #include <ostream>
 #include <string>
 #include <vector>
 
-#include <mgfp/utils.h> // for existsOrEmpty()
+#include <mgf/utils.h> // for existsOrEmpty()
 
 namespace mgf {
 
@@ -31,7 +31,7 @@ class MGFP_EXPORT MgfHeader
 
     /** Set the name of the enzyme used for digestion. If the MGF file is to be
      * searched, then the name needs to correspond to an enzyme name specified
-     * in the Mascot enzyme file. Because there is no way for \a mgfp to check
+     * in the Mascot enzyme file. Because there is no way for \a mgf to check
      * the validity of the string, the responsibility for valid enzyme names
      * lies with the user.
      *  @see http://www.matrixscience.com/help/search_field_help.html#CLE
@@ -88,7 +88,7 @@ class MGFP_EXPORT MgfHeader
 
     /** Set the instrument type/fragementation rules. Valid values are defined
      * in the Mascot \c fragmentation_rules configuration file. There is no way
-     * for \a mgfp to validate the user input, hence the responsibility lies
+     * for \a libmgf to validate the user input, hence the responsibility lies
      * with the user.
      *  @param[in] instrument The
      */

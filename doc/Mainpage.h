@@ -65,6 +65,8 @@ Optionally, if you want to build your own precompiled packages, you can add
 \section Usage
 To use the parser, one must first create a parser driver instance:
 \code
+    #include <mgf/mgf.h>
+    ...
     mgf::MgfFile mgfFile;
     mgf::Driver driver(mgfFile);
 \endcode

@@ -1,10 +1,9 @@
-/*$Id$*/
 /*
  * rix.cpp
  *
- * Copyright (c) 2010 Marc Kirchner <marc.kirchner@childrens.harvard.edu>
+ * Copyright (c) 2010 Marc Kirchner 
  *
- * This file is part of mgfp.
+ * This file is part of libmgf.
  * 
  * mgfp is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
@@ -32,7 +31,7 @@
 #include <tr1/array>
 #endif
 #include <boost/program_options.hpp>
-#include <mgfp/mgfp.h>
+#include <mgf/mgf.h>
 
 mgf::MgfSpectrum::iterator findClosestMz(mgf::MgfSpectrum::iterator begin, 
   mgf::MgfSpectrum::iterator end, double referenceMz)

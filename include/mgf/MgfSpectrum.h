@@ -1,15 +1,15 @@
 #ifndef __MGFP_INCLUDE_MGFSPECTRUM_H__
 #define __MGFP_INCLUDE_MGFSPECTRUM_H__
 
-#include <mgfp/config.h>
+#include <mgf/config.h>
 
 #include <ostream>
 #include <string>
 #include <utility>
 #include <vector>
 
-#include <mgfp/Collection.h>
-#include <mgfp/MassAbundancePair.h>
+#include <mgf/Collection.h>
+#include <mgf/MassAbundancePair.h>
 
 namespace mgf {
 
@@ -71,7 +71,7 @@ class MGFP_EXPORT MgfSpectrum : public Collection<MassAbundancePair>
 
     /** Set the instrument type/fragementation rules. Valid values are defined
      * in the Mascot \c fragmentation_rules configuration file. There is no way
-     * for \a mgfp to validate the user input, hence the responsibility lies
+     * for \a libmgf to validate the user input, hence the responsibility lies
      * with the user.
      *  @param[in] instrument The
      */

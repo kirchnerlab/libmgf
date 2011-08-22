@@ -1,7 +1,7 @@
 #ifndef __MGFP_INCLUDE_UTILS_H__
 #define __MGFP_INCLUDE_UTILS_H__
 
-#include <mgfp/config.h>
+#include <mgf/config.h>
 
 namespace mgf
 {

@@ -1,12 +1,9 @@
-/*$Id: ms2preproc.cpp 2725 2009-11-30 22:27:57Z marc.kirchner@childrens.harvard.edu $*/
-
 /*
  * ms2preproc.cpp
  *
- * Copyright (c) 2010 Marc Kirchner <marc.kirchner@childrens.harvard.edu>
- * Copyright (c) 2009 Marc Kirchner <marc.kirchner@childrens.harvard.edu>
+ * Copyright (c) 2009-2011 Marc Kirchner
  *
- * This file is part of mgfp.
+ * This file is part of libmgf.
  *
  * ms++ is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
@@ -34,9 +31,9 @@
 
 #include <boost/program_options.hpp>
 
-#include <mgfp/Driver.h>
-#include <mgfp/Context.h>
-#include <mgfp/MgfFile.h>
+#include <mgf/Driver.h>
+#include <mgf/Context.h>
+#include <mgf/MgfFile.h>
 
 // #define DEBUG
 

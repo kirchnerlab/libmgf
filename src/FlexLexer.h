@@ -49,7 +49,7 @@
 #define __FLEX_LEXER_H
 
 #include <iostream>
-#include <mgfp/config.h>
+#include <mgf/config.h>
 #  ifndef FLEX_STD
 #    define FLEX_STD std::
 #  endif

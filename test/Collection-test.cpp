@@ -1,31 +1,20 @@
-/*$Id$*/
-
 /*
  * Collection-test.cpp
  *
- * Copyright (c) 2009 Bernhard Kausler <bernhard.kausler@iwr.uni-heidelberg.de>
- *
- * This file is part of ms++.
- *
- * ms++ is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * ms++ is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
- *
- * You should have received a copy of the GNU Lesser General Public License
- * along with ms++. If not, see <http://www.gnu.org/licenses/>.
+ * Copyright (c) 2011 Marc Kirchner
+ * Copyright (c) 2009 Bernhard Kausler 
  *
  */
 
 #include <iostream>
 #include <vector>
 
-#include <mgfp/Collection.h>
+// expose the complete class for testing
+#define private public
+#define protected public
+#include <mgf/Collection.h>
+#undef private
+#undef protected
 
 #include "unittest.hxx"
 

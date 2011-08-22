@@ -1,20 +1,18 @@
-/*$Id$*/
-
 /*
  * ParserFormat-test.cpp
  *
  * This tests the parser on different MGF examples, with a focus on data files
  * that used to break the parsing process.
  *
- * Copyright (c) 2010 Marc Kirchner <marc.kirchner@childrens.harvard.edu>
+ * Copyright (c) 2010 Marc Kirchner
  *
  */
 
 #include <fstream>
 #include <string>
 
-#include "mgfpunittest.h"
-#include <mgfp/mgfp.h>
+#include "libmgfunittest.h"
+#include <mgf/mgf.h>
 
 using namespace vigra;
 
