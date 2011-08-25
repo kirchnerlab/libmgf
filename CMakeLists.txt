@@ -59,19 +59,19 @@ ADD_SUBDIRECTORY(test)
 #############################################################################
 
 # headers
-INSTALL(DIRECTORY ${MGF_SOURCE_DIR}/include/mgfp
+INSTALL(DIRECTORY ${MGF_SOURCE_DIR}/include/mgf
         DESTINATION include
         COMPONENT headers
         REGEX "/.svn$" EXCLUDE)
 
 # config.h
-INSTALL(FILES ${MGF_BINARY_DIR}/include/mgfp/config.h
-        DESTINATION include/mgfp
+INSTALL(FILES ${MGF_BINARY_DIR}/include/mgf/config.h
+        DESTINATION include/mgf
         COMPONENT headers)
 
 # documentation
 INSTALL(DIRECTORY ${MGF_BINARY_DIR}/doc
-        DESTINATION share/mgfp
+        DESTINATION share/libmgf
         COMPONENT documentation
         PATTERN "Doxyfile" EXCLUDE)
 
