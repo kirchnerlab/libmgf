@@ -25,7 +25,7 @@ DOXYFILE_ENCODING      = UTF-8
 # The PROJECT_NAME tag is a single word (or a sequence of words surrounded
 # by quotes) that should identify the project.
 
-PROJECT_NAME           = mgfp
+PROJECT_NAME           = libmgf
 
 # The PROJECT_NUMBER tag can be used to enter a project or revision number.
 # This could be handy for archiving the generated documentation or
@@ -38,7 +38,7 @@ PROJECT_NUMBER         =
 # If a relative path is entered, it will be relative to the location
 # where doxygen was started. If left blank the current directory will be used.
 
-OUTPUT_DIRECTORY       = @MGFP_BINARY_DIR@/doc
+OUTPUT_DIRECTORY       = @MGF_BINARY_DIR@/doc
 
 # If the CREATE_SUBDIRS tag is set to YES, then doxygen will create
 # 4096 sub-directories (in 2 levels) under the output directory of each output
@@ -114,7 +114,7 @@ FULL_PATH_NAMES        = YES
 # If left blank the directory from which doxygen is run is used as the
 # path to strip.
 
-STRIP_FROM_PATH        = @MGFP_SOURCE_DIR@
+STRIP_FROM_PATH        = @MGF_SOURCE_DIR@
 
 # The STRIP_FROM_INC_PATH tag can be used to strip a user-defined part of
 # the path mentioned in the documentation of a class, which tells
@@ -568,7 +568,7 @@ WARN_LOGFILE           =
 # directories like "/usr/src/myproject". Separate the files or directories
 # with spaces.
 
-INPUT                  = @MGFP_SOURCE_DIR@/doc @MGFP_SOURCE_DIR@/src @MGFP_SOURCE_DIR@/include/mgfp
+INPUT                  = @MGF_SOURCE_DIR@/doc @MGF_SOURCE_DIR@/src @MGF_SOURCE_DIR@/include/mgfp
 
 # This tag can be used to specify the character encoding of the source files
 # that doxygen parses. Internally doxygen uses the UTF-8 encoding, which is
@@ -598,7 +598,7 @@ RECURSIVE              = NO
 # subdirectory from a directory tree whose root is specified with the INPUT tag.
 
 EXCLUDE                = 
-#EXCLUDE                = @MGFP_SOURCE_DIR@/src/stack.h @MGFP_SOURCE_DIR@/src/location.h @MGFP_SOURCE_DIR@/src/position.h
+#EXCLUDE                = @MGF_SOURCE_DIR@/src/stack.h @MGF_SOURCE_DIR@/src/location.h @MGF_SOURCE_DIR@/src/position.h
 
 # The EXCLUDE_SYMLINKS tag can be used select whether or not files or
 # directories that are symbolic links (a Unix filesystem feature) are excluded
@@ -612,7 +612,7 @@ EXCLUDE_SYMLINKS       = NO
 # against the file with absolute path, so to exclude all test directories
 # for example use the pattern */test/*
 
-EXCLUDE_PATTERNS       = @MGFP_SOURCE_DIR@/src/stack.* @MGFP_SOURCE_DIR@/src/location.* @MGFP_SOURCE_DIR@/src/position.*
+EXCLUDE_PATTERNS       = @MGF_SOURCE_DIR@/src/stack.* @MGF_SOURCE_DIR@/src/location.* @MGF_SOURCE_DIR@/src/position.*
 
 # The EXCLUDE_SYMBOLS tag can be used to specify one or more symbol names
 # (namespaces, classes, functions, etc.) that should be excluded from the
@@ -626,7 +626,7 @@ EXCLUDE_SYMBOLS        =
 # directories that contain example code fragments that are included (see
 # the \include command).
 
-EXAMPLE_PATH           = @MGFP_SOURCE_DIR@/doc
+EXAMPLE_PATH           = @MGF_SOURCE_DIR@/doc
 
 # If the value of the EXAMPLE_PATH tag contains directories, you can use the
 # EXAMPLE_PATTERNS tag to specify one or more wildcard pattern (like *.cpp
@@ -646,7 +646,7 @@ EXAMPLE_RECURSIVE      = NO
 # directories that contain image that are included in the documentation (see
 # the \image command).
 
-IMAGE_PATH             = @MGFP_SOURCE_DIR@/doc/images
+IMAGE_PATH             = @MGF_SOURCE_DIR@/doc/images
 
 # The INPUT_FILTER tag can be used to specify a program that doxygen should
 # invoke to filter for each input file. Doxygen will invoke the filter program
@@ -768,7 +768,7 @@ GENERATE_HTML          = YES
 # If a relative path is entered the value of OUTPUT_DIRECTORY will be
 # put in front of it. If left blank `html' will be used as the default path.
 
-HTML_OUTPUT            = @MGFP_BINARY_DIR@/doc/html
+HTML_OUTPUT            = @MGF_BINARY_DIR@/doc/html
 
 # The HTML_FILE_EXTENSION tag can be used to specify the file extension for
 # each generated HTML page (for example: .htm,.php,.asp). If it is left blank

@@ -38,10 +38,11 @@ Peptide Identification, <i>Proteomics 9(21):4978-4984 (2009)</i>.
 \subsection sec_install_bin Obtaining the Software
 Binary packages for Microsoft Windows are available here: 
 \li https://github.com/kirchnerlab/libmgf/downloads
+
 Linux and Mac users, please build from source.
 
 \subsection sec_install_src Building from Source
-Building \c mgfp from source is straightforward. However, it requires a working
+Building \c libmgf from source is straightforward. It requires a working
 CMake build system (available from http://cmake.org/) and CMake >= 2.6.
 
 With cmake available, the build process is
@@ -56,7 +57,17 @@ With cmake available, the build process is
  make package (optional, generates binary packages for your platform)
 \endverbatim
 
+For Mac users: if you are using MacPorts, then linking errors with \c
+boost::program_options seem common; alas, this is not a \c libmgf issue but
+indicates a compiler/library incompatibility on your system.
+
 \section Usage
+
+\subsection cmdline Using the command line applications
+All command line applications come with a \c --help switch that
+describes their usage.
+
+\subsection lib Using the libmgf library
 To use the parser, one must first create a parser driver instance:
 \code
     #include <mgf/mgf.h>
