@@ -1,9 +1,9 @@
 /*!
 
-\mainpage mgfp: Mascot Generic Format (MGF) Parser
+\mainpage libmgf: Mascot Generic Format (MGF) Parser
 
 \section sec_intro Introduction
-\c mgfp is a flex/bison-based C++ MGF parser library.<br>
+\c libmgf (formerly mgfp) is a flex/bison-based C++ MGF parser library.<br>
 It includes the library code as well as the following set of 
 MGF processing tools:
 
@@ -12,12 +12,12 @@ MGF processing tools:
 \li ms2preproc -- MGF preprocessing tool (see below)
 
 The <a href="http://steenlab.org">Steen \& Steen Lab</a> provides
-the library under the terms of a BSD license for use in academic and 
+the library under the terms of a MIT license for use in academic and 
 non-academic environments.
 
 \section sec_citation Citation
 
-If you make use of \c mgfp in your own projects, please cite the
+If you make use of \c libmgf in your own projects, please cite the
 following article:<br>
 
 \li Kirchner M, Steen JAJ, Hamprecht FA, Steen H (2010).
@@ -36,10 +36,9 @@ Peptide Identification, <i>Proteomics 9(21):4978-4984 (2009)</i>.
 \section sec_install Installation
 
 \subsection sec_install_bin Obtaining the Software
-Binary packages for Microsoft Windows, Linux (64 bit, built on Ubuntu 10.4) and
-MacOS X (Snow Leopard) are available for download from 
-
-\li the MGFp project page at sourceforge: http://mgfp.sf.net .
+Binary packages for Microsoft Windows are available here: 
+\li https://github.com/kirchnerlab/libmgf/downloads
+Linux and Mac users, please build from source.
 
 \subsection sec_install_src Building from Source
 Building \c mgfp from source is straightforward. However, it requires a working
@@ -47,19 +46,14 @@ CMake build system (available from http://cmake.org/) and CMake >= 2.6.
 
 With cmake available, the build process is
 \verbatim
- tar xvzf mgfp-xxxxxxx.tar.gz
- mkdir mgfp-build
- cd mgfp-build
- cd build
- cmake ../mgfp-xxxxxxx
+ git clone git://github.com/kirchnerlab/libmgf.git
+ mkdir libmgf-build
+ cd libmgf-build
+ cmake ../libmgf
  make
  make test
  make install
-\endverbatim
-
-Optionally, if you want to build your own precompiled packages, you can add
-\verbatim
-  make package
+ make package (optional, generates binary packages for your platform)
 \endverbatim
 
 \section Usage
@@ -121,8 +115,14 @@ Coding examples are in the \c applications/ subdirectory
 \section sec_appendix Appendix
 
 \subsection sec_issues Known Issues
+\li the MGF format has been misused many times; although MatrixScience provides
+    a format description, there is no official formal grammar. As such, libmgf
+    may sometimes refuse to accept a specific MGF dialect. Please contact the
+    developers if that seems to be the case for you and we will see what we can 
+    do. Note that libmgf provides comprehensive error messages; please include
+    this information in bug reports or enhancement requests.
 \li Multiple USERxx entries; the current implementation ignores USER entries.
-\li General PMF support: most MGFp testing has been done on MS/MS ion search
+\li General PMF support: most libmgf testing has been done on MS/MS ion search
     data. Hence, it is possible that valid PMF constructs are not
     recognized. If that is the case, please contact the developers and we will
     attempt to fix issues as quickly as possible.
