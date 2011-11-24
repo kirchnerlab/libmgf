@@ -1,5 +1,12 @@
 --[ README ]------------------------------------------------
 
+1. Resources
+
+    The libmgf website is located at 
+        http://kirchnerlab.github.com/libmgf
+
+2. Notes
+
 This is a flex/bison-C++ parser. The MGF grammar is located
 in Parser.ypp, the scanner configuration in Scanner.l.
 The code is based on the basic template provided by Timo 
@@ -14,7 +21,6 @@ MGF grammar but getting rid of depending on bison/flex availability),
 the scanner and parser are pre-generated. This should in general not 
 be a problem.
 
-If you run into problems and manage to solve them, please send 
-patches to
-    Marc Kirchner <firstname.lastname@childrens.harvard.edu>
+If you run into problems and manage to solve them, please consider
+contributing your work.
 
