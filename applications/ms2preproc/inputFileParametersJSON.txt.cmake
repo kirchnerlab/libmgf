@@ -6,7 +6,7 @@
             "param": "2"             
         },
         {
-            "filterIdentifier": "MgfFileReaderFilter",
+            "filterIdentifier": "MgfFileReaderFilter1",
             "paramIdentifier": "infilename",
             "param": "numberformats.mgf"             
         },

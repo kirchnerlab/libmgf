@@ -41,6 +41,7 @@
 #include <libpipe/rtc/SharedData.hpp>
 #include <libpipe/rtc/Pipeline.hpp>
 #include <libpipe/rtc/PipelineLoader.hpp>
+#include <libpipe/utilities/Parameters.hpp>
 #include <boost/shared_ptr.hpp>
 
 // #define DEBUG
@@ -96,6 +97,8 @@ class MgfFileReader : public libpipe::rtc::Algorithm
 
         void update(libpipe::Request& req)
         {
+            infilename_ = parameters_.get<std::string>("infilename");
+            trace_ = parameters_.get<bool>("verbose");
 
             boost::shared_ptr<libpipe::rtc::SharedData<mgf::MgfFile> > mgfInputFile =
                     boost::dynamic_pointer_cast<
@@ -133,8 +136,6 @@ class MgfFileReader : public libpipe::rtc::Algorithm
         MgfFileReader() :
                 libpipe::rtc::Algorithm()
         {
-            infilename_ = parameters_.get<std::string>("infilename");
-            //trace_ = parameters_.get<bool>("verbose");
             ports_["MGFInputFile"] = boost::make_shared<
                     libpipe::rtc::SharedData<mgf::MgfFile> >(new mgf::MgfFile);
         }
@@ -165,6 +166,7 @@ class TopXAlgorithm : public libpipe::rtc::Algorithm
 
         void update(libpipe::Request& req)
         {
+            x_ = parameters_.get<unsigned int>("top");
 
             boost::shared_ptr<libpipe::rtc::SharedData<mgf::MgfFile> > mgfInputFile =
                     boost::dynamic_pointer_cast<
@@ -191,12 +193,8 @@ class TopXAlgorithm : public libpipe::rtc::Algorithm
         TopXAlgorithm() :
                 libpipe::rtc::Algorithm()
         {
-            x_=2;
-            //x_ = parameters_.get<unsigned int>("top");
             ports_["MGFInputFile"] = boost::make_shared<
                     libpipe::rtc::SharedData<mgf::MgfFile> >();
-
-
         }
 
         template<class In, class Out, class Comp>
@@ -596,7 +594,7 @@ int main(int argc, char* argv[])
             libpipe::rtc::Pipeline pipeline;
             try {
                 libpipe::rtc::PipelineLoader loader(inputFiles);
-//                pipeline = loader.getPipeline();
+                pipeline = loader.getPipeline();
             } catch (libpipe::utilities::Exception& e) {
                 std::cerr << e.what() << std::endl;
             } catch(std::exception& e){
