@@ -1,98 +1,26 @@
 {
     "connections": [
         {
-            "filterName": "Lowercase",
-            "identifier": "LowercaseFilter",
+            "filterName": "TopXFilter1",
+            "identifier": "TopXFilter",
             "precursors": [
                 {
-                    "precursorName": "Combiner"
+                    "precursorName": "MgfFileReaderFilter1"
                 }
             ],
             "ports": [
                 {
-                    "filterName": "Combiner",
-                    "portNameOfFilter": "StringOutput",
-                    "portNameOfThis": "StringInput"
+                    "filterName": "MgfFileReaderFilter1",
+                    "portNameOfFilter": "MGFInputFile",
+                    "portNameOfThis": "MGFInputFile"
                 }
             ]
         },
         {
-            "filterName": "Source",
-            "identifier": "SourceFilter",
+            "filterName": "MgfFileReaderFilter1",
+            "identifier": "MgfFileReaderFilter",
             "precursors": [],
             "ports": []
-        },
-        {
-            "filterName": "Uppercase",
-            "identifier": "UppercaseFilter",
-            "precursors": [
-                {
-                    "precursorName": "Source"
-                }
-            ],
-            "ports": [
-                {
-                    "filterName": "Source",
-                    "portNameOfFilter": "StringOutput",
-                    "portNameOfThis": "StringInput"
-                }
-            ]
-        },
-        {
-            "filterName": "ROTDecrypter",
-            "identifier": "ROTFilter",
-            "precursors": [
-                {
-                    "precursorName": "Uppercase"
-                }
-            ],
-            "ports": [
-                {
-                    "filterName": "Uppercase",
-                    "portNameOfFilter": "StringOutput",
-                    "portNameOfThis": "StringInput"
-                }
-            ]
-        },
-        {
-            "filterName": "ROTDecrypter1",
-            "identifier": "ROTFilter",
-            "precursors": [
-                {
-                    "precursorName": "ROTDecrypter"
-                }
-            ],
-            "ports": [
-                {
-                    "filterName": "ROTDecrypter",
-                    "portNameOfFilter": "StringOutput",
-                    "portNameOfThis": "StringInput"
-                }
-            ]
-        },
-        {
-            "filterName": "Combiner",
-            "identifier": "CombinerFilter",
-            "precursors": [
-                {
-                    "precursorName": "ROTDecrypter"
-                },
-                {
-                    "precursorName": "ROTDecrypter1"
-                }
-            ],
-            "ports": [
-                {
-                    "filterName": "ROTDecrypter",
-                    "portNameOfFilter": "StringOutput",
-                    "portNameOfThis": "StringInput1"
-                },
-                {
-                    "filterName": "ROTDecrypter1",
-                    "portNameOfFilter": "StringOutput",
-                    "portNameOfThis": "StringInput2"
-                }
-            ]
         }
     ]
 }

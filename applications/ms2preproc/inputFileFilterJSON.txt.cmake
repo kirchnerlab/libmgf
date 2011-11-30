@@ -1,28 +1,13 @@
 {
     "filters": [
         {
-            "filterIdentifier": "LowercaseFilter",
-            "algorithmName": "LowercaseAlgorithm",
+            "filterIdentifier": "MgfFileReaderFilter",
+            "algorithmName": "MgfFileReader",
             "managerName": "MangerRTC"
         },
         {
-            "filterIdentifier": "SourceFilter",
-            "algorithmName": "Source",
-            "managerName": "MangerRTC"
-        },
-        {
-            "filterIdentifier": "UppercaseFilter",
-            "algorithmName": "UppercaseAlgorithm",
-            "managerName": "MangerRTC"
-        },
-        {
-            "filterIdentifier": "ROTFilter",
-            "algorithmName": "ROT13Algorithm",
-            "managerName": "MangerRTC"
-        },
-        {
-            "filterIdentifier": "CombinerFilter",
-            "algorithmName": "CombineAlgorithm",
+            "filterIdentifier": "TopXFilter",
+            "algorithmName": "TopXAlgorithm",
             "managerName": "MangerRTC"
         }
     ]
