@@ -7,8 +7,6 @@ INCLUDE_DIRECTORIES(
     ${CMAKE_CURRENT_SOURCE_DIR}
 )
 
-   # message("${LIBPIPE_INCLUDE_DIR}")
-   # message("${LIBPIPE_LIBRARIES}")
 #############################################################################
 # require boost and libpipe
 #############################################################################
@@ -35,4 +33,26 @@ IF(Boost_PROGRAM_OPTIONS_FOUND)
 ELSE(Boost_PROGRAM_OPTIONS_FOUND)
     MESSAGE(STATUS "Could not find BOOST program_options. Skipping ${CMAKE_CURRENT_SOURCE_DIR}.")
 ENDIF(Boost_PROGRAM_OPTIONS_FOUND)
+
+CONFIGURE_FILE(${MGF_SOURCE_DIR}/applications/ms2preproc/inputFileFilterJSON.txt.cmake
+    ${MGF_BINARY_DIR}/applications/ms2preproc/inputFileFilterJSON.txt
+    @ONLY IMMEDIATE
+    )
+    
+CONFIGURE_FILE(${MGF_SOURCE_DIR}/applications/ms2preproc/inputFilePipelineJSON.txt.cmake
+    ${MGF_BINARY_DIR}/applications/ms2preproc/inputFilePipelineJSON.txt
+    @ONLY IMMEDIATE
+    )        
+    
+CONFIGURE_FILE(${MGF_SOURCE_DIR}/applications/ms2preproc/inputFileConnectionJSON.txt.cmake
+    ${MGF_BINARY_DIR}/applications/ms2preproc/inputFileConnectionJSON.txt
+    @ONLY IMMEDIATE
+    )
+    
+CONFIGURE_FILE(${MGF_SOURCE_DIR}/applications/ms2preproc/inputFileParametersJSON.txt.cmake
+    ${MGF_BINARY_DIR}/applications/ms2preproc/inputFileParametersJSON.txt
+    @ONLY IMMEDIATE
+    )  
+        
+
 

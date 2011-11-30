@@ -92,7 +92,7 @@ class MGFP_EXPORT Collection
         return c_.insert(pos, value);
     }
     virtual void insert(iterator pos, size_type n, const T& value) {
-        return c_.insert(pos, n, value);
+        c_.insert(pos, n, value);
     }
     template <class In> void insert(iterator pos, In begin, In end) {
         c_.insert(pos, begin, end);

@@ -72,6 +72,8 @@ struct LessThanAbundance
 
 namespace Ms2Preproc {
 
+
+
 class TopXAlgorithm : public libpipe::rtc::Algorithm{
 
     public:
@@ -236,8 +238,8 @@ class TopXInYRegions
                     double regionBegin = minMz + k*increment - 2.5;
                     regionBegin = regionBegin > minMz ? regionBegin : minMz;
                     double regionEnd =  minMz + (k+1)*increment + 2.5;
-                    In regionBeginIt = lower_bound(v.begin(), v.end(), regionBegin, massComp);
-                    In regionEndIt = upper_bound(v.begin(), v.end(), regionEnd, massComp);
+                    In regionBeginIt = std::lower_bound(v.begin(), v.end(), regionBegin, massComp);
+                    In regionEndIt = std::upper_bound(v.begin(), v.end(), regionEnd, massComp);
                     // run TopX on region
                     Out nout = topX(regionBeginIt, regionEndIt, out, abundanceComp);
 #ifdef DEBUG
@@ -287,8 +289,8 @@ class TopXInWindowsOfSizeZ
 #ifdef DEBUG
                 std::cerr << '#' << maxAbundanceMass - z_ << '-' << maxAbundanceMass + z_ << std::endl;
 #endif
-                In regionBegin = lower_bound(v.begin(), v.end(), maxAbundanceMass - z_, massComp);
-                In regionEnd = upper_bound(regionBegin, v.end(), maxAbundanceMass + z_, massComp);
+                In regionBegin = std::lower_bound(v.begin(), v.end(), maxAbundanceMass - z_, massComp);
+                In regionEnd = std::upper_bound(regionBegin, v.end(), maxAbundanceMass + z_, massComp);
                 // get TopX
                 out = topX(regionBegin, regionEnd, out, abundanceComp);
                 // erase entries in window
