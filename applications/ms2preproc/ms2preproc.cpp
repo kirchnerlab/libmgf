@@ -2,6 +2,7 @@
  * ms2preproc.cpp
  *
  * Copyright (c) 2009-2011 Marc Kirchner
+ *                    2011 David Sichau
  *
  * This file is part of libmgf.
  *
@@ -34,36 +35,129 @@
 #include <mgf/Driver.h>
 #include <mgf/Context.h>
 #include <mgf/MgfFile.h>
+#include <libpipe/rtc/Algorithm.hpp>
+#include <libpipe/rtc/AlgorithmFactory.hpp>
+#include <libpipe/rtc/SharedData.hpp>
+#include <libpipe/rtc/Pipeline.hpp>
+#include <boost/shared_ptr.hpp>
+
 
 // #define DEBUG
 
 struct LessThanMass
 {
-    bool operator()(const mgf::MassAbundancePair& lhs, const mgf::MassAbundancePair& rhs) {
-        return lhs.first < rhs.first;
-    }
-    bool operator()(const double lhs, const mgf::MassAbundancePair& rhs) {
-        return lhs < rhs.first;
-    }
-    bool operator()(const mgf::MassAbundancePair& lhs, const double rhs) {
-        return lhs.first < rhs;
-    }
+        bool operator()(const mgf::MassAbundancePair& lhs, const mgf::MassAbundancePair& rhs) {
+            return lhs.first < rhs.first;
+        }
+        bool operator()(const double lhs, const mgf::MassAbundancePair& rhs) {
+            return lhs < rhs.first;
+        }
+        bool operator()(const mgf::MassAbundancePair& lhs, const double rhs) {
+            return lhs.first < rhs;
+        }
 };
 
-struct LessThanAbundance 
+struct LessThanAbundance
 {
-    bool operator()(const mgf::MassAbundancePair& lhs, const mgf::MassAbundancePair& rhs) {
-        return lhs.second < rhs.second;
-    }
-    bool operator()(const double lhs, const mgf::MassAbundancePair& rhs) {
-        return lhs < rhs.second;
-    }
-    bool operator()(const mgf::MassAbundancePair& lhs, const double rhs) {
-        return lhs.second < rhs;
-    }
+        bool operator()(const mgf::MassAbundancePair& lhs, const mgf::MassAbundancePair& rhs) {
+            return lhs.second < rhs.second;
+        }
+        bool operator()(const double lhs, const mgf::MassAbundancePair& rhs) {
+            return lhs < rhs.second;
+        }
+        bool operator()(const mgf::MassAbundancePair& lhs, const double rhs) {
+            return lhs.second < rhs;
+        }
 };
 
 namespace Ms2Preproc {
+
+class TopXAlgorithm : public libpipe::rtc::Algorithm{
+
+    public:
+        static libpipe::rtc::Algorithm* create(){
+            return new TopXAlgorithm;
+        }
+
+        virtual ~TopXAlgorithm(){}
+
+        void update(libpipe::Request& req){
+
+            boost::shared_ptr<libpipe::rtc::SharedData<mgf::MgfFile> > mgfInputFile =
+                    boost::dynamic_pointer_cast<
+                            libpipe::rtc::SharedData<mgf::MgfFile> >(
+                        this->getPort("MGFInputFile"));
+            LIBPIPE_PIPELINE_TRACE(req, "Starting TopX");
+
+            for (mgf::MgfFile::iterator i = mgfInputFile->get()->begin(); i != mgfInputFile->get()->end(); ++i) {
+                mgf::MgfSpectrum::iterator trash = run(i->begin(), i->end(), i->begin(), LessThanAbundance());
+                i->erase(trash, i->end());
+                std::sort(i->begin(), i->end(), LessThanMass());
+            }
+            LIBPIPE_PIPELINE_TRACE(req, "TopX is finished");
+        }
+
+    protected:
+
+        unsigned int x_;
+
+    private:
+        TopXAlgorithm():libpipe::rtc::Algorithm(){
+            x_ = parameters_.get<unsigned int>("top");
+            ports_["MGFInputFile"] = boost::make_shared<
+                    libpipe::rtc::SharedData<mgf::MgfFile> >();
+
+        }
+
+        template<class In, class Out, class Comp>
+        Out run(In begin, In end, Out out, Comp comp) {
+            typename In::difference_type size = std::distance(begin, end);
+#ifdef DEBUG
+            if (size > 0) {
+                std::cerr << "range " << begin->first << " - " << (end-1)->first << std::endl;
+            }
+#endif
+
+            // FIXME: Make the static_cast in the next step safe.
+            if (static_cast<unsigned int>(size) > x_) {
+                // sort a copy
+                std::vector<typename In::value_type> v(begin, end);
+                std::sort(v.begin(), v.end(), comp);
+                std::copy(v.rbegin(), v.rbegin()+x_, out);
+#ifdef DEBUG
+                if (size > 0) {
+                    for (typename std::vector<typename In::value_type>::iterator i = v.end()-x_; i != v.end() ; ++i) {
+                        std::cerr << '\t' << i->first << " " << i->second << std::endl;
+                    }
+                }
+#endif
+                std::advance(out, x_);
+            } else {
+#ifdef DEBUG
+                if (size > 0) {
+                    for (In i = begin; i != end ; ++i) {
+                        std::cerr << '\t' << i->first << " " << i->second << std::endl;
+                    }
+                }
+#endif
+                // accept all peaks
+                std::copy(begin, end, out);
+                std::advance(out, size);
+            }
+            return out;
+        }
+
+        static const bool registerLoader()
+        {
+            std::string ids = "TopXAlgorithm";
+            return libpipe::rtc::AlgorithmFactory::instance().registerType(ids,
+                                                                           TopXAlgorithm::create);
+        }
+        /// true is class is registered in Algorithm Factory
+        static const bool registered_;
+};
+const bool TopXAlgorithm::registered_ = registerLoader();
+
 
 
 /** Functor to determine the top X peaks in a given set of peaks.
@@ -78,9 +172,9 @@ class TopX
         Out operator()(In begin, In end, Out out, Comp comp) {
             typename In::difference_type size = std::distance(begin, end);
 #ifdef DEBUG
-if (size > 0) {
-    std::cerr << "range " << begin->first << " - " << (end-1)->first << std::endl;
-}
+            if (size > 0) {
+                std::cerr << "range " << begin->first << " - " << (end-1)->first << std::endl;
+            }
 #endif
 
             // FIXME: Make the static_cast in the next step safe.
@@ -90,20 +184,20 @@ if (size > 0) {
                 std::sort(v.begin(), v.end(), comp);
                 std::copy(v.rbegin(), v.rbegin()+x_, out);
 #ifdef DEBUG
-if (size > 0) {
-    for (typename std::vector<typename In::value_type>::iterator i = v.end()-x_; i != v.end() ; ++i) {
-        std::cerr << '\t' << i->first << " " << i->second << std::endl;
-    }
-}
+                if (size > 0) {
+                    for (typename std::vector<typename In::value_type>::iterator i = v.end()-x_; i != v.end() ; ++i) {
+                        std::cerr << '\t' << i->first << " " << i->second << std::endl;
+                    }
+                }
 #endif
                 std::advance(out, x_);
             } else {
 #ifdef DEBUG
-if (size > 0) {
-    for (In i = begin; i != end ; ++i) {
-        std::cerr << '\t' << i->first << " " << i->second << std::endl;
-    }
-}
+                if (size > 0) {
+                    for (In i = begin; i != end ; ++i) {
+                        std::cerr << '\t' << i->first << " " << i->second << std::endl;
+                    }
+                }
 #endif
                 // accept all peaks
                 std::copy(begin, end, out);
@@ -136,7 +230,7 @@ class TopXInYRegions
             if (increment > 2.5) {
                 for (unsigned int k = 0; k < y_; ++k) {
 #ifdef DEBUG
-std::cerr << '#' <<  minMz + k*increment - 2.5 << " - " <<  minMz + (k+1)*increment + 2.5 << std::endl;
+                    std::cerr << '#' <<  minMz + k*increment - 2.5 << " - " <<  minMz + (k+1)*increment + 2.5 << std::endl;
 #endif
                     // iterate over all regions and apply TopX
                     double regionBegin = minMz + k*increment - 2.5;
@@ -147,7 +241,7 @@ std::cerr << '#' <<  minMz + k*increment - 2.5 << " - " <<  minMz + (k+1)*increm
                     // run TopX on region
                     Out nout = topX(regionBeginIt, regionEndIt, out, abundanceComp);
 #ifdef DEBUG
-std::cerr << "step " << k << " of " << y_ << ": topX returned " << nout-out << " peaks." << std::endl;
+                    std::cerr << "step " << k << " of " << y_ << ": topX returned " << nout-out << " peaks." << std::endl;
 #endif
                     out = nout;
 
@@ -155,7 +249,7 @@ std::cerr << "step " << k << " of " << y_ << ": topX returned " << nout-out << "
             } else {
                 Out nout = topX(v.begin(), v.end(), out, abundanceComp);
 #ifdef DEBUG
-std::cerr << "increment too small: topX returned " << nout-out << " peaks." << std::endl;
+                std::cerr << "increment too small: topX returned " << nout-out << " peaks." << std::endl;
 #endif
                 out = nout;
             }
@@ -173,7 +267,7 @@ class TopXInWindowsOfSizeZ
         TopXInWindowsOfSizeZ(unsigned int x, double z) : x_(x), z_(z)
         {
 #ifdef DEBUG
-std::cerr << "got: " << z_ << std::endl;
+            std::cerr << "got: " << z_ << std::endl;
 #endif
         }
 
@@ -191,7 +285,7 @@ std::cerr << "got: " << z_ << std::endl;
                 std::sort(v.begin(), v.end(), massComp);
                 // define window
 #ifdef DEBUG
-std::cerr << '#' << maxAbundanceMass - z_ << '-' << maxAbundanceMass + z_ << std::endl;
+                std::cerr << '#' << maxAbundanceMass - z_ << '-' << maxAbundanceMass + z_ << std::endl;
 #endif
                 In regionBegin = lower_bound(v.begin(), v.end(), maxAbundanceMass - z_, massComp);
                 In regionEnd = upper_bound(regionBegin, v.end(), maxAbundanceMass + z_, massComp);
@@ -284,29 +378,29 @@ int main(int argc, char* argv[]) {
         // Declare the supported options.
         // FIXME: add version info.
         po::options_description desc("MS/MS preprocessor executable, Copyright 2009-10 Marc Kirchner.\n"
-            "Please cite as:\n"
-            " Renard BY, Kirchner M, Monigatti F, Invanov AR, Rappsilber J,\n"
-            " Winter D, Steen JAJ, Hamprecht FA, Steen H, When Less Can Yield\n"
-            " More - Computational Preprocessing of MS/MS Spectra for\n"
-            " Peptide Identification, Proteomics (2009).\n\nValid arguments are"
-            );
+                                     "Please cite as:\n"
+                                     " Renard BY, Kirchner M, Monigatti F, Invanov AR, Rappsilber J,\n"
+                                     " Winter D, Steen JAJ, Hamprecht FA, Steen H, When Less Can Yield\n"
+                                     " More - Computational Preprocessing of MS/MS Spectra for\n"
+                                     " Peptide Identification, Proteomics (2009).\n\nValid arguments are"
+                                     );
         unsigned int precision(0);
         std::string format;
         desc.add_options()
-            ("help,h", "produce this help message")
-            ("infile,i", po::value<std::string>(), "name of the MGF/DTA input file")
-            ("outfile,o", po::value<std::string>(), "name of the MGF output file")
-            ("format,f", po::value<std::string>(&format)->default_value(std::string("mgf")), "input format: (dta|mgf)")
-            ("top,X", po::value<int>(), "number of highest intensity ions to keep")
-            ("nregions,Y", po::value<int>(), "number of equal-sized regions the MS/MS spectrum is split into")
-            ("winsize,Z", po::value<double>(), "m/z window (+/-Z) around high-intensity peaks in which the top X are selected")
-            ("verbose,v", "toggle verbose output")
-            ("precision,p", po::value<unsigned int>(&precision)->default_value(4), "precision of output")
-        ;
+                ("help,h", "produce this help message")
+                ("infile,i", po::value<std::string>(), "name of the MGF/DTA input file")
+                ("outfile,o", po::value<std::string>(), "name of the MGF output file")
+                ("format,f", po::value<std::string>(&format)->default_value(std::string("mgf")), "input format: (dta|mgf)")
+                ("top,X", po::value<int>(), "number of highest intensity ions to keep")
+                ("nregions,Y", po::value<int>(), "number of equal-sized regions the MS/MS spectrum is split into")
+                ("winsize,Z", po::value<double>(), "m/z window (+/-Z) around high-intensity peaks in which the top X are selected")
+                ("verbose,v", "toggle verbose output")
+                ("precision,p", po::value<unsigned int>(&precision)->default_value(4), "precision of output")
+                ;
 
         po::variables_map vm;
         po::store(po::parse_command_line(argc, argv, desc), vm);
-        po::notify(vm);    
+        po::notify(vm);
 
         if (vm.count("help")) {
             std::cerr << desc << std::endl;
@@ -316,22 +410,22 @@ int main(int argc, char* argv[]) {
         // input sanity checking
         if (!(vm.count("infile") && vm.count("outfile"))) {
             std::cerr << desc << std::endl << "ERROR: "
-            "Need 'infile' and 'outfile' arguments." << std::endl;
+                         "Need 'infile' and 'outfile' arguments." << std::endl;
             return 1;
         }
         if (!(vm.count("top"))) {
             std::cerr << desc << std::endl << "ERROR: "
-            "Need 'top,X' argument." << std::endl;
+                         "Need 'top,X' argument." << std::endl;
             return 1;
         }
-		if (vm.count("nregions") > 0 && vm.count("winsize") > 0) {
+        if (vm.count("nregions") > 0 && vm.count("winsize") > 0) {
             std::cerr << desc << std::endl << "ERROR: "
-            "Parameters 'nregions' and 'winsize' cannot be specified together." << std::endl;
+                         "Parameters 'nregions' and 'winsize' cannot be specified together." << std::endl;
             return 1;
         }
         if (!(format == "mgf" || format == "dta")) {
             std::cerr << desc << std::endl << "ERROR: "
-            "Format must be one of 'mgf' or 'dta'." << std::endl;
+                         "Format must be one of 'mgf' or 'dta'." << std::endl;
             return 1;
         }
         // logging/debug output
@@ -419,7 +513,7 @@ int main(int argc, char* argv[]) {
                 // Top X
                 Ms2Preproc::TopX topX(static_cast<unsigned int>(x));
                 for (Iterator i = s.begin(); i != s.end(); ++i) {
-                     mgf::MgfSpectrum::iterator trash = topX(i->begin(), i->end(), i->begin(), LessThanAbundance());
+                    mgf::MgfSpectrum::iterator trash = topX(i->begin(), i->end(), i->begin(), LessThanAbundance());
                     i->erase(trash, i->end());
                     std::sort(i->begin(), i->end(), LessThanMass());
                 }
