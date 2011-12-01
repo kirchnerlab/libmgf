@@ -9,6 +9,11 @@
             "filterIdentifier": "TopXFilter",
             "algorithmName": "TopXAlgorithm",
             "managerName": "MangerRTC"
+        },
+        {
+            "filterIdentifier": "MgfFilePrinterFilter",
+            "algorithmName": "MgfFilePrinter",
+            "managerName": "MangerRTC"
         }
     ]
 }

@@ -21,6 +21,23 @@
             "identifier": "MgfFileReaderFilter",
             "precursors": [],
             "ports": []
+        },
+        {
+            "filterName": "MgfFilePrinterFilter1",
+            "identifier": "MgfFilePrinterFilter",
+            "precursors": [
+                {
+                    "precursorName": "TopXFilter1"
+                }
+            ],
+            "ports": [
+                {
+                    "filterName": "TopXFilter1",
+                    "portNameOfFilter": "MGFParsedFile",
+                    "portNameOfThis": "MGFParseFile"
+                }
+            ]
         }
+        
     ]
 }

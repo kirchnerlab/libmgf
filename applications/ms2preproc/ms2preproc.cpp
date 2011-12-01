@@ -97,8 +97,9 @@ class MgfFileReader : public libpipe::rtc::Algorithm
 
         void update(libpipe::Request& req)
         {
-            infilename_ = parameters_.get<std::string>("infilename");
-            trace_ = parameters_.get<bool>("verbose");
+            std::string infilename = parameters_.get<std::string>(
+                "infilename");
+            bool trace = parameters_.get<bool>("verbose");
 
             boost::shared_ptr<libpipe::rtc::SharedData<mgf::MgfFile> > mgfInputFile =
                     boost::dynamic_pointer_cast<
@@ -106,13 +107,15 @@ class MgfFileReader : public libpipe::rtc::Algorithm
                         this->getPort("MGFInputFile"));
             LIBPIPE_PIPELINE_TRACE(req, "Starting Reading MGF File");
 
+            mgfInputFile->lock();
+
             mgf::MgfFile s;
             mgf::Driver driver(*mgfInputFile->get());
-            driver.trace_parsing = trace_;
-            driver.trace_scanning = trace_;
+            driver.trace_parsing = trace;
+            driver.trace_scanning = trace;
 
             // I/O: input
-            std::ifstream in(infilename_.c_str());
+            std::ifstream in(infilename.c_str());
             if (!in.good()) {
                 libpipe_fail("error in reading input file");
             }
@@ -122,15 +125,12 @@ class MgfFileReader : public libpipe::rtc::Algorithm
             if (!result) {
                 libpipe_fail("error in parsing input file to memory");
             }
+            mgfInputFile->unlock();
 
             LIBPIPE_PIPELINE_TRACE(req, "MGF File successful read.");
         }
 
     protected:
-
-        std::string infilename_;
-
-        bool trace_;
 
     private:
         MgfFileReader() :
@@ -151,6 +151,73 @@ class MgfFileReader : public libpipe::rtc::Algorithm
 };
 const bool MgfFileReader::registered_ = registerLoader();
 
+class MgfFilePrinter : public libpipe::rtc::Algorithm
+{
+
+    public:
+        static libpipe::rtc::Algorithm* create()
+        {
+            return new MgfFilePrinter;
+        }
+
+        virtual ~MgfFilePrinter()
+        {
+        }
+
+        void update(libpipe::Request& req)
+        {
+
+            boost::shared_ptr<libpipe::rtc::SharedData<mgf::MgfFile> > mgfOutputFile =
+                    boost::dynamic_pointer_cast<
+                            libpipe::rtc::SharedData<mgf::MgfFile> >(
+                        this->getPort("MGFParseFile"));
+            LIBPIPE_PIPELINE_TRACE(req, "Starting writting MGF File");
+
+            std::string outfilename = parameters_.get<std::string>("outfile");
+            std::ofstream out(outfilename.c_str());
+            if (!out.good()) {
+                libpipe_fail("Error in generating output file");
+            }
+            out
+                    << "# MGF created using ms2preproc, (c) 2009 Marc Kirchner.\n"
+                    << "# This program accompanies Renard BY, Kirchner M, Monigatti F, Invanov AR,\n"
+                    << "# Rappsilber J, Winter D, Steen JAJ, Hamprecht FA, Steen H, When Less\n"
+                    << "# Can Yield More - Computational Preprocessing of MS/MS Spectra for\n"
+                    << "# Peptide Identification, Proteomics (2009).\n";
+
+            out << std::endl;
+
+            out.setf(std::ios_base::fixed, std::ios_base::floatfield);
+            out.precision(parameters_.get<unsigned int>("precision"));
+
+            mgfOutputFile->lock();
+            out << *mgfOutputFile->get() << std::endl;
+            mgfOutputFile->unlock();
+
+            LIBPIPE_PIPELINE_TRACE(req, "MGF File successful written.");
+        }
+
+    protected:
+
+    private:
+        MgfFilePrinter() :
+                libpipe::rtc::Algorithm()
+        {
+            ports_["MGFParseFile"] = boost::make_shared<
+                    libpipe::rtc::SharedData<mgf::MgfFile> >();
+        }
+
+        static const bool registerLoader()
+        {
+            std::string ids = "MgfFilePrinter";
+            return libpipe::rtc::AlgorithmFactory::instance().registerType(ids,
+                MgfFilePrinter::create);
+        }
+        /// true is class is registered in Algorithm Factory
+        static const bool registered_;
+};
+const bool MgfFilePrinter::registered_ = registerLoader();
+
 class TopXAlgorithm : public libpipe::rtc::Algorithm
 {
 
@@ -166,13 +233,19 @@ class TopXAlgorithm : public libpipe::rtc::Algorithm
 
         void update(libpipe::Request& req)
         {
-            x_ = parameters_.get<unsigned int>("top");
 
             boost::shared_ptr<libpipe::rtc::SharedData<mgf::MgfFile> > mgfInputFile =
                     boost::dynamic_pointer_cast<
                             libpipe::rtc::SharedData<mgf::MgfFile> >(
                         this->getPort("MGFInputFile"));
+            boost::shared_ptr<libpipe::rtc::SharedData<mgf::MgfFile> > mgfParsedFile =
+                    boost::dynamic_pointer_cast<
+                            libpipe::rtc::SharedData<mgf::MgfFile> >(
+                        this->getPort("MGFParsedFile"));
             LIBPIPE_PIPELINE_TRACE(req, "Starting TopX");
+
+            mgfInputFile->lock();
+            mgfParsedFile->lock();
 
             for (mgf::MgfFile::iterator i = mgfInputFile->get()->begin();
                     i != mgfInputFile->get()->end(); ++i) {
@@ -181,13 +254,17 @@ class TopXAlgorithm : public libpipe::rtc::Algorithm
                 i->erase(trash, i->end());
                 std::sort(i->begin(), i->end(), LessThanMass());
             }
+
+            mgfParsedFile->set(new mgf::MgfFile(*mgfInputFile->get()));
+
+            mgfParsedFile->unlock();
+            mgfInputFile->unlock();
+
             LIBPIPE_PIPELINE_TRACE(req, "TopX is finished");
 
         }
 
     protected:
-
-        unsigned int x_;
 
     private:
         TopXAlgorithm() :
@@ -195,40 +272,24 @@ class TopXAlgorithm : public libpipe::rtc::Algorithm
         {
             ports_["MGFInputFile"] = boost::make_shared<
                     libpipe::rtc::SharedData<mgf::MgfFile> >();
+            ports_["MGFParsedFile"] = boost::make_shared<
+                    libpipe::rtc::SharedData<mgf::MgfFile> >(new mgf::MgfFile);
         }
 
         template<class In, class Out, class Comp>
         Out run(In begin, In end, Out out, Comp comp)
         {
             typename In::difference_type size = std::distance(begin, end);
-#ifdef DEBUG
-            if (size > 0) {
-                std::cerr << "range " << begin->first << " - " << (end-1)->first << std::endl;
-            }
-#endif
+            unsigned int x = parameters_.get<unsigned int>("top");
 
             // FIXME: Make the static_cast in the next step safe.
-            if (static_cast<unsigned int>(size) > x_) {
+            if (static_cast<unsigned int>(size) > x) {
                 // sort a copy
                 std::vector<typename In::value_type> v(begin, end);
                 std::sort(v.begin(), v.end(), comp);
-                std::copy(v.rbegin(), v.rbegin() + x_, out);
-#ifdef DEBUG
-                if (size > 0) {
-                    for (typename std::vector<typename In::value_type>::iterator i = v.end()-x_; i != v.end(); ++i) {
-                        std::cerr << '\t' << i->first << " " << i->second << std::endl;
-                    }
-                }
-#endif
-                std::advance(out, x_);
+                std::copy(v.rbegin(), v.rbegin() + x, out);
+                std::advance(out, x);
             } else {
-#ifdef DEBUG
-                if (size > 0) {
-                    for (In i = begin; i != end; ++i) {
-                        std::cerr << '\t' << i->first << " " << i->second << std::endl;
-                    }
-                }
-#endif
                 // accept all peaks
                 std::copy(begin, end, out);
                 std::advance(out, size);
@@ -584,7 +645,6 @@ int main(int argc, char* argv[])
         //
         if (format == "mgf") {
 
-
             std::map<std::string, std::string> inputFiles;
             inputFiles["FilterInput"] = "inputFileFilterJSON.txt";
             inputFiles["ConnectionInput"] = "inputFileConnectionJSON.txt";
@@ -597,8 +657,8 @@ int main(int argc, char* argv[])
                 pipeline = loader.getPipeline();
             } catch (libpipe::utilities::Exception& e) {
                 std::cerr << e.what() << std::endl;
-            } catch(std::exception& e){
-                std::cerr<<"bla "<<e.what()<<std::endl;
+            } catch (std::exception& e) {
+                std::cerr << "bla " << e.what() << std::endl;
             }
 
             try {
@@ -633,17 +693,17 @@ int main(int argc, char* argv[])
 //            }
 
             // set info
-            out
-                    << "# MGF created using ms2preproc, (c) 2009 Marc Kirchner.\n"
-                    << "# This program accompanies Renard BY, Kirchner M, Monigatti F, Invanov AR,\n"
-                    << "# Rappsilber J, Winter D, Steen JAJ, Hamprecht FA, Steen H, When Less\n"
-                    << "# Can Yield More - Computational Preprocessing of MS/MS Spectra for\n"
-                    << "# Peptide Identification, Proteomics (2009).\n"
-                    << "# Command: " << argv[0];
-            for (int i = 1; i < argc; ++i) {
-                out << " " << argv[i];
-            }
-            out << "." << std::endl;
+//            out
+//                    << "# MGF created using ms2preproc, (c) 2009 Marc Kirchner.\n"
+//                    << "# This program accompanies Renard BY, Kirchner M, Monigatti F, Invanov AR,\n"
+//                    << "# Rappsilber J, Winter D, Steen JAJ, Hamprecht FA, Steen H, When Less\n"
+//                    << "# Can Yield More - Computational Preprocessing of MS/MS Spectra for\n"
+//                    << "# Peptide Identification, Proteomics (2009).\n"
+//                    << "# Command: " << argv[0];
+//            for (int i = 1; i < argc; ++i) {
+//                out << " " << argv[i];
+//            }
+//            out << "." << std::endl;
 
             // get a handle to the data
             typedef mgf::MgfFile::iterator Iterator;
@@ -694,9 +754,9 @@ int main(int argc, char* argv[])
 //                    std::sort(i->begin(), i->end(), LessThanMass());
 //                }
             }
-            out.setf(std::ios_base::fixed, std::ios_base::floatfield);
-            out.precision(precision);
-            out << s << std::endl;
+//            out.setf(std::ios_base::fixed, std::ios_base::floatfield);
+//            out.precision(precision);
+//            out << s << std::endl;
         } else if (format == "dta") {
             dta::DtaParser parser;
             dta::DtaSpectrum s;
