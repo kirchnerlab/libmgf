@@ -8,7 +8,7 @@
         {
             "filterIdentifier": "TopXInWindowsOfSizeZFilter1",
             "paramIdentifier": "winsize",
-            "param": "3.0"             
+            "param": "1000000000"             
         },
         {
             "filterIdentifier": "TopXInYRegionsFilter1",
