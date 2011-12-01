@@ -1,6 +1,16 @@
 {
     "parameters": [
         {
+            "filterIdentifier": "TopXInWindowsOfSizeZFilter1",
+            "paramIdentifier": "top",
+            "param": "2"             
+        },
+        {
+            "filterIdentifier": "TopXInWindowsOfSizeZFilter1",
+            "paramIdentifier": "winsize",
+            "param": "3.0"             
+        },
+        {
             "filterIdentifier": "TopXInYRegionsFilter1",
             "paramIdentifier": "top",
             "param": "2"             
@@ -42,6 +52,16 @@
         },
         {
             "filterIdentifier": "MgfFilePrinterFilterTopXInYRegions",
+            "paramIdentifier": "outfile",
+            "param": "out2.mgf"             
+        },
+        {
+            "filterIdentifier": "MgfFilePrinterFilterTopXInWindowsOfSizeZ",
+            "paramIdentifier": "precision",
+            "param": "4"             
+        },
+        {
+            "filterIdentifier": "MgfFilePrinterFilterTopXInWindowsOfSizeZ",
             "paramIdentifier": "outfile",
             "param": "out2.mgf"             
         }

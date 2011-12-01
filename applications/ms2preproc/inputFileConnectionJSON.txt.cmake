@@ -33,6 +33,22 @@
             ]
         },
         {
+            "filterName": "TopXInWindowsOfSizeZFilter1",
+            "identifier": "TopXInWindowsOfSizeZFilter",
+            "precursors": [
+                {
+                    "precursorName": "MgfFileReaderFilter1"
+                }
+            ],
+            "ports": [
+                {
+                    "filterName": "MgfFileReaderFilter1",
+                    "portNameOfFilter": "MGFInputFile",
+                    "portNameOfThis": "MGFInputFile"
+                }
+            ]
+        },
+        {
             "filterName": "MgfFileReaderFilter1",
             "identifier": "MgfFileReaderFilter",
             "precursors": [],
@@ -65,6 +81,22 @@
             "ports": [
                 {
                     "filterName": "TopXInYRegionsFilter1",
+                    "portNameOfFilter": "MGFParsedFile",
+                    "portNameOfThis": "MGFParseFile"
+                }
+            ]
+        },
+        {
+            "filterName": "MgfFilePrinterFilterTopXInWindowsOfSizeZ",
+            "identifier": "MgfFilePrinterFilter",
+            "precursors": [
+                {
+                    "precursorName": "TopXInWindowsOfSizeZFilter1"
+                }
+            ],
+            "ports": [
+                {
+                    "filterName": "TopXInWindowsOfSizeZFilter1",
                     "portNameOfFilter": "MGFParsedFile",
                     "portNameOfThis": "MGFParseFile"
                 }

@@ -16,6 +16,11 @@
             "managerName": "MangerRTC"
         },
         {
+            "filterIdentifier": "TopXInWindowsOfSizeZFilter",
+            "algorithmName": "TopXInWindowsOfSizeZAlgorithm",
+            "managerName": "MangerRTC"
+        },
+        {
             "filterIdentifier": "MgfFilePrinterFilter",
             "algorithmName": "MgfFilePrinter",
             "managerName": "MangerRTC"
