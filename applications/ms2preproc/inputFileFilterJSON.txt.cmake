@@ -11,6 +11,11 @@
             "managerName": "MangerRTC"
         },
         {
+            "filterIdentifier": "TopXInYRegionsFilter",
+            "algorithmName": "TopXInYRegionsAlgorithm",
+            "managerName": "MangerRTC"
+        },
+        {
             "filterIdentifier": "MgfFilePrinterFilter",
             "algorithmName": "MgfFilePrinter",
             "managerName": "MangerRTC"

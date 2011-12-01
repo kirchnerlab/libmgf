@@ -1,7 +1,7 @@
 {
     "pipeline": [
         {
-            "filterName": "MgfFilePrinterFilter1",
+            "filterName": "MgfFilePrinterFilterTopXInYRegions",
             "requestType": "UPDATE",
             "requestRank": 1,
             "makeTrace": "true"

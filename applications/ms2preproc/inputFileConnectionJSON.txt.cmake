@@ -1,6 +1,22 @@
 {
     "connections": [
         {
+            "filterName": "TopXInYRegionsFilter1",
+            "identifier": "TopXInYRegionsFilter",
+            "precursors": [
+                {
+                    "precursorName": "MgfFileReaderFilter1"
+                }
+            ],
+            "ports": [
+                {
+                    "filterName": "MgfFileReaderFilter1",
+                    "portNameOfFilter": "MGFInputFile",
+                    "portNameOfThis": "MGFInputFile"
+                }
+            ]
+        },
+        {
             "filterName": "TopXFilter1",
             "identifier": "TopXFilter",
             "precursors": [
@@ -23,7 +39,7 @@
             "ports": []
         },
         {
-            "filterName": "MgfFilePrinterFilter1",
+            "filterName": "MgfFilePrinterFilterTopX",
             "identifier": "MgfFilePrinterFilter",
             "precursors": [
                 {
@@ -33,6 +49,22 @@
             "ports": [
                 {
                     "filterName": "TopXFilter1",
+                    "portNameOfFilter": "MGFParsedFile",
+                    "portNameOfThis": "MGFParseFile"
+                }
+            ]
+        },
+        {
+            "filterName": "MgfFilePrinterFilterTopXInYRegions",
+            "identifier": "MgfFilePrinterFilter",
+            "precursors": [
+                {
+                    "precursorName": "TopXInYRegionsFilter1"
+                }
+            ],
+            "ports": [
+                {
+                    "filterName": "TopXInYRegionsFilter1",
                     "portNameOfFilter": "MGFParsedFile",
                     "portNameOfThis": "MGFParseFile"
                 }

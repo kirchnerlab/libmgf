@@ -244,21 +244,21 @@ class TopXAlgorithm : public libpipe::rtc::Algorithm
                         this->getPort("MGFParsedFile"));
             LIBPIPE_PIPELINE_TRACE(req, "Starting TopX");
 
-            mgfInputFile->lock();
+            mgfInputFile->shared_lock();
             mgfParsedFile->lock();
+            // copy the file so that input is not changed.
+            mgfParsedFile->set(new mgf::MgfFile(*mgfInputFile->get()));
+            mgfInputFile->unlock();
 
-            for (mgf::MgfFile::iterator i = mgfInputFile->get()->begin();
-                    i != mgfInputFile->get()->end(); ++i) {
+            for (mgf::MgfFile::iterator i = mgfParsedFile->get()->begin();
+                    i != mgfParsedFile->get()->end(); ++i) {
                 mgf::MgfSpectrum::iterator trash = run(i->begin(), i->end(),
                     i->begin(), LessThanAbundance());
                 i->erase(trash, i->end());
                 std::sort(i->begin(), i->end(), LessThanMass());
             }
 
-            mgfParsedFile->set(new mgf::MgfFile(*mgfInputFile->get()));
-
             mgfParsedFile->unlock();
-            mgfInputFile->unlock();
 
             LIBPIPE_PIPELINE_TRACE(req, "TopX is finished");
 
@@ -307,6 +307,146 @@ class TopXAlgorithm : public libpipe::rtc::Algorithm
         static const bool registered_;
 };
 const bool TopXAlgorithm::registered_ = registerLoader();
+
+class TopXInYRegionsAlgorithm : public libpipe::rtc::Algorithm
+{
+
+    public:
+        static libpipe::rtc::Algorithm* create()
+        {
+            return new TopXInYRegionsAlgorithm;
+        }
+
+        virtual ~TopXInYRegionsAlgorithm()
+        {
+        }
+
+        void update(libpipe::Request& req)
+        {
+
+            boost::shared_ptr<libpipe::rtc::SharedData<mgf::MgfFile> > mgfInputFile =
+                    boost::dynamic_pointer_cast<
+                            libpipe::rtc::SharedData<mgf::MgfFile> >(
+                        this->getPort("MGFInputFile"));
+            boost::shared_ptr<libpipe::rtc::SharedData<mgf::MgfFile> > mgfParsedFile =
+                    boost::dynamic_pointer_cast<
+                            libpipe::rtc::SharedData<mgf::MgfFile> >(
+                        this->getPort("MGFParsedFile"));
+            LIBPIPE_PIPELINE_TRACE(req, "Starting TopX");
+
+            mgfInputFile->shared_lock();
+            mgfParsedFile->lock();
+            // copy the file so that input is not changed.
+            mgfParsedFile->set(new mgf::MgfFile(*mgfInputFile->get()));
+            mgfInputFile->unlock();
+
+            // Top X in Y regions
+
+            for (mgf::MgfFile::iterator i = mgfParsedFile->get()->begin();
+                    i != mgfParsedFile->get()->end(); ++i) {
+                // get a temporary object and make sure it is big enough
+                mgf::MgfSpectrum m;
+                m.resize(2 * i->size());
+                // get the top X in Y regions, including duplicated from overlaps
+                mgf::MgfSpectrum::iterator sEnd = run(i->begin(), i->end(),
+                    m.begin(), LessThanMass(), LessThanAbundance());
+                // make sure we have enough space in the original object
+                i->resize(std::distance(m.begin(), sEnd));
+                // unique copy expectes a sorted range
+                std::sort(m.begin(), sEnd, LessThanMass());
+                // copy all unique peaks back into the original MgfSpectrum
+                mgf::MgfSpectrum::iterator iEnd = std::unique_copy(m.begin(),
+                    sEnd, i->begin());
+                // crop to fit
+                i->resize(std::distance(i->begin(), iEnd));
+            }
+
+            mgfParsedFile->unlock();
+
+            LIBPIPE_PIPELINE_TRACE(req, "TopX is finished");
+
+        }
+
+    protected:
+
+    private:
+        TopXInYRegionsAlgorithm() :
+                libpipe::rtc::Algorithm()
+        {
+            ports_["MGFInputFile"] = boost::make_shared<
+                    libpipe::rtc::SharedData<mgf::MgfFile> >();
+            ports_["MGFParsedFile"] = boost::make_shared<
+                    libpipe::rtc::SharedData<mgf::MgfFile> >(new mgf::MgfFile);
+        }
+
+        template<class In, class Out, class MassComp, class AbundanceComp>
+        Out run(In begin, In end, Out out, MassComp massComp,
+            AbundanceComp abundanceComp)
+        {
+            // sort a copy
+            std::vector<typename In::value_type> v(begin, end);
+            std::sort(v.begin(), v.end(), massComp);
+            // split the m/z domain in y_ equisized regions
+            double maxMz = (v.end() - 1)->first;
+            double minMz = (v.begin())->first;
+            double increment = (maxMz - minMz)
+                    / static_cast<double>(parameters_.get<unsigned int>(
+                        "nregions"));
+            if (increment > 2.5) {
+                for (unsigned int k = 0;
+                        k < parameters_.get<unsigned int>("nregions"); ++k) {
+                    // iterate over all regions and apply TopX
+                    double regionBegin = minMz + k * increment - 2.5;
+                    regionBegin = regionBegin > minMz ? regionBegin : minMz;
+                    double regionEnd = minMz + (k + 1) * increment + 2.5;
+                    In regionBeginIt = std::lower_bound(v.begin(), v.end(),
+                        regionBegin, massComp);
+                    In regionEndIt = std::upper_bound(v.begin(), v.end(),
+                        regionEnd, massComp);
+                    // run TopX on region
+                    Out nout = runTopX(regionBeginIt, regionEndIt, out,
+                        abundanceComp);
+                    out = nout;
+
+                }
+            } else {
+                Out nout = runTopX(v.begin(), v.end(), out, abundanceComp);
+                out = nout;
+            }
+            return out;
+        }
+
+        template<class In, class Out, class Comp>
+        Out runTopX(In begin, In end, Out out, Comp comp)
+        {
+            typename In::difference_type size = std::distance(begin, end);
+            unsigned int x = parameters_.get<unsigned int>("top");
+
+            // FIXME: Make the static_cast in the next step safe.
+            if (static_cast<unsigned int>(size) > x) {
+                // sort a copy
+                std::vector<typename In::value_type> v(begin, end);
+                std::sort(v.begin(), v.end(), comp);
+                std::copy(v.rbegin(), v.rbegin() + x, out);
+                std::advance(out, x);
+            } else {
+                // accept all peaks
+                std::copy(begin, end, out);
+                std::advance(out, size);
+            }
+            return out;
+        }
+
+        static const bool registerLoader()
+        {
+            std::string ids = "TopXInYRegionsAlgorithm";
+            return libpipe::rtc::AlgorithmFactory::instance().registerType(ids,
+                TopXInYRegionsAlgorithm::create);
+        }
+        /// true is class is registered in Algorithm Factory
+        static const bool registered_;
+};
+const bool TopXInYRegionsAlgorithm::registered_ = registerLoader();
 
 /** Functor to determine the top X peaks in a given set of peaks.
  */
@@ -625,7 +765,7 @@ int main(int argc, char* argv[])
             return 1;
         }
         // logging/debug output
-        bool trace = vm.count("verbose") > 0 ? true : false;
+        bool trace_ = vm.count("verbose") > 0 ? true : false;
         // I/O
         std::string infilename(vm["infile"].as<std::string>());
         std::string outfilename(vm["outfile"].as<std::string>());
@@ -644,7 +784,7 @@ int main(int argc, char* argv[])
         // This is some ugly code duplication between the two cases; oh, well...
         //
         if (format == "mgf") {
-
+//PIPELINE
             std::map<std::string, std::string> inputFiles;
             inputFiles["FilterInput"] = "inputFileFilterJSON.txt";
             inputFiles["ConnectionInput"] = "inputFileConnectionJSON.txt";
@@ -673,37 +813,37 @@ int main(int argc, char* argv[])
                     i != trace.end(); ++i) {
                 std::cout << *i << '\n';
             }
-
+//END PIPELINE
             // set up context
             mgf::MgfFile s;
-//            mgf::Driver driver(s);
-//            driver.trace_parsing = trace;
-//            driver.trace_scanning = trace;
-//
-//            // I/O: input
-//            std::ifstream in(infilename.c_str());
-//            if (!in.good()) {
-//                return -1;
-//            }
-//
-//            // parse input into memory
-//            bool result = driver.parse_stream(in);
-//            if (!result) {
-//                return -1;
-//            }
+            mgf::Driver driver(s);
+            driver.trace_parsing = trace_;
+            driver.trace_scanning = trace_;
+
+            // I/O: input
+            std::ifstream in(infilename.c_str());
+            if (!in.good()) {
+                return -1;
+            }
+
+            // parse input into memory
+            bool result = driver.parse_stream(in);
+            if (!result) {
+                return -1;
+            }
 
             // set info
-//            out
-//                    << "# MGF created using ms2preproc, (c) 2009 Marc Kirchner.\n"
-//                    << "# This program accompanies Renard BY, Kirchner M, Monigatti F, Invanov AR,\n"
-//                    << "# Rappsilber J, Winter D, Steen JAJ, Hamprecht FA, Steen H, When Less\n"
-//                    << "# Can Yield More - Computational Preprocessing of MS/MS Spectra for\n"
-//                    << "# Peptide Identification, Proteomics (2009).\n"
-//                    << "# Command: " << argv[0];
-//            for (int i = 1; i < argc; ++i) {
-//                out << " " << argv[i];
-//            }
-//            out << "." << std::endl;
+            out
+                    << "# MGF created using ms2preproc, (c) 2009 Marc Kirchner.\n"
+                    << "# This program accompanies Renard BY, Kirchner M, Monigatti F, Invanov AR,\n"
+                    << "# Rappsilber J, Winter D, Steen JAJ, Hamprecht FA, Steen H, When Less\n"
+                    << "# Can Yield More - Computational Preprocessing of MS/MS Spectra for\n"
+                    << "# Peptide Identification, Proteomics (2009).\n"
+                    << "# Command: " << argv[0];
+            for (int i = 1; i < argc; ++i) {
+                out << " " << argv[i];
+            }
+            out << "." << std::endl;
 
             // get a handle to the data
             typedef mgf::MgfFile::iterator Iterator;
@@ -746,17 +886,17 @@ int main(int argc, char* argv[])
                 }
             } else {
                 // Top X
-//                Ms2Preproc::TopX topX(static_cast<unsigned int>(x));
-//                for (Iterator i = s.begin(); i != s.end(); ++i) {
-//                    mgf::MgfSpectrum::iterator trash = topX(i->begin(),
-//                        i->end(), i->begin(), LessThanAbundance());
-//                    i->erase(trash, i->end());
-//                    std::sort(i->begin(), i->end(), LessThanMass());
-//                }
+                Ms2Preproc::TopX topX(static_cast<unsigned int>(x));
+                for (Iterator i = s.begin(); i != s.end(); ++i) {
+                    mgf::MgfSpectrum::iterator trash = topX(i->begin(),
+                        i->end(), i->begin(), LessThanAbundance());
+                    i->erase(trash, i->end());
+                    std::sort(i->begin(), i->end(), LessThanMass());
+                }
             }
-//            out.setf(std::ios_base::fixed, std::ios_base::floatfield);
-//            out.precision(precision);
-//            out << s << std::endl;
+            out.setf(std::ios_base::fixed, std::ios_base::floatfield);
+            out.precision(precision);
+            out << s << std::endl;
         } else if (format == "dta") {
             dta::DtaParser parser;
             dta::DtaSpectrum s;

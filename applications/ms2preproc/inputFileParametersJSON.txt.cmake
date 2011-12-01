@@ -1,6 +1,16 @@
 {
     "parameters": [
         {
+            "filterIdentifier": "TopXInYRegionsFilter1",
+            "paramIdentifier": "top",
+            "param": "2"             
+        },
+        {
+            "filterIdentifier": "TopXInYRegionsFilter1",
+            "paramIdentifier": "nregions",
+            "param": "3"             
+        },
+        {
             "filterIdentifier": "TopXFilter1",
             "paramIdentifier": "top",
             "param": "2"             
@@ -16,12 +26,22 @@
             "param": "0"             
         },
         {
-            "filterIdentifier": "MgfFilePrinterFilter1",
+            "filterIdentifier": "MgfFilePrinterFilterTopX",
             "paramIdentifier": "precision",
             "param": "4"             
         },
         {
-            "filterIdentifier": "MgfFilePrinterFilter1",
+            "filterIdentifier": "MgfFilePrinterFilterTopX",
+            "paramIdentifier": "outfile",
+            "param": "out2.mgf"             
+        },
+        {
+            "filterIdentifier": "MgfFilePrinterFilterTopXInYRegions",
+            "paramIdentifier": "precision",
+            "param": "4"             
+        },
+        {
+            "filterIdentifier": "MgfFilePrinterFilterTopXInYRegions",
             "paramIdentifier": "outfile",
             "param": "out2.mgf"             
         }
