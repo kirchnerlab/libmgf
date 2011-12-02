@@ -43,6 +43,7 @@
 #include <libpipe/rtc/PipelineLoader.hpp>
 #include <libpipe/utilities/Parameters.hpp>
 #include <boost/shared_ptr.hpp>
+#include <boost/algorithm/string.hpp>
 
 // #define DEBUG
 
@@ -481,10 +482,10 @@ class TopXInWindowsOfSizeZAlgorithm : public libpipe::rtc::Algorithm
             mgfInputFile->unlock();
 
             // Top X in windows of size Z
-            for (mgf::MgfFile::iterator i = mgfParsedFile->get()->begin(); i != mgfParsedFile->get()->end(); ++i) {
-                mgf::MgfSpectrum::iterator trash = run(
-                    i->begin(), i->end(), i->begin(), LessThanMass(),
-                    LessThanAbundance());
+            for (mgf::MgfFile::iterator i = mgfParsedFile->get()->begin();
+                    i != mgfParsedFile->get()->end(); ++i) {
+                mgf::MgfSpectrum::iterator trash = run(i->begin(), i->end(),
+                    i->begin(), LessThanMass(), LessThanAbundance());
                 i->erase(trash, i->end());
                 std::sort(i->begin(), i->end(), LessThanMass()); // not necessary
             }
@@ -582,23 +583,9 @@ int main(int argc, char* argv[])
                 " Winter D, Steen JAJ, Hamprecht FA, Steen H, When Less Can Yield\n"
                 " More - Computational Preprocessing of MS/MS Spectra for\n"
                 " Peptide Identification, Proteomics (2009).\n\nValid arguments are");
-        unsigned int precision(0);
-        std::string format;
+
         desc.add_options()("help,h", "produce this help message")("infile,i",
-            po::value<std::string>(), "name of the MGF/DTA input file")(
-            "outfile,o", po::value<std::string>(),
-            "name of the MGF output file")("format,f",
-            po::value<std::string>(&format)->default_value(std::string("mgf")),
-            "input format: (dta|mgf)")("top,X", po::value<int>(),
-            "number of highest intensity ions to keep")("nregions,Y",
-            po::value<int>(),
-            "number of equal-sized regions the MS/MS spectrum is split into")(
-            "winsize,Z",
-            po::value<double>(),
-            "m/z window (+/-Z) around high-intensity peaks in which the top X are selected")(
-            "verbose,v", "toggle verbose output")("precision,p",
-            po::value<unsigned int>(&precision)->default_value(4),
-            "precision of output");
+            po::value<std::string>(), "name of the MGF/DTA input file");
 
         po::variables_map vm;
         po::store(po::parse_command_line(argc, argv, desc), vm);
@@ -610,82 +597,68 @@ int main(int argc, char* argv[])
         }
 
         // input sanity checking
-        if (!(vm.count("infile") && vm.count("outfile"))) {
+        if (!(vm.count("infile"))) {
             std::cerr << desc << std::endl << "ERROR: "
-                    "Need 'infile' and 'outfile' arguments." << std::endl;
+                    "Need 'infile'  arguments." << std::endl;
             return 1;
         }
-        if (!(vm.count("top"))) {
-            std::cerr << desc << std::endl << "ERROR: "
-                    "Need 'top,X' argument." << std::endl;
-            return 1;
-        }
-        if (vm.count("nregions") > 0 && vm.count("winsize") > 0) {
-            std::cerr
-                    << desc
-                    << std::endl
-                    << "ERROR: "
-                            "Parameters 'nregions' and 'winsize' cannot be specified together."
-                    << std::endl;
-            return 1;
-        }
-        if (!(format == "mgf" || format == "dta")) {
-            std::cerr << desc << std::endl << "ERROR: "
-                    "Format must be one of 'mgf' or 'dta'." << std::endl;
-            return 1;
-        }
-        // logging/debug output
-        bool trace_ = vm.count("verbose") > 0 ? true : false;
-        // I/O
+
         std::string infilename(vm["infile"].as<std::string>());
-        std::string outfilename(vm["outfile"].as<std::string>());
-        std::ofstream out(outfilename.c_str());
-        if (!out.good()) {
+
+        std::ifstream inFile(infilename.c_str());
+        if (!inFile.good()) {
             return -1;
         }
-        // check format
-        // common variables
-        int x = vm["top"].as<int>();
-        // check which format we are dealing with: in the case of MGF
-        // we need to invoke the parser, read a whole collection of
-        // spectra and apply the operators to each spectrum. In the
-        // case of DTA, we deal with a single spectrum only.
-        //
-        // This is some ugly code duplication between the two cases; oh, well...
-        //
-        if (format == "mgf") {
-//PIPELINE
-            std::map<std::string, std::string> inputFiles;
-            inputFiles["FilterInput"] = "inputFileFilterJSON.txt";
-            inputFiles["ConnectionInput"] = "inputFileConnectionJSON.txt";
-            inputFiles["PipelineInput"] = "inputFilePipelineJSON.txt";
-            inputFiles["ParameterInput"] = "inputFileParametersJSON.txt";
 
-            libpipe::rtc::Pipeline pipeline;
-            try {
-                libpipe::rtc::PipelineLoader loader(inputFiles);
-                pipeline = loader.getPipeline();
-            } catch (libpipe::utilities::Exception& e) {
-                std::cerr << e.what() << std::endl;
-            } catch (std::exception& e) {
-                std::cerr << e.what() << std::endl;
+        std::map<std::string, std::string> inputFiles;
+//Parses input file with the libpipe input files
+        std::string strOneLine;
+        std::string file, key;
+        size_t pos;
+        getline(inFile, strOneLine);
+        while (!strOneLine.empty()) {
+            if (strOneLine[0] == '#') {
+                getline(inFile, strOneLine);
+                continue;
+            } else {
+                pos = strOneLine.find(":"); // position of ":"
+                file = strOneLine.substr(pos + 1);
+                boost::trim(file);
+                key = strOneLine.substr(0, pos);
+                boost::trim(key);
+                inputFiles[key] = file;
+                getline(inFile, strOneLine);
             }
 
-            try {
-                pipeline.run();
-            } catch (libpipe::utilities::Exception& e) {
-                std::cerr << e.what() << std::endl;
-            }
-
-            std::vector<std::string> trace;
-            trace = pipeline.getTrace();
-            for (std::vector<std::string>::const_iterator i = trace.begin();
-                    i != trace.end(); ++i) {
-                std::cout << *i << '\n';
-            }
-//END PIPELINE
-            // set up context
         }
+
+        inFile.close();
+
+        libpipe::rtc::Pipeline pipeline;
+        try {
+            libpipe::rtc::PipelineLoader loader(inputFiles);
+            pipeline = loader.getPipeline();
+        } catch (libpipe::utilities::Exception& e) {
+            std::cerr << e.what() << std::endl;
+        } catch (std::exception& e) {
+            std::cerr << e.what() << std::endl;
+        }
+
+        try {
+            pipeline.run();
+        } catch (libpipe::utilities::Exception& e) {
+            std::cerr << e.what() << std::endl;
+        }
+
+        std::vector<std::string> trace;
+        trace = pipeline.getTrace();
+        for (std::vector<std::string>::const_iterator i = trace.begin();
+                i != trace.end(); ++i) {
+            std::cout << *i << '\n';
+        }
+//END PIPELINE
+        // set up context
+
         return 0;
     } catch (std::exception& e) {
         std::cerr << e.what() << std::endl;

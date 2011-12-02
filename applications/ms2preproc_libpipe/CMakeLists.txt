@@ -54,5 +54,9 @@ CONFIGURE_FILE(${MGF_SOURCE_DIR}/applications/ms2preproc_libpipe/inputFileParame
     @ONLY IMMEDIATE
     )  
         
+CONFIGURE_FILE(${MGF_SOURCE_DIR}/applications/ms2preproc_libpipe/input.txt.cmake
+    ${MGF_BINARY_DIR}/applications/ms2preproc_libpipe/input.txt
+    @ONLY IMMEDIATE
+    )  
 
 
