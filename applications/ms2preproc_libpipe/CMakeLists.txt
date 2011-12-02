@@ -34,23 +34,23 @@ ELSE(Boost_PROGRAM_OPTIONS_FOUND)
     MESSAGE(STATUS "Could not find BOOST program_options. Skipping ${CMAKE_CURRENT_SOURCE_DIR}.")
 ENDIF(Boost_PROGRAM_OPTIONS_FOUND)
 
-CONFIGURE_FILE(${MGF_SOURCE_DIR}/applications/ms2preproc/inputFileFilterJSON.txt.cmake
-    ${MGF_BINARY_DIR}/applications/ms2preproc/inputFileFilterJSON.txt
+CONFIGURE_FILE(${MGF_SOURCE_DIR}/applications/ms2preproc_libpipe/inputFileFilterJSON.txt.cmake
+    ${MGF_BINARY_DIR}/applications/ms2preproc_libpipe/inputFileFilterJSON.txt
     @ONLY IMMEDIATE
     )
     
-CONFIGURE_FILE(${MGF_SOURCE_DIR}/applications/ms2preproc/inputFilePipelineJSON.txt.cmake
-    ${MGF_BINARY_DIR}/applications/ms2preproc/inputFilePipelineJSON.txt
+CONFIGURE_FILE(${MGF_SOURCE_DIR}/applications/ms2preproc_libpipe/inputFilePipelineJSON.txt.cmake
+    ${MGF_BINARY_DIR}/applications/ms2preproc_libpipe/inputFilePipelineJSON.txt
     @ONLY IMMEDIATE
     )        
     
-CONFIGURE_FILE(${MGF_SOURCE_DIR}/applications/ms2preproc/inputFileConnectionJSON.txt.cmake
-    ${MGF_BINARY_DIR}/applications/ms2preproc/inputFileConnectionJSON.txt
+CONFIGURE_FILE(${MGF_SOURCE_DIR}/applications/ms2preproc_libpipe/inputFileConnectionJSON.txt.cmake
+    ${MGF_BINARY_DIR}/applications/ms2preproc_libpipe/inputFileConnectionJSON.txt
     @ONLY IMMEDIATE
     )
     
-CONFIGURE_FILE(${MGF_SOURCE_DIR}/applications/ms2preproc/inputFileParametersJSON.txt.cmake
-    ${MGF_BINARY_DIR}/applications/ms2preproc/inputFileParametersJSON.txt
+CONFIGURE_FILE(${MGF_SOURCE_DIR}/applications/ms2preproc_libpipe/inputFileParametersJSON.txt.cmake
+    ${MGF_BINARY_DIR}/applications/ms2preproc_libpipe/inputFileParametersJSON.txt
     @ONLY IMMEDIATE
     )  
         
