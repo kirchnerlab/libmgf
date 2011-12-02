@@ -25,9 +25,7 @@
 
 #include <fstream>
 
-
 #include <boost/program_options.hpp>
-
 
 #include <libpipe/rtc/PipelineLoader.hpp>
 #include <boost/algorithm/string.hpp>
@@ -38,7 +36,117 @@
 #include "Algorithms/TopXAlgorithm.hpp"
 #include "Algorithms/TopXInWindowsOfSizeZAlgorithm.hpp"
 #include "Algorithms/TopXInYRegionsAlgorithm.hpp"
+namespace Ms2Preproc {
 
+class MgfFileSpliterFour : public libpipe::rtc::Algorithm
+{
+
+    public:
+        static libpipe::rtc::Algorithm* create()
+        {
+            return new MgfFileSpliterFour;
+        }
+
+        virtual ~MgfFileSpliterFour()
+        {
+        }
+
+        void update(libpipe::Request& req)
+        {
+
+            boost::shared_ptr<libpipe::rtc::SharedData<mgf::MgfFile> > mgfInputFile =
+                    boost::dynamic_pointer_cast<
+                            libpipe::rtc::SharedData<mgf::MgfFile> >(
+                        this->getPort("MGFInputFile"));
+
+            boost::shared_ptr<libpipe::rtc::SharedData<mgf::MgfFile> > mgfOutputFile1 =
+                    boost::dynamic_pointer_cast<
+                            libpipe::rtc::SharedData<mgf::MgfFile> >(
+                        this->getPort("MGFOutputFile1"));
+            boost::shared_ptr<libpipe::rtc::SharedData<mgf::MgfFile> > mgfOutputFile2 =
+                    boost::dynamic_pointer_cast<
+                            libpipe::rtc::SharedData<mgf::MgfFile> >(
+                        this->getPort("MGFOutputFile2"));
+            boost::shared_ptr<libpipe::rtc::SharedData<mgf::MgfFile> > mgfOutputFile3 =
+                    boost::dynamic_pointer_cast<
+                            libpipe::rtc::SharedData<mgf::MgfFile> >(
+                        this->getPort("MGFOutputFile3"));
+            boost::shared_ptr<libpipe::rtc::SharedData<mgf::MgfFile> > mgfOutputFile4 =
+                    boost::dynamic_pointer_cast<
+                            libpipe::rtc::SharedData<mgf::MgfFile> >(
+                        this->getPort("MGFOutputFile4"));
+
+            LIBPIPE_PIPELINE_TRACE(req, "Starting Reading MGF File");
+
+            mgfInputFile->lock();
+            mgfOutputFile1->lock();
+            mgfOutputFile2->lock();
+            mgfOutputFile3->lock();
+            mgfOutputFile4->lock();
+
+            std::cout<<mgfInputFile->get()->size()<<std::endl;
+
+            int div = mgfInputFile->get()->size()/4;
+
+
+            mgf::MgfFile* temp1 = new mgf::MgfFile;
+            mgf::MgfFile* temp2 = new mgf::MgfFile;
+            mgf::MgfFile* temp3 = new mgf::MgfFile;
+            mgf::MgfFile* temp4 = new mgf::MgfFile;
+
+            mgf::MgfFile::iterator it = mgfInputFile->get()->begin();
+
+            temp1->assign(it,it+div);
+            it=it+div;
+            temp2->assign(it,it+div);
+            it=it+div;
+            temp3->assign(it,it+div);
+            it=it+div;
+            temp4->assign(it, mgfInputFile->get()->end());
+
+            mgfOutputFile1->set(temp1);
+            mgfOutputFile2->set(temp2);
+            mgfOutputFile3->set(temp3);
+            mgfOutputFile4->set(temp4);
+
+            mgfOutputFile1->unlock();
+            mgfOutputFile2->unlock();
+            mgfOutputFile3->unlock();
+            mgfOutputFile4->unlock();
+            mgfInputFile->unlock();
+
+            LIBPIPE_PIPELINE_TRACE(req, "MGF File successful read.");
+        }
+
+    protected:
+
+    private:
+        MgfFileSpliterFour() :
+                libpipe::rtc::Algorithm()
+        {
+            ports_["MGFInputFile"] = boost::make_shared<
+                    libpipe::rtc::SharedData<mgf::MgfFile> >();
+            ports_["MGFOutputFile1"] = boost::make_shared<
+                    libpipe::rtc::SharedData<mgf::MgfFile> >(new mgf::MgfFile);
+            ports_["MGFOutputFile2"] = boost::make_shared<
+                    libpipe::rtc::SharedData<mgf::MgfFile> >(new mgf::MgfFile);
+            ports_["MGFOutputFile3"] = boost::make_shared<
+                    libpipe::rtc::SharedData<mgf::MgfFile> >(new mgf::MgfFile);
+            ports_["MGFOutputFile4"] = boost::make_shared<
+                    libpipe::rtc::SharedData<mgf::MgfFile> >(new mgf::MgfFile);
+        }
+
+        static const bool registerLoader()
+        {
+            std::string ids = "MgfFileSpliterFour";
+            return libpipe::rtc::AlgorithmFactory::instance().registerType(ids,
+                MgfFileSpliterFour::create);
+        }
+        /// true is class is registered in Algorithm Factory
+        static const bool registered_;
+};
+const bool MgfFileSpliterFour::registered_ = registerLoader();
+}
 
 namespace po = boost::program_options;
 
@@ -57,8 +165,9 @@ int main(int argc, char* argv[])
                 " Peptide Identification, Proteomics (2009).\n\nValid arguments are");
 
         desc.add_options()("help,h", "produce this help message")("infile,i",
-            po::value<std::string>(), "name of the input file which contains the path to the"
-                    " libpipe input files");
+            po::value<std::string>(),
+            "name of the input file which contains the path to the"
+                " libpipe input files");
 
         po::variables_map vm;
         po::store(po::parse_command_line(argc, argv, desc), vm);

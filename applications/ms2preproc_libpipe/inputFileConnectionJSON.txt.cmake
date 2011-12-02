@@ -17,6 +17,22 @@
             ]
         },
         {
+            "filterName": "MgfFileSpliterFourFilter1",
+            "identifier": "MgfFileSpliterFourFilter",
+            "precursors": [
+                {
+                    "precursorName": "MgfFileReaderFilter1"
+                }
+            ],
+            "ports": [
+                {
+                    "filterName": "MgfFileReaderFilter1",
+                    "portNameOfFilter": "MGFInputFile",
+                    "portNameOfThis": "MGFInputFile"
+                }
+            ]
+        },
+        {
             "filterName": "TopXFilter1",
             "identifier": "TopXFilter",
             "precursors": [

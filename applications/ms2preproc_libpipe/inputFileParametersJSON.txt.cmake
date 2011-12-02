@@ -28,7 +28,7 @@
         {
             "filterIdentifier": "MgfFileReaderFilter1",
             "paramIdentifier": "infilename",
-            "param": "numberformats.mgf"             
+            "param": "JP_FT_WCL_4313.mgf"             
         },
         {
             "filterIdentifier": "MgfFileReaderFilter1",
@@ -43,7 +43,7 @@
         {
             "filterIdentifier": "MgfFilePrinterFilterTopX",
             "paramIdentifier": "outfile",
-            "param": "out2.mgf"             
+            "param": "outTOPX.mgf"             
         },
         {
             "filterIdentifier": "MgfFilePrinterFilterTopXInYRegions",
@@ -53,7 +53,7 @@
         {
             "filterIdentifier": "MgfFilePrinterFilterTopXInYRegions",
             "paramIdentifier": "outfile",
-            "param": "out2.mgf"             
+            "param": "out2TOPXInY.mgf"             
         },
         {
             "filterIdentifier": "MgfFilePrinterFilterTopXInWindowsOfSizeZ",
@@ -63,7 +63,7 @@
         {
             "filterIdentifier": "MgfFilePrinterFilterTopXInWindowsOfSizeZ",
             "paramIdentifier": "outfile",
-            "param": "out2.mgf"             
+            "param": "outTOPXInZ.mgf"             
         }
     ]
 }
