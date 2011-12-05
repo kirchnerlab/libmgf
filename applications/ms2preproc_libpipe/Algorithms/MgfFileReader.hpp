@@ -53,6 +53,7 @@ class MgfFileReader : public libpipe::rtc::Algorithm
 
         void update(libpipe::Request& req)
         {
+
             std::string infilename = parameters_.get<std::string>(
                 "infilename");
             bool trace = parameters_.get<bool>("verbose");
@@ -61,29 +62,34 @@ class MgfFileReader : public libpipe::rtc::Algorithm
                     boost::dynamic_pointer_cast<
                             libpipe::rtc::SharedData<mgf::MgfFile> >(
                         this->getPort("MGFInputFile"));
-            LIBPIPE_PIPELINE_TRACE(req, "Starting Reading MGF File");
-
             mgfInputFile->lock();
 
-            mgf::MgfFile s;
-            mgf::Driver driver(*mgfInputFile->get());
-            driver.trace_parsing = trace;
-            driver.trace_scanning = trace;
+            if (mgfInputFile->get()->size() > 0) {
+                LIBPIPE_PIPELINE_TRACE(req, "MGF File already stored in memory");
+            } else {
+                LIBPIPE_PIPELINE_TRACE(req, "Starting Reading MGF File");
 
-            // I/O: input
-            std::ifstream in(infilename.c_str());
-            if (!in.good()) {
-                libpipe_fail("error in reading input file");
-            }
+                mgf::MgfFile s;
+                mgf::Driver driver(*mgfInputFile->get());
+                driver.trace_parsing = trace;
+                driver.trace_scanning = trace;
 
-            // parse input into memory
-            bool result = driver.parse_stream(in);
-            if (!result) {
-                libpipe_fail("error in parsing input file to memory");
+                // I/O: input
+                std::ifstream in(infilename.c_str());
+                if (!in.good()) {
+                    libpipe_fail("error in reading input file");
+                }
+
+                // parse input into memory
+                bool result = driver.parse_stream(in);
+                if (!result) {
+                    libpipe_fail("error in parsing input file to memory");
+                }
+
+                LIBPIPE_PIPELINE_TRACE(req, "MGF File successful read.");
             }
             mgfInputFile->unlock();
 
-            LIBPIPE_PIPELINE_TRACE(req, "MGF File successful read.");
         }
 
     protected:

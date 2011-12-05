@@ -26,6 +26,26 @@
             "param": "2"             
         },
         {
+            "filterIdentifier": "TopXFilterMerge1",
+            "paramIdentifier": "top",
+            "param": "2"             
+        },
+        {
+            "filterIdentifier": "TopXFilterMerge2",
+            "paramIdentifier": "top",
+            "param": "2"             
+        },
+        {
+            "filterIdentifier": "TopXFilterMerge3",
+            "paramIdentifier": "top",
+            "param": "2"             
+        },
+        {
+            "filterIdentifier": "TopXFilterMerge4",
+            "paramIdentifier": "top",
+            "param": "2"             
+        },
+        {
             "filterIdentifier": "MgfFileReaderFilter1",
             "paramIdentifier": "infilename",
             "param": "JP_FT_WCL_4313.mgf"             
@@ -44,6 +64,16 @@
             "filterIdentifier": "MgfFilePrinterFilterTopX",
             "paramIdentifier": "outfile",
             "param": "outTOPX.mgf"             
+        },
+        {
+            "filterIdentifier": "MgfFilePrinterFilterTopXMerged",
+            "paramIdentifier": "precision",
+            "param": "4"             
+        },
+        {
+            "filterIdentifier": "MgfFilePrinterFilterTopXMerged",
+            "paramIdentifier": "outfile",
+            "param": "outTOPXMerge.mgf"             
         },
         {
             "filterIdentifier": "MgfFilePrinterFilterTopXInYRegions",

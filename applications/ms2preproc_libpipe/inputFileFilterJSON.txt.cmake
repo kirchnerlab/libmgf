@@ -29,6 +29,11 @@
             "filterIdentifier": "MgfFileSpliterFourFilter",
             "algorithmName": "MgfFileSpliterFour",
             "managerName": "MangerRTC"
+        },
+        {
+            "filterIdentifier": "MgfFileMergerPrinterFilter",
+            "algorithmName": "MgfFileMergerPrinter",
+            "managerName": "MangerRTC"
         }
     ]
 }

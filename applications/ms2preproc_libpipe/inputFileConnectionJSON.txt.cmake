@@ -49,6 +49,70 @@
             ]
         },
         {
+            "filterName": "TopXFilterMerge1",
+            "identifier": "TopXFilter",
+            "precursors": [
+                {
+                    "precursorName": "MgfFileSpliterFourFilter1"
+                }
+            ],
+            "ports": [
+                {
+                    "filterName": "MgfFileSpliterFourFilter1",
+                    "portNameOfFilter": "MGFOutputFile1",
+                    "portNameOfThis": "MGFInputFile"
+                }
+            ]
+        },
+        {
+            "filterName": "TopXFilterMerge2",
+            "identifier": "TopXFilter",
+            "precursors": [
+                {
+                    "precursorName": "MgfFileSpliterFourFilter1"
+                }
+            ],
+            "ports": [
+                {
+                    "filterName": "MgfFileSpliterFourFilter1",
+                    "portNameOfFilter": "MGFOutputFile2",
+                    "portNameOfThis": "MGFInputFile"
+                }
+            ]
+        },
+        {
+            "filterName": "TopXFilterMerge3",
+            "identifier": "TopXFilter",
+            "precursors": [
+                {
+                    "precursorName": "MgfFileSpliterFourFilter1"
+                }
+            ],
+            "ports": [
+                {
+                    "filterName": "MgfFileSpliterFourFilter1",
+                    "portNameOfFilter": "MGFOutputFile3",
+                    "portNameOfThis": "MGFInputFile"
+                }
+            ]
+        },
+        {
+            "filterName": "TopXFilterMerge4",
+            "identifier": "TopXFilter",
+            "precursors": [
+                {
+                    "precursorName": "MgfFileSpliterFourFilter1"
+                }
+            ],
+            "ports": [
+                {
+                    "filterName": "MgfFileSpliterFourFilter1",
+                    "portNameOfFilter": "MGFOutputFile4",
+                    "portNameOfThis": "MGFInputFile"
+                }
+            ]
+        },
+        {
             "filterName": "TopXInWindowsOfSizeZFilter1",
             "identifier": "TopXInWindowsOfSizeZFilter",
             "precursors": [
@@ -71,18 +135,34 @@
             "ports": []
         },
         {
-            "filterName": "MgfFilePrinterFilterTopX",
-            "identifier": "MgfFilePrinterFilter",
+            "filterName": "MgfFilePrinterFilterTopXMerged",
+            "identifier": "MgfFileMergerPrinterFilter",
             "precursors": [
-                {
-                    "precursorName": "TopXFilter1"
-                }
+                {"precursorName": "TopXFilterMerge1"},
+                {"precursorName": "TopXFilterMerge2"},
+                {"precursorName": "TopXFilterMerge3"},
+                {"precursorName": "TopXFilterMerge4"}
             ],
             "ports": [
                 {
-                    "filterName": "TopXFilter1",
+                    "filterName": "TopXFilterMerge1",
                     "portNameOfFilter": "MGFParsedFile",
-                    "portNameOfThis": "MGFParseFile"
+                    "portNameOfThis": "MGFOutputFile1"
+                },                
+                {
+                    "filterName": "TopXFilterMerge2",
+                    "portNameOfFilter": "MGFParsedFile",
+                    "portNameOfThis": "MGFOutputFile2"
+                },                
+                {
+                    "filterName": "TopXFilterMerge3",
+                    "portNameOfFilter": "MGFParsedFile",
+                    "portNameOfThis": "MGFOutputFile3"
+                },                
+                {
+                    "filterName": "TopXFilterMerge4",
+                    "portNameOfFilter": "MGFParsedFile",
+                    "portNameOfThis": "MGFOutputFile4"
                 }
             ]
         },
