@@ -167,6 +167,22 @@
             ]
         },
         {
+            "filterName": "MgfFilePrinterFilterTopX",
+            "identifier": "MgfFilePrinterFilter",
+            "precursors": [
+                {
+                    "precursorName": "TopXFilter1"
+                }
+            ],
+            "ports": [
+                {
+                    "filterName": "TopXFilter1",
+                    "portNameOfFilter": "MGFParsedFile",
+                    "portNameOfThis": "MGFParseFile"
+                }
+            ]
+        },
+        {
             "filterName": "MgfFilePrinterFilterTopXInYRegions",
             "identifier": "MgfFilePrinterFilter",
             "precursors": [
