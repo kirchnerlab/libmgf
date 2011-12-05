@@ -35,39 +35,26 @@
 #include <boost/shared_ptr.hpp>
 namespace Ms2Preproc {
 
-class MgfFileMergerPrinter : public libpipe::rtc::Algorithm
+class MgfFilePrinter : public libpipe::rtc::Algorithm
 {
 
     public:
         static libpipe::rtc::Algorithm* create()
         {
-            return new MgfFileMergerPrinter;
+            return new MgfFilePrinter;
         }
 
-        virtual ~MgfFileMergerPrinter()
+        virtual ~MgfFilePrinter()
         {
         }
 
         void update(libpipe::Request& req)
         {
 
-            boost::shared_ptr<libpipe::rtc::SharedData<mgf::MgfFile> > mgfOutputFile1 =
+            boost::shared_ptr<libpipe::rtc::SharedData<mgf::MgfFile> > mgfOutputFile =
                     boost::dynamic_pointer_cast<
                             libpipe::rtc::SharedData<mgf::MgfFile> >(
-                        this->getPort("MGFOutputFile1"));
-            boost::shared_ptr<libpipe::rtc::SharedData<mgf::MgfFile> > mgfOutputFile2 =
-                    boost::dynamic_pointer_cast<
-                            libpipe::rtc::SharedData<mgf::MgfFile> >(
-                        this->getPort("MGFOutputFile2"));
-            boost::shared_ptr<libpipe::rtc::SharedData<mgf::MgfFile> > mgfOutputFile3 =
-                    boost::dynamic_pointer_cast<
-                            libpipe::rtc::SharedData<mgf::MgfFile> >(
-                        this->getPort("MGFOutputFile3"));
-            boost::shared_ptr<libpipe::rtc::SharedData<mgf::MgfFile> > mgfOutputFile4 =
-                    boost::dynamic_pointer_cast<
-                            libpipe::rtc::SharedData<mgf::MgfFile> >(
-                        this->getPort("MGFOutputFile4"));
-
+                        this->getPort("MGFParseFile"));
             LIBPIPE_PIPELINE_TRACE(req, "Starting writting MGF File");
 
             std::string outfilename = parameters_.get<std::string>("outfile");
@@ -87,20 +74,9 @@ class MgfFileMergerPrinter : public libpipe::rtc::Algorithm
             out.setf(std::ios_base::fixed, std::ios_base::floatfield);
             out.precision(parameters_.get<unsigned int>("precision"));
 
-            mgfOutputFile1->lock();
-            mgfOutputFile2->lock();
-            mgfOutputFile3->lock();
-            mgfOutputFile4->lock();
-
-            out << *mgfOutputFile1->get() << std::endl;
-            out << *mgfOutputFile2->get() << std::endl;
-            out << *mgfOutputFile3->get() << std::endl;
-            out << *mgfOutputFile4->get() << std::endl;
-
-            mgfOutputFile1->unlock();
-            mgfOutputFile2->unlock();
-            mgfOutputFile3->unlock();
-            mgfOutputFile4->unlock();
+            mgfOutputFile->lock();
+            out << *mgfOutputFile->get() << std::endl;
+            mgfOutputFile->unlock();
 
             LIBPIPE_PIPELINE_TRACE(req, "MGF File successful written.");
         }
@@ -108,29 +84,23 @@ class MgfFileMergerPrinter : public libpipe::rtc::Algorithm
     protected:
 
     private:
-        MgfFileMergerPrinter() :
+        MgfFilePrinter() :
                 libpipe::rtc::Algorithm()
         {
-            ports_["MGFOutputFile1"] = boost::make_shared<
-                    libpipe::rtc::SharedData<mgf::MgfFile> >();
-            ports_["MGFOutputFile2"] = boost::make_shared<
-                    libpipe::rtc::SharedData<mgf::MgfFile> >();
-            ports_["MGFOutputFile3"] = boost::make_shared<
-                    libpipe::rtc::SharedData<mgf::MgfFile> >();
-            ports_["MGFOutputFile4"] = boost::make_shared<
+            ports_["MGFParseFile"] = boost::make_shared<
                     libpipe::rtc::SharedData<mgf::MgfFile> >();
         }
 
         static const bool registerLoader()
         {
-            std::string ids = "MgfFileMergerPrinter";
+            std::string ids = "MgfFilePrinter";
             return libpipe::rtc::AlgorithmFactory::instance().registerType(ids,
-                MgfFileMergerPrinter::create);
+                MgfFilePrinter::create);
         }
         /// true is class is registered in Algorithm Factory
         static const bool registered_;
 };
-const bool MgfFileMergerPrinter::registered_ = registerLoader();
-
+const bool MgfFilePrinter::registered_ = registerLoader();
 }
+
 #endif /* MGFFILEPRINTER_HPP_ */

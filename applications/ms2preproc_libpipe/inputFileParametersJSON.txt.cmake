@@ -48,7 +48,7 @@
         {
             "filterIdentifier": "MgfFileReaderFilter1",
             "paramIdentifier": "infilename",
-            "param": "JP_FT_WCL_4313.mgf"             
+            "param": "biggest.mgf"             
         },
         {
             "filterIdentifier": "MgfFileReaderFilter1",
