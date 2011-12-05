@@ -113,5 +113,5 @@ class MgfFileReader : public libpipe::rtc::Algorithm
 };
 const bool MgfFileReader::registered_ = registerLoader();
 
-} /* namespace Ms2Preproc_libpipe */
+} /* namespace Ms2Preproc */
 #endif /* MGFFILEREADER_H_ */
