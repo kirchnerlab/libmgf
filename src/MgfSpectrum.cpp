@@ -31,7 +31,7 @@ std::string MgfSpectrum::getETAG(void) const {
     return etag_;
 }
 void MgfSpectrum::setETAG(const std::string& etag) {
-    etag_ = etag_;
+    etag_ = etag;
 }
 
 std::string MgfSpectrum::getINSTRUMENT(void) const {
