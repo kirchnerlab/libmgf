@@ -33,7 +33,6 @@
 
 namespace Ms2Preproc {
 
-
 class MgfFileMergerPrinter : public libpipe::rtc::Algorithm
 {
 
@@ -50,24 +49,18 @@ class MgfFileMergerPrinter : public libpipe::rtc::Algorithm
         void update(libpipe::Request& req)
         {
 
-            boost::shared_ptr<libpipe::rtc::SharedData<mgf::MgfFile> > mgfOutputFile1 =
-                    boost::dynamic_pointer_cast<
-                            libpipe::rtc::SharedData<mgf::MgfFile> >(
-                        this->getPort("MGFOutputFile1"));
-            boost::shared_ptr<libpipe::rtc::SharedData<mgf::MgfFile> > mgfOutputFile2 =
-                    boost::dynamic_pointer_cast<
-                            libpipe::rtc::SharedData<mgf::MgfFile> >(
-                        this->getPort("MGFOutputFile2"));
-            boost::shared_ptr<libpipe::rtc::SharedData<mgf::MgfFile> > mgfOutputFile3 =
-                    boost::dynamic_pointer_cast<
-                            libpipe::rtc::SharedData<mgf::MgfFile> >(
-                        this->getPort("MGFOutputFile3"));
-            boost::shared_ptr<libpipe::rtc::SharedData<mgf::MgfFile> > mgfOutputFile4 =
-                    boost::dynamic_pointer_cast<
-                            libpipe::rtc::SharedData<mgf::MgfFile> >(
-                        this->getPort("MGFOutputFile4"));
 
-            LIBPIPE_PIPELINE_TRACE(req, "Starting writting MGF File");
+
+            LIBPIPE_PREPARE_READ_ACCESS(mgfOutputFile1, mgfOutputFile1Data,
+                mgf::MgfFile, "MGFOutputFile1");
+            LIBPIPE_PREPARE_READ_ACCESS(mgfOutputFile2, mgfOutputFile2Data,
+                mgf::MgfFile, "MGFOutputFile2");
+            LIBPIPE_PREPARE_READ_ACCESS(mgfOutputFile3, mgfOutputFile3Data,
+                mgf::MgfFile, "MGFOutputFile3");
+            LIBPIPE_PREPARE_READ_ACCESS(mgfOutputFile4, mgfOutputFile4Data,
+                mgf::MgfFile, "MGFOutputFile4");
+
+            LIBPIPE_PIPELINE_TRACE("Starting writting MGF File");
 
             std::string outfilename = parameters_.get<std::string>("outfile");
             std::ofstream out(outfilename.c_str());
@@ -86,22 +79,20 @@ class MgfFileMergerPrinter : public libpipe::rtc::Algorithm
             out.setf(std::ios_base::fixed, std::ios_base::floatfield);
             out.precision(parameters_.get<unsigned int>("precision"));
 
-            mgfOutputFile1->lock();
-            mgfOutputFile2->lock();
-            mgfOutputFile3->lock();
-            mgfOutputFile4->lock();
 
-            out << *mgfOutputFile1->get() << std::endl;
-            out << *mgfOutputFile2->get() << std::endl;
-            out << *mgfOutputFile3->get() << std::endl;
-            out << *mgfOutputFile4->get() << std::endl;
 
-            mgfOutputFile1->unlock();
-            mgfOutputFile2->unlock();
-            mgfOutputFile3->unlock();
-            mgfOutputFile4->unlock();
+            out << mgfOutputFile1Data << std::endl;
+            out << mgfOutputFile2Data << std::endl;
+            out << mgfOutputFile3Data << std::endl;
+            out << mgfOutputFile4Data << std::endl;
 
-            LIBPIPE_PIPELINE_TRACE(req, "MGF File successful written.");
+            LIBPIPE_CLEAN_ACCESS(mgfOutputFile1);
+            LIBPIPE_CLEAN_ACCESS(mgfOutputFile2);
+            LIBPIPE_CLEAN_ACCESS(mgfOutputFile3);
+            LIBPIPE_CLEAN_ACCESS(mgfOutputFile4);
+
+
+            LIBPIPE_PIPELINE_TRACE("MGF File successful written.");
         }
 
     protected:
@@ -132,7 +123,5 @@ class MgfFileMergerPrinter : public libpipe::rtc::Algorithm
 const bool MgfFileMergerPrinter::registered_ = registerLoader();
 
 }
-
-
 
 #endif /* MGFFILEMERGERPRINTER_HPP_ */

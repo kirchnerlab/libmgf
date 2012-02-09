@@ -51,49 +51,34 @@ class MgfFileSpliterFour : public libpipe::rtc::Algorithm
         void update(libpipe::Request& req)
         {
 
-            boost::shared_ptr<libpipe::rtc::SharedData<mgf::MgfFile> > mgfInputFile =
-                    boost::dynamic_pointer_cast<
-                            libpipe::rtc::SharedData<mgf::MgfFile> >(
-                        this->getPort("MGFInputFile"));
 
-            boost::shared_ptr<libpipe::rtc::SharedData<mgf::MgfFile> > mgfOutputFile1 =
-                    boost::dynamic_pointer_cast<
-                            libpipe::rtc::SharedData<mgf::MgfFile> >(
-                        this->getPort("MGFOutputFile1"));
-            boost::shared_ptr<libpipe::rtc::SharedData<mgf::MgfFile> > mgfOutputFile2 =
-                    boost::dynamic_pointer_cast<
-                            libpipe::rtc::SharedData<mgf::MgfFile> >(
-                        this->getPort("MGFOutputFile2"));
-            boost::shared_ptr<libpipe::rtc::SharedData<mgf::MgfFile> > mgfOutputFile3 =
-                    boost::dynamic_pointer_cast<
-                            libpipe::rtc::SharedData<mgf::MgfFile> >(
-                        this->getPort("MGFOutputFile3"));
-            boost::shared_ptr<libpipe::rtc::SharedData<mgf::MgfFile> > mgfOutputFile4 =
-                    boost::dynamic_pointer_cast<
-                            libpipe::rtc::SharedData<mgf::MgfFile> >(
-                        this->getPort("MGFOutputFile4"));
+            LIBPIPE_PREPARE_WRITE_ACCESS(mgfOutputFile1, mgfOutputFile1Data,
+                mgf::MgfFile, "MGFOutputFile1");
+            LIBPIPE_PREPARE_WRITE_ACCESS(mgfOutputFile2, mgfOutputFile2Data,
+                mgf::MgfFile, "MGFOutputFile2");
+            LIBPIPE_PREPARE_WRITE_ACCESS(mgfOutputFile3, mgfOutputFile3Data,
+                mgf::MgfFile, "MGFOutputFile3");
+            LIBPIPE_PREPARE_WRITE_ACCESS(mgfOutputFile4, mgfOutputFile4Data,
+                mgf::MgfFile, "MGFOutputFile4");
+            LIBPIPE_PREPARE_WRITE_ACCESS(mgfInputFile, mgfInputFileData,
+                            mgf::MgfFile, "MGFInputFile");
 
 
-            mgfInputFile->lock();
-            mgfOutputFile1->lock();
-            mgfOutputFile2->lock();
-            mgfOutputFile3->lock();
-            mgfOutputFile4->lock();
 
-            if (mgfOutputFile1->get()->size() > 0) {
-                LIBPIPE_PIPELINE_TRACE(req, "MGF File already splited");
+            if (mgfOutputFile1Data.size() > 0) {
+                LIBPIPE_PIPELINE_TRACE("MGF File already splited");
 
             } else {
-                LIBPIPE_PIPELINE_TRACE(req, "Starting spliting MGF File");
+                LIBPIPE_PIPELINE_TRACE("Starting spliting MGF File");
 
-                int div = mgfInputFile->get()->size() / 4;
+                int div = mgfInputFileData.size() / 4;
 
                 mgf::MgfFile* temp1 = new mgf::MgfFile;
                 mgf::MgfFile* temp2 = new mgf::MgfFile;
                 mgf::MgfFile* temp3 = new mgf::MgfFile;
                 mgf::MgfFile* temp4 = new mgf::MgfFile;
 
-                mgf::MgfFile::iterator it = mgfInputFile->get()->begin();
+                mgf::MgfFile::iterator it = mgfInputFileData.begin();
 
                 temp1->assign(it, it + div);
                 it = it + div;
@@ -101,21 +86,21 @@ class MgfFileSpliterFour : public libpipe::rtc::Algorithm
                 it = it + div;
                 temp3->assign(it, it + div);
                 it = it + div;
-                temp4->assign(it, mgfInputFile->get()->end());
+                temp4->assign(it, mgfInputFileData.end());
 
                 mgfOutputFile1->set(temp1);
                 mgfOutputFile2->set(temp2);
                 mgfOutputFile3->set(temp3);
                 mgfOutputFile4->set(temp4);
-                LIBPIPE_PIPELINE_TRACE(req, "MGF File successful splited.");
+                LIBPIPE_PIPELINE_TRACE("MGF File successful splited.");
 
             }
 
-            mgfOutputFile1->unlock();
-            mgfOutputFile2->unlock();
-            mgfOutputFile3->unlock();
-            mgfOutputFile4->unlock();
-            mgfInputFile->unlock();
+            LIBPIPE_CLEAN_ACCESS(mgfOutputFile1);
+            LIBPIPE_CLEAN_ACCESS(mgfOutputFile2);
+            LIBPIPE_CLEAN_ACCESS(mgfOutputFile3);
+            LIBPIPE_CLEAN_ACCESS(mgfOutputFile4);
+            LIBPIPE_CLEAN_ACCESS(mgfInputFile);
 
         }
 

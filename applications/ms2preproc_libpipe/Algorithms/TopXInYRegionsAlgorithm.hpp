@@ -56,26 +56,21 @@ class TopXInYRegionsAlgorithm : public libpipe::rtc::Algorithm
         void update(libpipe::Request& req)
         {
 
-            boost::shared_ptr<libpipe::rtc::SharedData<mgf::MgfFile> > mgfInputFile =
-                    boost::dynamic_pointer_cast<
-                            libpipe::rtc::SharedData<mgf::MgfFile> >(
-                        this->getPort("MGFInputFile"));
-            boost::shared_ptr<libpipe::rtc::SharedData<mgf::MgfFile> > mgfParsedFile =
-                    boost::dynamic_pointer_cast<
-                            libpipe::rtc::SharedData<mgf::MgfFile> >(
-                        this->getPort("MGFParsedFile"));
-            LIBPIPE_PIPELINE_TRACE(req, "Starting TopXInYRegions");
+            LIBPIPE_PREPARE_WRITE_ACCESS(mgfParsedFile, mgfParsedFileData,
+                mgf::MgfFile, "MGFParsedFile");
 
-            mgfInputFile->shared_lock();
-            mgfParsedFile->lock();
+            LIBPIPE_PREPARE_READ_ACCESS(mgfInputFile, mgfInputFileData,
+                mgf::MgfFile, "MGFInputFile");
+            LIBPIPE_PIPELINE_TRACE("Starting TopXInYRegions");
+
+
             // copy the file so that input is not changed.
-            mgfParsedFile->set(new mgf::MgfFile(*mgfInputFile->get()));
-            mgfInputFile->unlock();
+            mgfParsedFile->set(new mgf::MgfFile(mgfInputFileData));
 
             // Top X in Y regions
 
-            for (mgf::MgfFile::iterator i = mgfParsedFile->get()->begin();
-                    i != mgfParsedFile->get()->end(); ++i) {
+            for (mgf::MgfFile::iterator i = mgfParsedFileData.begin();
+                    i != mgfParsedFileData.end(); ++i) {
                 // get a temporary object and make sure it is big enough
                 mgf::MgfSpectrum m;
                 m.resize(2 * i->size());
@@ -93,9 +88,9 @@ class TopXInYRegionsAlgorithm : public libpipe::rtc::Algorithm
                 i->resize(std::distance(i->begin(), iEnd));
             }
 
-            mgfParsedFile->unlock();
-
-            LIBPIPE_PIPELINE_TRACE(req, "TopXInYRegions is finished");
+            LIBPIPE_CLEAN_ACCESS(mgfParsedFile);
+            LIBPIPE_CLEAN_ACCESS(mgfInputFile);
+            LIBPIPE_PIPELINE_TRACE("TopXInYRegions is finished");
 
         }
 

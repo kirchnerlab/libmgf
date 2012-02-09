@@ -58,19 +58,17 @@ class MgfFileReader : public libpipe::rtc::Algorithm
                 "infilename");
             bool trace = parameters_.get<bool>("verbose");
 
-            boost::shared_ptr<libpipe::rtc::SharedData<mgf::MgfFile> > mgfInputFile =
-                    boost::dynamic_pointer_cast<
-                            libpipe::rtc::SharedData<mgf::MgfFile> >(
-                        this->getPort("MGFInputFile"));
-            mgfInputFile->lock();
+
+            LIBPIPE_PREPARE_WRITE_ACCESS(mgfInputFile, mgfInputFileData,
+                mgf::MgfFile, "MGFInputFile");
 
             if (mgfInputFile->get()->size() > 0) {
-                LIBPIPE_PIPELINE_TRACE(req, "MGF File already stored in memory");
+                LIBPIPE_PIPELINE_TRACE("MGF File already stored in memory");
             } else {
-                LIBPIPE_PIPELINE_TRACE(req, "Starting Reading MGF File");
+                LIBPIPE_PIPELINE_TRACE("Starting Reading MGF File");
 
                 mgf::MgfFile s;
-                mgf::Driver driver(*mgfInputFile->get());
+                mgf::Driver driver(mgfInputFileData);
                 driver.trace_parsing = trace;
                 driver.trace_scanning = trace;
 
@@ -86,9 +84,9 @@ class MgfFileReader : public libpipe::rtc::Algorithm
                     libpipe_fail("error in parsing input file to memory");
                 }
 
-                LIBPIPE_PIPELINE_TRACE(req, "MGF File successful read.");
+                LIBPIPE_PIPELINE_TRACE("MGF File successful read.");
             }
-            mgfInputFile->unlock();
+            LIBPIPE_CLEAN_ACCESS(mgfInputFile);
 
         }
 

@@ -56,35 +56,29 @@ class TopXInWindowsOfSizeZAlgorithm : public libpipe::rtc::Algorithm
         void update(libpipe::Request& req)
         {
 
-            boost::shared_ptr<libpipe::rtc::SharedData<mgf::MgfFile> > mgfInputFile =
-                    boost::dynamic_pointer_cast<
-                            libpipe::rtc::SharedData<mgf::MgfFile> >(
-                        this->getPort("MGFInputFile"));
-            boost::shared_ptr<libpipe::rtc::SharedData<mgf::MgfFile> > mgfParsedFile =
-                    boost::dynamic_pointer_cast<
-                            libpipe::rtc::SharedData<mgf::MgfFile> >(
-                        this->getPort("MGFParsedFile"));
-            LIBPIPE_PIPELINE_TRACE(req, "Starting TopXInWindowsOfSizeZ");
+            LIBPIPE_PREPARE_WRITE_ACCESS(mgfParsedFile, mgfParsedFileData,
+                mgf::MgfFile, "MGFParsedFile");
 
-            mgfInputFile->shared_lock();
-            mgfParsedFile->lock();
+            LIBPIPE_PREPARE_READ_ACCESS(mgfInputFile, mgfInputFileData,
+                mgf::MgfFile, "MGFInputFile");
+
+            LIBPIPE_PIPELINE_TRACE("Starting TopXInWindowsOfSizeZ");
+
             // copy the file so that input is not changed.
-            mgfParsedFile->set(new mgf::MgfFile(*mgfInputFile->get()));
-            mgfInputFile->unlock();
+            mgfParsedFile->set(new mgf::MgfFile(mgfInputFileData));
 
             // Top X in windows of size Z
-            for (mgf::MgfFile::iterator i = mgfParsedFile->get()->begin();
-                    i != mgfParsedFile->get()->end(); ++i) {
+            for (mgf::MgfFile::iterator i = mgfParsedFileData.begin();
+                    i != mgfParsedFileData.end(); ++i) {
                 mgf::MgfSpectrum::iterator trash = run(i->begin(), i->end(),
                     i->begin(), LessThanMass(), LessThanAbundance());
                 i->erase(trash, i->end());
                 std::sort(i->begin(), i->end(), LessThanMass()); // not necessary
             }
 
-            mgfParsedFile->unlock();
-
-            LIBPIPE_PIPELINE_TRACE(req, "TopXInWindowsOfSizeZ is finished");
-
+            LIBPIPE_PIPELINE_TRACE("TopXInWindowsOfSizeZ is finished");
+            LIBPIPE_CLEAN_ACCESS(mgfParsedFile);
+            LIBPIPE_CLEAN_ACCESS(mgfInputFile);
         }
 
     protected:

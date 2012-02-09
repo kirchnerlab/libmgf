@@ -50,11 +50,9 @@ class MgfFilePrinter : public libpipe::rtc::Algorithm
         void update(libpipe::Request& req)
         {
 
-            boost::shared_ptr<libpipe::rtc::SharedData<mgf::MgfFile> > mgfOutputFile =
-                    boost::dynamic_pointer_cast<
-                            libpipe::rtc::SharedData<mgf::MgfFile> >(
-                        this->getPort("MGFParseFile"));
-            LIBPIPE_PIPELINE_TRACE(req, "Starting writting MGF File");
+            LIBPIPE_PREPARE_WRITE_ACCESS(mgfOutputFile, mgfOutputFileData,
+                 mgf::MgfFile, "MGFParseFile");
+            LIBPIPE_PIPELINE_TRACE("Starting writting MGF File");
 
             std::string outfilename = parameters_.get<std::string>("outfile");
             std::ofstream out(outfilename.c_str());
@@ -73,11 +71,10 @@ class MgfFilePrinter : public libpipe::rtc::Algorithm
             out.setf(std::ios_base::fixed, std::ios_base::floatfield);
             out.precision(parameters_.get<unsigned int>("precision"));
 
-            mgfOutputFile->lock();
-            out << *mgfOutputFile->get() << std::endl;
-            mgfOutputFile->unlock();
 
-            LIBPIPE_PIPELINE_TRACE(req, "MGF File successful written.");
+            out << mgfOutputFileData << std::endl;
+            LIBPIPE_CLEAN_ACCESS(mgfOutputFile)
+            LIBPIPE_PIPELINE_TRACE("MGF File successful written.");
         }
 
     protected:
