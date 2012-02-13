@@ -96,11 +96,11 @@ class MgfFileSpliterFour : public libpipe::rtc::Algorithm
 
             }
 
-            LIBPIPE_CLEAN_ACCESS(mgfOutputFile1);
-            LIBPIPE_CLEAN_ACCESS(mgfOutputFile2);
-            LIBPIPE_CLEAN_ACCESS(mgfOutputFile3);
-            LIBPIPE_CLEAN_ACCESS(mgfOutputFile4);
-            LIBPIPE_CLEAN_ACCESS(mgfInputFile);
+            LIBPIPE_CLEAR_ACCESS(mgfOutputFile1);
+            LIBPIPE_CLEAR_ACCESS(mgfOutputFile2);
+            LIBPIPE_CLEAR_ACCESS(mgfOutputFile3);
+            LIBPIPE_CLEAR_ACCESS(mgfOutputFile4);
+            LIBPIPE_CLEAR_ACCESS(mgfInputFile);
 
         }
 

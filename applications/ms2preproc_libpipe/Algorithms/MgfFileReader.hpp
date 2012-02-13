@@ -86,7 +86,7 @@ class MgfFileReader : public libpipe::rtc::Algorithm
 
                 LIBPIPE_PIPELINE_TRACE("MGF File successful read.");
             }
-            LIBPIPE_CLEAN_ACCESS(mgfInputFile);
+            LIBPIPE_CLEAR_ACCESS(mgfInputFile);
 
         }
 

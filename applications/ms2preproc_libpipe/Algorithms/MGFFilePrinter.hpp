@@ -73,7 +73,7 @@ class MgfFilePrinter : public libpipe::rtc::Algorithm
 
 
             out << mgfOutputFileData << std::endl;
-            LIBPIPE_CLEAN_ACCESS(mgfOutputFile)
+            LIBPIPE_CLEAR_ACCESS(mgfOutputFile)
             LIBPIPE_PIPELINE_TRACE("MGF File successful written.");
         }
 

@@ -86,10 +86,10 @@ class MgfFileMergerPrinter : public libpipe::rtc::Algorithm
             out << mgfOutputFile3Data << std::endl;
             out << mgfOutputFile4Data << std::endl;
 
-            LIBPIPE_CLEAN_ACCESS(mgfOutputFile1);
-            LIBPIPE_CLEAN_ACCESS(mgfOutputFile2);
-            LIBPIPE_CLEAN_ACCESS(mgfOutputFile3);
-            LIBPIPE_CLEAN_ACCESS(mgfOutputFile4);
+            LIBPIPE_CLEAR_ACCESS(mgfOutputFile1);
+            LIBPIPE_CLEAR_ACCESS(mgfOutputFile2);
+            LIBPIPE_CLEAR_ACCESS(mgfOutputFile3);
+            LIBPIPE_CLEAR_ACCESS(mgfOutputFile4);
 
 
             LIBPIPE_PIPELINE_TRACE("MGF File successful written.");

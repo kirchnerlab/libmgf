@@ -77,8 +77,8 @@ class TopXInWindowsOfSizeZAlgorithm : public libpipe::rtc::Algorithm
             }
 
             LIBPIPE_PIPELINE_TRACE("TopXInWindowsOfSizeZ is finished");
-            LIBPIPE_CLEAN_ACCESS(mgfParsedFile);
-            LIBPIPE_CLEAN_ACCESS(mgfInputFile);
+            LIBPIPE_CLEAR_ACCESS(mgfParsedFile);
+            LIBPIPE_CLEAR_ACCESS(mgfInputFile);
         }
 
     protected:

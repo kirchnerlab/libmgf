@@ -88,8 +88,8 @@ class TopXInYRegionsAlgorithm : public libpipe::rtc::Algorithm
                 i->resize(std::distance(i->begin(), iEnd));
             }
 
-            LIBPIPE_CLEAN_ACCESS(mgfParsedFile);
-            LIBPIPE_CLEAN_ACCESS(mgfInputFile);
+            LIBPIPE_CLEAR_ACCESS(mgfParsedFile);
+            LIBPIPE_CLEAR_ACCESS(mgfInputFile);
             LIBPIPE_PIPELINE_TRACE("TopXInYRegions is finished");
 
         }
